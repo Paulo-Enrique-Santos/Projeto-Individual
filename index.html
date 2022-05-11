@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link type="image/png" sizes="96x96" rel="icon" href=".../icons8-casinha-de-cachorro-96.png">
+    <link rel="icon" href="./assets/picture/icon.png">
+
+    <title>MusicFans | Index</title>
+</head>
+<body>
+    <div class="sobreposi">
+        <div class="opacity" onclick="Close()">
+            
+        </div>
+        <div class="cadastro">
+            <span onclick="Close()">X</span>
+            <div class="container">
+                <div class="logo">
+                    <img src="./assets/picture/icon.png" alt="ICON.png">
+                    <h1>Crie sua Conta</h1>
+                </div> 
+                <hr>       
+                <div id="form-cadastro">
+                    <label>Nome:</label>
+                    <input type="text" placeholder="Como devemos te Chamar ?">
+                    <label for="">Email:</label>
+                    <input type="text" placeholder="Qual é o seu email ?">
+                    <input type="text" placeholder="Confirme seu email.">
+                    <label>Senha:</label>
+                    <input type="text" placeholder="Crie uma Senha.">
+                    <input type="text" placeholder="Confirme sua Senha.">
+                </div>
+                <button>
+                    Increva-se
+                </button>
+            </div>
+        </div>
+        <div class="login">
+            <span onclick="Close()">X</span>
+            <div class="container">
+                <div class="logo">
+                    <img src="./assets/picture/icon.png" alt="ICON.png">
+                    <h1>Conecte-se</h1>
+                </div>        
+                <hr>
+                <div id="form-login">
+                    <label for="">Login:</label>
+                    <input type="text" placeholder="Informe seu email">
+                    <label for="">Senha:</label>
+                    <input type="text" placeholder="Informe sua Senha">
+                </div>
+                <button>
+                    Login
+                </button>
+            </div>    
+        </div>
+    </div>
+        
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="./assets/picture/icon.png" alt="ICON.png">
+                <h2>MusicFans</h2>
+            </div>
+
+            <hr>
+
+            <ul>
+                <li>
+                    <span>Home</span>
+                </li>
+                <li>
+                    <span>Musicas</span>
+                </li>
+                <li>
+                    <span>Artistas</span>
+                </li>
+            </ul>
+                <hr>
+            <ul>
+                <li>
+                    <span>Top 10</span>
+                </li>
+                <li>
+                    <span>Novidades</span>
+                </li>
+            </ul>
+                <hr>
+            <ul>
+                <li onclick="AbrirLogin()">
+                    <span>Meus Favoritos</span>
+                </li>
+                <li onclick="AbrirLogin()">
+                    <span>Minhas PlayLists</span>
+                </li>
+                <li onclick="AbrirLogin()">
+                    <span>Minha Conta</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="content">
+        <header>
+            <div class="bar-src">
+                <input type="search" name="src" id="src" placeholder="Pesquise">
+            </div>     
+            <div class="btns">
+                <button onclick="AbrirLogin()">
+                    Login
+                </button>
+                <button onclick="AbrirCadastro()">
+                    Increva-se
+                </button>
+            </div>
+        </header>
+        <div class="container">
+            <div class="card">
+                <h3>Sertanejo</h3>
+                <ul id="sertanejo">
+                </ul>
+            </div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script src="js/index.js"></script>
