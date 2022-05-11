@@ -37,6 +37,10 @@ header {
     z-index: 3;
 }
 
+.header-left{
+    box-shadow: 1px 1px 11px 2px #000000;
+}
+
 .container{
     height: 100%;
     width: 85%;
@@ -149,7 +153,6 @@ section .card{
     background-color: var(--background5-color);
     color: var(--contraste-color);
     box-shadow: 1px 1px 11px 6px #000000;
-    /* background: linear-gradient(180deg, var(--background5-color) 0%, var(--background-color) 50%); */
 }
 
 section .card::-webkit-scrollbar{
