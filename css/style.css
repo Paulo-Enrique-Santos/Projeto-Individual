@@ -7,10 +7,11 @@
     /* #202020 #131313 #2c2c2c #616161 */
     --background5-color: #131313;
     --contraste-color: #01a0c8;
+    --hoverbutton-color: #085078;
     --background2-color: #1a1a1a;
     --background4-color: #202020;
     --background-color: #2c2c2c;
-    --background3-color: #a8a8a8;
+    --textos-color: #a8a8a8;
     --border-width: 0.3vh;
     --border-radius: 2vh;
 }
@@ -19,6 +20,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    outline: none;
 }
 
 body{
@@ -30,7 +32,7 @@ body{
 
 header {
     background-color: var(--background-color);
-    color: var(--background3-color);
+    color: var(--textos-color);
     height: 100vh;
     width: 20vw;
     border-right: var(--border-width) solid var(--background5-color);
@@ -42,16 +44,26 @@ header {
 }
 
 .container{
-    height: 100%;
     width: 85%;
     margin: auto;
+}
+
+.container::-webkit-scrollbar{
+    display: none;
 }
 
 button{
     font-family: 'Rubik', sans-serif;
     border-radius: var(--border-radius);
-    border: solid var(--border-width);
+    border: none;
     cursor: pointer;
+    transition: all 200ms;
+}
+
+button:hover{
+    transform: scale(1.1);
+    transition: all 200ms;
+    box-shadow: 1px 1px 11px 6px #202020;
 }
 
 .logo{
@@ -76,6 +88,11 @@ input{
     width: 70%;
     padding-left: 3%;
     background-color: var(--background2-color);
+    color: var(--textos-color);
+}
+
+input::placeholder{
+    color: var(--textos-color);
 }
 
 /* HEADER LATERAL */
@@ -108,12 +125,12 @@ header .text-next{
 
 header li:hover .text-next {
     width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color))
+    filter: drop-shadow(0 0 23px var(--animation-color));
   }
 
 /* HEADER DO CONTEUDO */
 
-section header{
+.body-dois header{
     width: 100%;
     height: 10vh;
     border: none;
@@ -126,7 +143,7 @@ section header{
     border-bottom: var(--border-width) solid var(--background5-color);
 }
 
-section header .bar-src{
+.body-dois header .bar-src{
     padding-left: 2%;
     width: 60%;
     height: 100%;
@@ -134,7 +151,7 @@ section header .bar-src{
     align-items: center;
 }
 
-section header .btns{
+.body-dois header .btns{
     width: 25%;
     height: 100%;
     display: flex;
@@ -142,29 +159,47 @@ section header .btns{
     align-items: center;
 }
 
-section header .btns button{
-    border-color: var(--contraste-color);
+.body-dois header .btns button{
     width: 40%;
     height: 50%;
+    color: var(--background2-color);
     background-color: var(--contraste-color);
 }
 
+.body-dois header .btns button:hover{
+    background-color: var(--hoverbutton-color);
+    color: var(--contraste-color);
+}
+
 /* SECTION DE CONTEUDO */
+.body-dois{
+    height: 100vh;
+    width: 100vw;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+}
+
 section{
     height: 100vh;
-    width: 80vw;
+    width: 100%;
     overflow-y: scroll;
     display: flex;
     background-color: var(--background-color);
     flex-direction: column;
 }
 
+section .container{
+    background-color: red;
+}
+
 section .card{
-    height: 30%;
+    height: 30vh;
     width: 100%;
     overflow-x: scroll;
     border-radius: var(--border-radius);
-    margin-top: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 1% 2% 2% 2%;
     background-color: var(--background5-color);
     color: var(--contraste-color);
@@ -243,7 +278,7 @@ section .card li:hover{
 /* CADASTRO E LOGIN */
 .sobreposi .container{
     display: flex;
-    height: 80%;
+    height: 90vh;
     justify-content: center;
     flex-direction: column;
     margin-top: 10%;
@@ -254,7 +289,7 @@ section .card li:hover{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 55%;
+    height: 40vh;
     width: 100%;
 }
 
@@ -269,11 +304,21 @@ section .card li:hover{
 }
 
 .sobreposi button{
-    margin-top: 15%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
     width: 80%;
     height: 5vh;
     align-self: center;
+    border: none;
+    color: var(--background2-color);
+    background-color: var(--contraste-color);
 }
+
+.sobreposi button:hover{
+    background-color: var(--hoverbutton-color);
+    color: var(--contraste-color);
+}
+
 
 .sobreposi .logo{
     flex-direction: column;
@@ -318,4 +363,91 @@ section .card li:hover{
 @keyframes fechar {
     0%{opacity: 1;}
     100%{opacity: 0;}
+}
+
+.wait {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+}
+
+.loading{
+    display: flex;
+    flex-wrap: wrap;
+    width: 6vw;
+    height: 100%;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.loading span{
+    position: relative;
+    margin: 0;
+    color: var(--textos-color);
+}
+
+.loading .ball{
+    border-radius: 50%;
+    width: 3vh;
+    height: 3vh;
+    background-color: var(--contraste-color);
+    animation: load .5s alternate infinite;
+}
+
+.loading .ball:nth-child(2){
+    animation-delay: .16s;
+}
+
+.loading .ball:nth-child(3){
+    animation-delay: .32s;
+}
+
+@keyframes load {
+    from{
+        transform: scaleX(1.25);
+    }
+
+    to{
+        transform: translateY(-2vh) scaleX(1);
+    }
+    
+}
+
+/* DIV DAS MÚSICAS */
+.music{
+    background-color: red;
+}
+
+.top{
+    height: 30vh;
+    width: 100%;
+    background-color: blue;
+}
+
+.content .player{
+    background-color: yellow;
+    height: 10vh;
+    border-radius: 5vh;
+    margin-top: 1%;
+    width: 100%;
+    padding: 1%;
+    display: flex;
+}
+
+.player .foto{
+    border-radius: 5vh;
+    background-color: red;
+    height: 100%;
+    width: 5%;
+}
+
+.titles{
+    background-color: purple;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
