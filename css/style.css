@@ -93,7 +93,23 @@ header li{
     cursor: pointer;
     display: flex;
     align-items: center;
+    position: relative;
 }
+
+header .text-next{
+    position: absolute;
+    color: var(--contraste-color);
+    width: 0%;
+    inset: 0;
+    border-bottom: var(--border-width) solid var(--contraste-color);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+header li:hover .text-next {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color))
+  }
 
 /* HEADER DO CONTEUDO */
 
