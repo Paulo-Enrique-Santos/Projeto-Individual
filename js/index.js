@@ -16,6 +16,7 @@ window.onload = InserirFotos();
 
 //INSERINDO FOTOS
 function InserirFotos(){
+    InserindoCards();
     for(var i = 0; i < (musica.length); i ++)
     {
         sertanejo.innerHTML += `<li class="slide${i}"></li>`
@@ -25,8 +26,17 @@ function InserirFotos(){
             document.querySelector('#sertanejo').style.width = (musica.length * 15) + '%'
         }else{
             document.querySelector('#sertanejo').style.width = '100%'
-        
         }
+    }
+}
+
+//INSERINDO CARDS
+function InserindoCards(){
+    for(var i = 0; i < 2; i ++)
+    {
+        document.querySelector('#index').innerHTML += `
+        <div class="card" id="${i}"></div>
+        `
     }
 }
 

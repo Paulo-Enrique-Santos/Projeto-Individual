@@ -373,7 +373,7 @@ section .card li:hover{
 }
 
 .loading{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     width: 6vw;
     height: 100%;
@@ -438,8 +438,8 @@ section .card li:hover{
 .player .foto{
     border-radius: 5vh;
     background-color: red;
-    height: 100%;
-    width: 5%;
+    height: 50px;
+    width: 50px;
 }
 
 .titles{
@@ -450,4 +450,10 @@ section .card li:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#waveform{
+    width: 30vw;
+    height: 100%;
+    background-color: red;
 }
