@@ -11,6 +11,7 @@
     --background2-color: #1a1a1a;
     --background4-color: #202020;
     --background-color: #2c2c2c;
+    --card-color: #0c0c0c;
     --textos-color: #a8a8a8;
     --border-width: 0.3vh;
     --border-radius: 2vh;
@@ -126,7 +127,12 @@ header .text-next{
 header li:hover .text-next {
     width: 100%;
     filter: drop-shadow(0 0 23px var(--animation-color));
-  }
+}
+
+header a{
+    text-decoration: none;
+    color: unset;
+}
 
 /* HEADER DO CONTEUDO */
 
@@ -159,6 +165,20 @@ header li:hover .text-next {
     align-items: center;
 }
 
+.body-dois header .logado{
+    display: none;
+    justify-content: center;
+}
+
+.body-dois header .logado span{
+    color: var(--contraste-color);
+}
+
+.body-dois header .logado img{
+    width: 40px;
+    cursor: pointer;
+}
+
 .body-dois header .btns button{
     width: 40%;
     height: 50%;
@@ -175,7 +195,6 @@ header li:hover .text-next {
 .body-dois{
     height: 100vh;
     width: 100vw;
-    background-color: red;
     display: flex;
     flex-direction: column;
 }
@@ -189,10 +208,6 @@ section{
     flex-direction: column;
 }
 
-section .container{
-    background-color: red;
-}
-
 section .card{
     height: 30vh;
     width: 100%;
@@ -202,7 +217,7 @@ section .card{
     margin-bottom: 2%;
     padding: 1% 2% 2% 2%;
     background-color: var(--background5-color);
-    color: var(--contraste-color);
+    color: var(--textos-color);
     box-shadow: 1px 1px 11px 6px #000000;
 }
 
@@ -368,6 +383,7 @@ section .card li:hover{
 .wait {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     height: 10vh;
 }
@@ -381,10 +397,22 @@ section .card li:hover{
     justify-content: space-between;
 }
 
+.wait .card_erro{
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
 .loading span{
     position: relative;
     margin: 0;
     color: var(--textos-color);
+}
+
+.wait .card_erro h4{
+    color: red;
 }
 
 .loading .ball{
@@ -415,45 +443,114 @@ section .card li:hover{
 }
 
 /* DIV DAS MÚSICAS */
-.music{
-    background-color: red;
+#music{
+    padding: 10px 20px 30px 20px;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+    box-shadow: 1px 1px 11px 2px #000000;
 }
 
 .top{
-    height: 30vh;
+    height: 25vh;
     width: 100%;
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: var(--contraste-color);
+}
+
+.top h1{
+    font-size: 3rem;
+}
+
+.top h2{
+    font-size: 2rem;
+    color: var(--hoverbutton-color);
+}
+
+.content{
+    position: relative;
 }
 
 .content .player{
-    background-color: yellow;
+    background-color: var(--background-color);
+    box-shadow: 1px 1px 11px 2px #000000;
+    color: var(--textos-color);
     height: 10vh;
     border-radius: 5vh;
-    margin-top: 1%;
+    margin-top: 1.5%;
     width: 100%;
     padding: 1%;
     display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.content .player:hover{
+    background-color: #494949;
+    cursor: pointer;
 }
 
 .player .foto{
     border-radius: 5vh;
-    background-color: red;
     height: 50px;
     width: 50px;
+    box-shadow: 1px 1px 11px 2px #000000;
+    background-size: cover;
+    position: relative;
 }
 
 .titles{
-    background-color: purple;
     height: 100%;
     width: 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-left: 2%;
+    text-align: center;
 }
 
-#waveform{
-    width: 30vw;
+.player .sobre{
+    height: 10vh;
+    border-radius: 5vh;
+    width: 60vw;
+    position: absolute;
+    z-index: 6;
+    cursor: pointer;
+}
+
+.titles h2{
+    font-size: 1em;
+    color: #e6e6e6;
+}
+
+.final h1{
+    color: #e6e6e6;
+}
+
+.titles h3{
+    font-size: 0.8em;
+}
+
+.player .like{
+    width: 30px;
+    height: 30px;
+    background-image: url("/assets/picture/heart.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.player .final{
+    width: 10vw;
     height: 100%;
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.waveform{
+    width: 40vw;
+    height: 100%;
 }

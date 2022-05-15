@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="./assets/picture/icon.png">
 
-    <script src="https://unpkg.com/wavesurfer.js"></script>
-
     <title>MusicFans | Musicas</title>
 </head>
 
-<body>
+<body onload="atualizarMusic(), validarSessao()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -29,26 +27,26 @@
                 <hr>
                 <div id="form-cadastro">
                     <label>Nome:</label>
-                    <input type="text" placeholder="Como devemos te Chamar ?">
+                    <input id="nome_cadastro" type="text" placeholder="Como devemos te Chamar ?">
                     <label for="">Email:</label>
-                    <input type="text" placeholder="Qual é o seu email ?">
-                    <input type="text" placeholder="Confirme seu email.">
+                    <input id="email_cadastro" type="text" placeholder="Qual é o seu email ?">
+                    <input id="email_cadastro_c" type="text" placeholder="Confirme seu email.">
                     <label>Senha:</label>
-                    <input type="text" placeholder="Crie uma Senha.">
-                    <input type="text" placeholder="Confirme sua Senha.">
+                    <input id="senha_cadastro" type="text" placeholder="Crie uma Senha.">
+                    <input id="senha_cadastro_c" type="text" placeholder="Confirme sua Senha.">
                 </div>
-                <button>
+                <button onclick="cadastrar()">
                     Increva-se
                 </button>
                 <div class="wait">
-                    <div class="loading">
+                    <div class="loading" id="loading_cadastro">
                         <div class="ball"></div>
                         <div class="ball"></div>
                         <div class="ball"></div>
                         <span>Loading...</span>
                     </div>
-                    <div class="card_erro">
-                        <span id="error"></span>
+                    <div class="card_erro" id="card_erro_cadastro">
+                        <h4 id="erro_cadastro"></h4>
                     </div>
                 </div>
             </div>
@@ -63,22 +61,22 @@
                 <hr>
                 <div id="form-login">
                     <label for="">Login:</label>
-                    <input type="text" placeholder="Informe seu email">
+                    <input id="email_login" type="text" placeholder="Informe seu email">
                     <label for="">Senha:</label>
-                    <input type="text" placeholder="Informe sua Senha">
+                    <input id="senha_login" type="text" placeholder="Informe sua Senha">
                 </div>
-                <button>
+                <button onclick="entrar()">
                     Login
                 </button>
                 <div class="wait">
-                    <div class="loading">
+                    <div class="loading" id="loading_login">
                         <div class="ball"></div>
                         <div class="ball"></div>
                         <div class="ball"></div>
                         <span>Loading...</span>
                     </div>
-                    <div class="card_erro">
-                        <span id="error"></span>
+                    <div class="card_erro" id="card_erro_login">
+                        <h4 id="erro_login"></h4>
                     </div>
                 </div>
             </div>
@@ -97,12 +95,12 @@
 
             <ul>
                 <li>
-                    <span>Home</span>
-                    <span class="text-next">Home</span>
+                    <a href="./index.html"><span>Home</span>
+                    <span class="text-next">Home</span></a>
                 </li>
                 <li>
-                    <span>Musicas</span>
-                    <span class="text-next">Musicas</span>
+                    <a href="./music.html"><span>Musicas</span>
+                    <span class="text-next">Musicas</span></a>
                 </li>
                 <li>
                     <span>Artistas</span>
@@ -151,13 +149,29 @@
                     Increva-se
                 </button>
             </div>
+            <div class="btns logado">
+                <h3>Olá, 
+                    <span id="name_user"></span>
+                </h3>
+                <a href="./myaccount.html">
+                    <img src="./assets/picture/user.png">
+                </a>
+            </div>
         </header>
         <section class="content">
             <div class="container">
                 <div class="top">
+                    <h1>Dezenas de Musicas!</h1>
+                    <h2>Ouça Quando e Onde Quiser.</h2>
+                </div>
+                <div id="music">
 
                 </div>
-                <div class="player">
+                <!-- <div class="player">
+
+                    <div class="sobre">
+
+                    </div>
                     <div class="foto">
 
                     </div>
@@ -165,36 +179,25 @@
                         <h2 class="title-music">Red Eye</h2>
                         <h3 class="title-artist">Justin Bieber</h3>
                     </div>
-                    <div id="waveform"></div>
-                </div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
-                <div class="player"></div>
+                    <div class="waveform"></div>
+                    <div class="final">
+                        <span id="Testinho">0:00</span>
+                        <div class="like">
+    
+                        </div>
+                        <h1>+</h1>
+                    </div>
+                </div> -->
             </div>
         </section>
     </div>
 </body>
-
 </html>
 
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="js/funcoes.js"></script>
 <script src="js/index.js"></script>
 <script src="js/music.js"></script>
+
 
 

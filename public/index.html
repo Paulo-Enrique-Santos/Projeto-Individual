@@ -10,13 +10,14 @@
     <link type="image/png" sizes="96x96" rel="icon" href=".../icons8-casinha-de-cachorro-96.png">
     <link rel="icon" href="./assets/picture/icon.png">
     
-
     <title>MusicFans | Index</title>
 </head>
 
-<body>
+<body onload="atualizarGenero(), validarSessao()">
     <div class="sobreposi">
-        <div class="opacity" onclick="Close()"></div>
+        <div class="opacity" onclick="Close()">
+
+        </div>
         <div class="cadastro">
             <span onclick="Close()">X</span>
             <div class="container">
@@ -27,17 +28,28 @@
                 <hr>
                 <div id="form-cadastro">
                     <label>Nome:</label>
-                    <input type="text" placeholder="Como devemos te Chamar ?">
+                    <input id="nome_cadastro" type="text" placeholder="Como devemos te Chamar ?">
                     <label for="">Email:</label>
-                    <input type="text" placeholder="Qual é o seu email ?">
-                    <input type="text" placeholder="Confirme seu email.">
+                    <input id="email_cadastro" type="text" placeholder="Qual é o seu email ?">
+                    <input id="email_cadastro_c" type="text" placeholder="Confirme seu email.">
                     <label>Senha:</label>
-                    <input type="text" placeholder="Crie uma Senha.">
-                    <input type="text" placeholder="Confirme sua Senha.">
+                    <input id="senha_cadastro" type="text" placeholder="Crie uma Senha.">
+                    <input id="senha_cadastro_c" type="text" placeholder="Confirme sua Senha.">
                 </div>
-                <button>
+                <button onclick="cadastrar()">
                     Increva-se
                 </button>
+                <div class="wait">
+                    <div class="loading" id="loading_cadastro">
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <span>Loading...</span>
+                    </div>
+                    <div class="card_erro" id="card_erro_cadastro">
+                        <h4 id="erro_cadastro"></h4>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="login">
@@ -50,17 +62,27 @@
                 <hr>
                 <div id="form-login">
                     <label for="">Login:</label>
-                    <input type="text" placeholder="Informe seu email">
+                    <input id="email_login" type="text" placeholder="Informe seu email">
                     <label for="">Senha:</label>
-                    <input type="text" placeholder="Informe sua Senha">
+                    <input id="senha_login" type="text" placeholder="Informe sua Senha">
                 </div>
-                <button>
+                <button onclick="entrar()">
                     Login
                 </button>
+                <div class="wait">
+                    <div class="loading" id="loading_login">
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <span>Loading...</span>
+                    </div>
+                    <div class="card_erro" id="card_erro_login">
+                        <h4 id="erro_login"></h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 
     <header class="header-left">
         <div class="container">
@@ -73,12 +95,12 @@
 
             <ul>
                 <li>
-                    <span>Home</span>
-                    <span class="text-next">Home</span>
+                    <a href="./index.html"><span>Home</span>
+                    <span class="text-next">Home</span></a>
                 </li>
                 <li>
-                    <span>Musicas</span>
-                    <span class="text-next">Musicas</span>
+                    <a href="./music.html"><span>Musicas</span>
+                    <span class="text-next">Musicas</span></a>
                 </li>
                 <li>
                     <span>Artistas</span>
@@ -127,17 +149,26 @@
                     Increva-se
                 </button>
             </div>
+            <div class="btns logado">
+                <h3>Olá, 
+                    <span id="name_user"></span>
+                </h3>
+                <a href="./myaccount.html">
+                    <img src="./assets/picture/user.png">
+                </a>
+            </div>
         </header>
         <section class="content">
             <div class="container" id="index">
                 <div class="top">
-
+                    <H1>Ouça os Melhores Artistas!</H1>
+                    <h2>Monte PlayLists Incríveis.</h2>
                 </div>
-                <div class="card">
+                <!-- <div class="card">
                     <h3>Sertanejo</h3>
                     <ul id="sertanejo">
                     </ul>
-                </div>
+                </div> -->
             </div>
         </section>
     </div>
@@ -145,4 +176,5 @@
 
 </html>
 
+<script src="js/funcoes.js"></script>
 <script src="js/index.js"></script>
