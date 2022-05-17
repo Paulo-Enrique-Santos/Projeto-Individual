@@ -1,7 +1,7 @@
 //FUNCTIONS ##############################################################################################################
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function atualizarGenero() {
-    fetch("/avisos/listar").then(function (resposta) {
+    fetch("/atualizar/listarGenero").then(function (resposta) {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {
@@ -38,7 +38,7 @@ function atualizarFoto(id) {
     var idVar = id
 
     console.log(idVar, 'TESTE')
-    fetch("/avisos/listarFoto", {
+    fetch("/atualizar/listarFoto", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

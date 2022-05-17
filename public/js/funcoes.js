@@ -70,10 +70,8 @@ function addLike(id){
     var idMusic = id;
     var idUser = sessionStorage.ID_USUARIO;
 
-    alert(idUser);
-
     // Enviando o valor da nova input
-    fetch("/avisos/addLike", {
+    fetch("/atualizar/addLike", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

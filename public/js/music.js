@@ -13,8 +13,6 @@ document.addEventListener('click', function (event) {
 
     var idConteudo = idClick.replace(/^./, "");
 
-    alert(idConteudo);
-
     if(classClick == 'like' && validarSessao() == true){
         document.querySelector(`#${idClick}`).classList.add("likeRed");
         document.querySelector(`#${idClick}`).classList.remove("like");
@@ -49,7 +47,7 @@ function click(event){
 }
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function atualizarMusic() {
-    fetch("/avisos/listarMusic").then(function (resposta) {
+    fetch("/atualizar/listarMusic").then(function (resposta) {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {

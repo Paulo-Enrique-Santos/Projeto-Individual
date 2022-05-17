@@ -1,46 +1,22 @@
 var express = require("express");
 var router = express.Router();
 
-var avisoController = require("../controllers/avisoController");
+var atualizarController = require("../controllers/atualizarController");
 
-router.get("/", function (req, res) {
-    avisoController.testar(req, res);
-});
-
-router.get("/listar", function (req, res) {
-    avisoController.listar(req, res);
+router.get("/listarGenero", function (req, res) {
+    atualizarController.listarGenero(req, res);
 });
 
 router.post("/addLike", function (req, res) {
-    avisoController.addLike(req, res);
+    atualizarController.addLike(req, res);
 });
 
 router.get("/listarMusic", function (req, res) {
-    avisoController.listarMusic(req, res);
+    atualizarController.listarMusic(req, res);
 });
 
 router.post("/listarFoto", function (req, res) {
-    avisoController.listarFoto(req, res);
-});
-
-router.get("/listar/:idUsuario", function (req, res) {
-    avisoController.listarPorUsuario(req, res);
-});
-
-router.get("/pesquisar/:descricao", function (req, res) {
-    avisoController.pesquisarDescricao(req, res);
-});
-
-router.post("/publicar/:idUsuario", function (req, res) {
-    avisoController.publicar(req, res);
-});
-
-router.put("/editar/:idAviso", function (req, res) {
-    avisoController.editar(req, res);
-});
-
-router.delete("/deletar/:idAviso", function (req, res) {
-    avisoController.deletar(req, res);
+    atualizarController.listarFoto(req, res);
 });
 
 module.exports = router;
