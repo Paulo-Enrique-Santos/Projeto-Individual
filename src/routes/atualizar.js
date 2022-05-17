@@ -11,6 +11,10 @@ router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
 });
 
+router.post("/addLike", function (req, res) {
+    avisoController.addLike(req, res);
+});
+
 router.get("/listarMusic", function (req, res) {
     avisoController.listarMusic(req, res);
 });

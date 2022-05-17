@@ -7,14 +7,32 @@ var arrayMusic = ['0'];
 //EVENTO QUE CHAMA FUNÇÃO CLICK (QUE FAZ AS MUSICAS TOCAREM)
 document.addEventListener('click', click);
 
-arrayMusic[1].on('ready', carregarDuracao);
+document.addEventListener('click', function (event) {
+    var classClick = event.target.className;
+    var idClick = event.target.id;
+
+    var idConteudo = idClick.replace(/^./, "");
+
+    alert(idConteudo);
+
+    if(classClick == 'like' && validarSessao() == true){
+        document.querySelector(`#${idClick}`).classList.add("likeRed");
+        document.querySelector(`#${idClick}`).classList.remove("like");
+        addLike(idConteudo);
+        } else if (classClick == 'like' && validarSessao() == false){
+        AbrirLogin();
+    } else if (classClick == 'likeRed' && validarSessao() == true){
+        document.querySelector(`#${idClick}`).classList.add("like");
+        document.querySelector(`#${idClick}`).classList.remove("likeRed");
+        removeLike(idConteudo);
+    }
+
+});
 
 //FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
 function click(event){
     var click = event.target.id;
     
-    console.log(arrayMusic.length);
-    console.log(arrayMusic[click]);
     carregarDuracao();
     for(var music = 1; music< arrayMusic.length ;music++){
         if(click == music){
@@ -75,6 +93,7 @@ function atualizarMusic() {
 
                     var like = document.createElement('div');
                     like.className = 'like';
+                    like.id = 'l'+(i+1);
 
                     var add = document.createElement('h1');
                     add.innerHTML = '+';
@@ -106,16 +125,18 @@ function atualizarMusic() {
                     
                    wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
                    var adicionar = arrayMusic.push(wavesurfer);
-                   carregarDuracao();
-                   setTimeout(() => {
-                       console.log('Entrei na função');
-                    timeMusic.innerHTML = converterTempo(wavesurfer.getDuration());
-                    }, "2000")
+                   //carregarDuracao();
     
 
                 }
 
             });
+
+            setTimeout(() => {
+                console.log('Entrei na função');
+                carregarDuracao();
+             }, "8000")
+
         } else {
             throw ('Houve um erro na API!');
         }
@@ -132,7 +153,6 @@ function converterTempo(segundo){
         campoSegundo = '0' + campoSegundo;
     }
 
-    console.log(campoMinuto, campoSegundo);
     return campoMinuto + ':' + campoSegundo;
 }
 
@@ -144,3 +164,5 @@ function carregarDuracao(){
             duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
     }    
 }
+
+//FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS

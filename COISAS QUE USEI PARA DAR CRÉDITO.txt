@@ -1,1 +1,2 @@
 wavesurfer.js
+icons 8

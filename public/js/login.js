@@ -1,14 +1,32 @@
+//FUNÇÃO PARA ENTRAR NA CONTA
 function entrar() {
-    aguardar();
+    aguardarLogin();
 
-    var formulario = new URLSearchParams(new FormData(document.getElementById("form_login")));
+    var emailVar = email_login.value;
+    var senhaVar = senha_login.value;
 
-    console.log("FORM LOGIN: ", formulario.get("login"));
-    console.log("FORM SENHA: ", formulario.get("senha"));
+    if (emailVar == "" || senhaVar == "") {
+        card_erro_login.style.display = "flex"
+        erro_login.innerHTML = "Um ou mais campos estão em branco.";
+        finalizarAguardarLogin();
+        return false;
+    }
+    else {
+        setInterval(sumirMensagemLogin, 5000)
+    }
+
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
     fetch("/usuarios/autenticar", {
         method: "POST",
-        body: formulario
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
+        })
     }).then(function (resposta) {
         console.log("ESTOU NO THEN DO entrar()!")
 
@@ -19,23 +37,23 @@ function entrar() {
                 console.log(json);
                 console.log(JSON.stringify(json));
 
-                sessionStorage.LOGIN_USUARIO = json.login;
+                sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.ID_USUARIO = json.idUser;
 
                 setTimeout(function () {
-                    window.location = "/index.html";
-                }, 1000);
+                    window.location = "music.html";
+                }, 1000); // apenas para exibir o loading
+
             });
 
         } else {
 
-            console.log("Erro de login!");
+            console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
                 console.error(texto);
-                // limparFormulario();
-                finalizarAguardar(texto);
+                finalizarAguardarLogin(texto);
             });
         }
 
@@ -46,24 +64,7 @@ function entrar() {
     return false;
 }
 
-function validarSessao() {
-    aguardar();
-
-    var login = sessionStorage.LOGIN_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
-
-    var h1Titulo = document.getElementById("h1_titulo");
-
-    if (login != null && nome != null) {
-        // window.alert(`Seja bem-vindo, ${nome}!`);
-        h1Titulo.innerHTML = `${login}`;
-
-        finalizarAguardar();
-    } else {
-        window.location = "login.html";
-    }
-}
-
+//FUNÇÃO PARA SAIR DA CONTA
 function sair() {
     aguardar();
     sessionStorage.clear();

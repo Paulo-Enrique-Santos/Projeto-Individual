@@ -542,6 +542,15 @@ section .card li:hover{
     background-size: cover;
 }
 
+.player .likeRed{
+    width: 30px;
+    height: 30px;
+    background-image: url("/assets/picture/heart-red.png");
+    background-position: center;
+    background-size: cover;
+}
+
+
 .player .final{
     width: 10vw;
     height: 100%;

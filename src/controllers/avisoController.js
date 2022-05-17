@@ -19,6 +19,31 @@ function listar(req, res) {
     });
 }
 
+function addLike(req, res) {
+
+    var idMusic = req.body.idMusicServer;
+    var idUser = req.body.idUserServer;
+
+    console.log (idMusic) ;
+    console.log (idUser) ;
+    avisoModel.addLike(idMusic, idUser)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
 function listarMusic(req, res) {
     avisoModel.listarMusic().then(function (resultado) {
         if (resultado.length > 0) {
@@ -171,5 +196,6 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletar,
+    addLike
 }
