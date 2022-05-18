@@ -11,6 +11,10 @@ router.post("/addLike", function (req, res) {
     atualizarController.addLike(req, res);
 });
 
+router.post("/removeLike", function (req, res) {
+    atualizarController.removeLike(req, res);
+});
+
 router.get("/listarMusic", function (req, res) {
     atualizarController.listarMusic(req, res);
 });

@@ -1,6 +1,7 @@
 //ARRAY QUE SALVA AS MÚSICAS
 var arrayMusic = ['0'];
 
+let classAtual = 'like';
 //EVENTO QUE CHAMA A FUNÇÃO PARA ATUALIZAR A DURAÇÃO DA MÚSICA
 //arrayMusic[arrayMusic.length].on('ready', carregarDuracao);
 
@@ -131,8 +132,8 @@ function atualizarMusic() {
             });
 
             setTimeout(() => {
-                console.log('Entrei na função');
                 carregarDuracao();
+                attLikes();
              }, "8000")
 
         } else {
@@ -164,3 +165,44 @@ function carregarDuracao(){
 }
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
+function attLikes(){
+
+    for(var i = 1 ; i < arrayMusic.length ; i ++){
+
+    fetch("/validacoes/attLikes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idMusicServer: i,
+            idUserServer: sessionStorage.ID_USUARIO
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+
+            resposta.json().then(function (resposta) {
+
+                if(resposta.length == 1){
+                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.add("likeRed");
+                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.remove("like");
+
+                }
+            });    
+
+
+        } else {
+            console.log("Houve um erro ao tentar realizar o login!");
+            
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+            return false;
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    });
+}
+}

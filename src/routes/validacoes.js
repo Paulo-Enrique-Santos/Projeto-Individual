@@ -1,14 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-var medidaController = require("../controllers/validacoesController");
+var validacoesController = require("../controllers/validacoesController");
 
-router.get("/ultimas/:idAquario", function (req, res) {
-    medidaController.buscarUltimasMedidas(req, res);
+router.post("/attLikes", function (req, res) {
+    validacoesController.attLikes(req, res);
 });
-
-router.get("/tempo-real/:idAquario", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
-})
 
 module.exports = router;

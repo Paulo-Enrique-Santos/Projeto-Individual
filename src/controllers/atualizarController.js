@@ -19,8 +19,6 @@ function addLike(req, res) {
     var idMusic = req.body.idMusicServer;
     var idUser = req.body.idUserServer;
 
-    console.log (idMusic) ;
-    console.log (idUser) ;
     atualizarModel.addLike(idMusic, idUser)
     .then(
         function (resultado) {
@@ -38,6 +36,27 @@ function addLike(req, res) {
     );
 }
 
+function removeLike(req, res) {
+
+    var idMusic = req.body.idMusicServer;
+    var idUser = req.body.idUserServer;
+
+    atualizarModel.removeLike(idMusic, idUser)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
 
 function listarMusic(req, res) {
     atualizarModel.listarMusic().then(function (resultado) {
@@ -73,5 +92,6 @@ module.exports = {
     listarGenero,
     listarFoto,
     listarMusic,
-    addLike
+    addLike,
+    removeLike
 }

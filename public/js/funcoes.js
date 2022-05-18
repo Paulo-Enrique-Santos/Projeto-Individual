@@ -84,8 +84,6 @@ function addLike(id){
         })
     }).then(function (resposta) {
 
-        console.log("resposta: ", resposta);
-
         if (resposta.ok) {
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
@@ -98,7 +96,30 @@ function addLike(id){
 
 //REMOVER LIKE DE UMA DETERMINADA MÚSICA
 function removeLike(id){
-    console.log(id)
+    var idMusic = id;
+    var idUser = sessionStorage.ID_USUARIO;
+
+    // Enviando o valor da nova input
+    fetch("/atualizar/removeLike", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            idMusicServer: idMusic,
+            idUserServer: idUser
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
 }
 
 //ABRINDO A TELA DE CADASTRO
