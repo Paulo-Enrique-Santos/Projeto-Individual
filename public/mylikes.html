@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="./assets/picture/icon.png">
 
-    <title>MusicFans | Musicas</title>
+    <title>MusicFans | Favoritas</title>
 </head>
 
-<body onload="atualizarMusic(), validarSessao()">
+<body onload="listarFavoritas(), validarSessao()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -32,8 +32,8 @@
                     <input id="email_cadastro" type="text" placeholder="Qual é o seu email ?">
                     <input id="email_cadastro_c" type="text" placeholder="Confirme seu email.">
                     <label>Senha:</label>
-                    <input id="senha_cadastro" type="text" placeholder="Crie uma Senha.">
-                    <input id="senha_cadastro_c" type="text" placeholder="Confirme sua Senha.">
+                    <input id="senha_cadastro" type="password" placeholder="Crie uma Senha.">
+                    <input id="senha_cadastro_c" type="password" placeholder="Confirme sua Senha.">
                 </div>
                 <button onclick="cadastrar()">
                     Increva-se
@@ -63,7 +63,7 @@
                     <label for="">Login:</label>
                     <input id="email_login" type="text" placeholder="Informe seu email">
                     <label for="">Senha:</label>
-                    <input id="senha_login" type="text" placeholder="Informe sua Senha">
+                    <input id="senha_login" type="password" placeholder="Informe sua Senha">
                 </div>
                 <button onclick="entrar()">
                     Login
@@ -120,15 +120,15 @@
             </ul>
             <hr>
             <ul>
-                <li onclick="AbrirLogin()">
+                <li onclick="AbrirLogin('mylikes')">
                     <span>Meus&nbsp;Favoritos</span>
-                    <span class="text-next">Meus&nbsp;Favoritos</span>
+                    <span class="text-next" >Meus&nbsp;Favoritos</span>
                 </li>
-                <li onclick="AbrirLogin()">
+                <li onclick="AbrirLogin('playlist')">
                     <span>Minhas&nbsp;PlayLists</span>
                     <span class="text-next">Minhas&nbsp;PlayLists</span>
                 </li>
-                <li onclick="AbrirLogin()">
+                <li onclick="AbrirLogin('myaccount')">
                     <span>Minha&nbsp;Conta</span>
                     <span class="text-next">Minha&nbsp;Conta</span>
                 </li>
@@ -196,8 +196,6 @@
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script src="js/funcoes.js"></script>
-<script src="js/index.js"></script>
-<script src="js/music.js"></script>
-
-
-
+<script src="js/login.js"></script>
+<script src="js/cadastrar.js"></script>
+<script src="js/mylikes.js"></script>

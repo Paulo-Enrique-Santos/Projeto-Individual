@@ -23,4 +23,8 @@ router.post("/listarFoto", function (req, res) {
     atualizarController.listarFoto(req, res);
 });
 
+router.get("/listarFavoritas/:idUser/", function (req, res) {
+    atualizarController.listarFavoritas(req, res);
+});
+
 module.exports = router;

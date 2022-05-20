@@ -135,7 +135,7 @@ function AbrirCadastro(){
     }
 }
 
-function AbrirLogin(){
+function AbrirLogin(local){
 
     if(validarSessao() == false){
     document.querySelector('.sobreposi').style.animation = 'sobrepor 0.9s ease forwards';
@@ -143,9 +143,12 @@ function AbrirLogin(){
     document.querySelector('.sobreposi').style.display = 'flex'
     document.querySelector('.login').style.display = 'flex'
     }else{
-        alert('Ainda não fiz essa página')
-    }
+        if(local == "mylikes"){
+            window.location = "mylikes.html"
+        }
+    };        
 }
+
 
 //FECHANDO A TELA DE CADASTRO OU DE LOGIN
 function Close(){

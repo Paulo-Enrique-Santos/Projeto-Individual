@@ -72,6 +72,23 @@ function listarMusic(req, res) {
     });
 }
 
+function listarFavoritas(req, res) {
+    var idUser = req.params.idUser;
+
+    atualizarModel.listarFavoritas(idUser).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function listarFoto(req, res) {
     var idVar = req.body.idServer;
 
@@ -93,5 +110,6 @@ module.exports = {
     listarFoto,
     listarMusic,
     addLike,
-    removeLike
+    removeLike,
+    listarFavoritas
 }

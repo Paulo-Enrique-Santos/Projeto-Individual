@@ -59,7 +59,7 @@ function atualizarFoto(id) {
 
                     // criando e manipulando elementos do HTML via JavaScript
                     var fotoArtista = document.createElement("li");
-                    fotoArtista.id = i;
+                    fotoArtista.id = publicacao.idMusica;
                     fotoArtista.style.backgroundImage = `url('./assets/picture/${publicacao.caminhoFoto}')`
 
                     feed.appendChild(fotoArtista);

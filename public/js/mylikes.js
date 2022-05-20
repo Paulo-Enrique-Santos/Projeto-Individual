@@ -1,64 +1,23 @@
-//ARRAY QUE SALVA AS MÚSICAS
-var arrayMusic = ['0'];
+let arrayMusic = ['0'];
 
-let classAtual = 'like';
-//EVENTO QUE CHAMA A FUNÇÃO PARA ATUALIZAR A DURAÇÃO DA MÚSICA
-//arrayMusic[arrayMusic.length].on('ready', carregarDuracao);
-
-//EVENTO QUE CHAMA FUNÇÃO CLICK (QUE FAZ AS MUSICAS TOCAREM)
-document.addEventListener('click', click);
-
-document.addEventListener('click', function (event) {
-    var classClick = event.target.className;
-    var idClick = event.target.id;
-    var idConteudo = idClick.replace(/^./, "");
-
-    if(classClick == 'like' && validarSessao() == true){
-        document.querySelector(`#${idClick}`).classList.add("likeRed");
-        document.querySelector(`#${idClick}`).classList.remove("like");
-        addLike(idConteudo);
-        } else if (classClick == 'like' && validarSessao() == false){
-        AbrirLogin();
-    } else if (classClick == 'likeRed' && validarSessao() == true){
-        document.querySelector(`#${idClick}`).classList.add("like");
-        document.querySelector(`#${idClick}`).classList.remove("likeRed");
-        removeLike(idConteudo);
-    }
-
-});
-
-//FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
-function click(event){
-    var click = event.target.id;
-    
-    carregarDuracao();
-    for(var music = 1; music< arrayMusic.length ;music++){
-        if(click == music){
-            for(var i = 1; i < arrayMusic.length ; i++){
-                    if(arrayMusic[i].isPlaying() == true){
-                        if(i != click){
-                        arrayMusic[i].stop();
-                        }
-                    }       
-                }
-            arrayMusic[click].playPause();
-            }
-        }
-}
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
-function atualizarMusic() {
-    fetch("/atualizar/listarMusic").then(function (resposta) {
+function listarFavoritas() {
+    var idUser = sessionStorage.ID_USUARIO;
+    var feed = document.getElementById("music");
+    feed.innerHTML = "";
+    arrayMusic = ['0'];
+    fetch(`/atualizar/listarFavoritas/${idUser}`).then(function (resposta) {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                var feed = document.getElementById("music");
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
 
                     // criando e manipulando elementos do HTML via JavaScript
                     var divPublicacao = document.createElement("div");
                     divPublicacao.className = "player";
+                    divPublicacao.id = "p" + publicacao.idMusica;
 
                     var sobre = document.createElement("div");
                     sobre.className = 'sobre';
@@ -81,17 +40,17 @@ function atualizarMusic() {
 
                     var divWaves = document.createElement('div');
                     divWaves.className = 'waveform'
-                    divWaves.id = 'waves' + publicacao.idMusica;
+                    divWaves.id = 'waves' + publicacao.idMusica
                     
                     var divFinal = document.createElement('div');
                     divFinal.className = 'final';
 
                     var timeMusic = document.createElement('span');
-                    timeMusic.id = 'duracao' + publicacao.idMusica;
+                    timeMusic.id = 'duracao' + (i+1);
 
                     var like = document.createElement('div');
-                    like.className = 'like';
-                    like.id = 'l'+ publicacao.idMusica;
+                    like.className = 'likeRed';
+                    like.id = 'l'+publicacao.idMusica;
 
                     var add = document.createElement('h1');
                     add.innerHTML = '+';
@@ -132,7 +91,6 @@ function atualizarMusic() {
 
             setTimeout(() => {
                 carregarDuracao();
-                attLikes();
              }, "8000")
 
         } else {
@@ -141,6 +99,32 @@ function atualizarMusic() {
     }).catch(function (resposta) {
         console.error(resposta);
     });
+}
+
+//FUNÇÃO PARA CONSEGUIR REMOVER A MUSICA
+document.addEventListener('click', function (event) {
+    var classClick = event.target.className;
+    var idClick = event.target.id;
+    var idConteudo = idClick.replace(/^./, "");
+
+    alert(classClick);
+    alert(idConteudo);
+ if (classClick == 'likeRed' && validarSessao() == true){
+        removeLike(idConteudo);
+        var feed = document.getElementById("p" + idConteudo);
+        feed.style.display = "none";
+    }
+
+});
+
+//FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
+function carregarDuracao(){
+
+    console.log(arrayMusic.length);
+    for(var i = 1 ; i < arrayMusic.length ; i ++){
+        var duracao = document.getElementById(`duracao${i}`);
+            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
+    }    
 }
 
 //FUNCTION PARA CONVERTER SEGUNDOS EM UM HORÁRIO VISÍVEL
@@ -152,60 +136,4 @@ function converterTempo(segundo){
     }
 
     return campoMinuto + ':' + campoSegundo;
-}
-
-//FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
-function carregarDuracao(){
-
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
-        var duracao = document.getElementById(`duracao${i}`);
-            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
-    }    
-}
-
-//FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
-function attLikes(){
-
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
-
-        var id = arrayMusic[i].container.id;
-        var idConteudo = id.replace("waves", "");
-
-    fetch("/validacoes/attLikes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            idMusicServer: idConteudo,
-            idUserServer: sessionStorage.ID_USUARIO
-        })
-    }).then(function (resposta) {
-
-        if (resposta.ok) {
-
-            resposta.json().then(function (resposta) {
-
-                if(resposta.length == 1){
-                    console.log(`#l${resposta[0].fkMusica}`);
-                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.add("likeRed");
-                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.remove("like");
-
-                }
-            });    
-
-
-        } else {
-            console.log("Houve um erro ao tentar realizar o login!");
-            
-            resposta.text().then(texto => {
-                console.error(texto);
-            });
-            return false;
-        }
-
-    }).catch(function (erro) {
-        console.log(erro);
-    });
-}
 }
