@@ -17,6 +17,20 @@
     --border-radius: 2vh;
 }
 
+section::-webkit-scrollbar{
+    width: 1vw;
+    background-color: var(--background5-color);
+}
+
+section::-webkit-scrollbar-thumb{
+    background-color: #01a0c8;
+    border-radius: var(--border-radius);
+}
+
+section::-webkit-scrollbar-thumb:hover{
+    background-color: var(--hoverbutton-color);
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -449,6 +463,7 @@ section .card li:hover{
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
     margin-bottom: 3vh;
+    min-height: 70vh;
 }
 
 .top{
@@ -616,4 +631,57 @@ footer .contato{
 
 footer .contato h5{
     align-self: center;
+}
+
+/* PÁGINA DOS ARTISTAS */
+#artist{
+    padding: 10px 20px 30px 20px;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+    box-shadow: 1px 1px 11px 2px #000000;
+    margin-bottom: 3vh;
+    min-height: 70vh;
+    display: flex;
+    justify-content: space-between;
+}
+#artist #left{
+    width: 49%;
+}
+
+#artist #right{
+    width: 49%;
+}
+
+#artist .card{
+    width: 100%;
+    height: 20vh;
+    padding: 1.5vh;
+    display: flex;
+    cursor: pointer;
+}
+
+#artist .card img{
+    height: 100%;
+    border-radius: var(--border-radius);
+}
+
+#artist .titulos h4{
+    color: #494949;
+}
+
+#artist .titulos h2{
+    color: #494949;
+}
+
+#artist span{
+    color: var(--contraste-color);
+}
+
+#artist .card .titulos{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
