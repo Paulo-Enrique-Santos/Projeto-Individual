@@ -31,7 +31,6 @@ document.addEventListener('click', function (event) {
 function click(event){
     var click = event.target.id;
     
-    carregarDuracao();
     for(var music = 1; music< arrayMusic.length ;music++){
         if(click == music){
             for(var i = 1; i < arrayMusic.length ; i++){

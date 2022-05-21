@@ -63,7 +63,10 @@ select
 from 
 musicas;
 
-select * from likes;
+update musicas set likes = likes+1 where idMusica = 1;
+select * from Musicas;
+
+select * from usuario join likes on usuario.idUser = likes.fkUsuario join musicas on likes.fkMusica = musicas.idMusica where idUser = 1;
 
 insert into Musicas values
 (null, 'Barões da Pisadinha', 'Teste', 'BAROES.PNG','teste-predio.mp3','Sertanejo');
@@ -73,4 +76,12 @@ select count(fkMusica) from likes;
 select distinct artista, caminhofoto, genero from musicas;
 
 select distinct artista, caminhoFoto from musicas where genero = 'Sertanejo';
+
+-- SELECT PARA TRAZER O TOP 10
+select * from musicas order by likes desc limit 10;
+
+-- SELECT PARA TRAZER AS ULTIMAS MÚSICAS ADICIONADAS
+select * from musicas order by idMusica desc limit 10;
+
+
 

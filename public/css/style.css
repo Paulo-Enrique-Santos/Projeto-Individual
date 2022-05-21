@@ -45,7 +45,7 @@ header {
 }
 
 .container{
-    width: 85%;
+    width: 80%;
     margin: auto;
 }
 
@@ -448,6 +448,7 @@ section .card li:hover{
     border-radius: var(--border-radius);
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
+    margin-bottom: 3vh;
 }
 
 .top{
@@ -471,6 +472,11 @@ section .card li:hover{
 
 .content{
     position: relative;
+}
+
+.content .container {
+    height: auto;
+    width: 95%;
 }
 
 .content .player{
@@ -562,4 +568,52 @@ section .card li:hover{
 .waveform{
     width: 40vw;
     height: 100%;
+}
+
+/* FOOTER DO SITE */
+footer {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    color: var(--textos-color);
+    border-top: var(--border-width) solid var(--hoverbutton-color);
+}
+
+footer h1{
+    margin-bottom: 1vh;
+    color: var(--contraste-color);
+}
+
+footer .direitos{
+    height: 90%;
+    width: 25%;
+    padding: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-right: var(--border-width) solid var(--background2-color);
+}
+
+footer .agradecimentos{
+    height: 90%;
+    width: 25%;
+    padding: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-right: var(--border-width) solid var(--background2-color);
+}
+
+footer .contato{
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+footer .contato h5{
+    align-self: center;
 }

@@ -21,7 +21,7 @@ function listarFavoritas() {
 
                     var sobre = document.createElement("div");
                     sobre.className = 'sobre';
-                    sobre.id = publicacao.idMusica;
+                    sobre.id = (i+1);
 
                     var divFoto = document.createElement("div");
                     divFoto.className = "foto";
@@ -70,6 +70,7 @@ function listarFavoritas() {
                     var wavesurfer = WaveSurfer.create({
                         container: '#waves' + publicacao.idMusica,
                         waveColor: '#a8a8a8',
+                        partialRender: false,
                         progressColor: '#01a0c8',
                         height: 50,
                         responsive: true,
@@ -77,12 +78,11 @@ function listarFavoritas() {
                         barRadius: 2,
                         cursorWidth: 0,
                         interact: false,
-                        pixelRatio: 1
+                        backend: 'MediaElement'
                     });
-                    
-                   wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
-                   var adicionar = arrayMusic.push(wavesurfer);
-                   //carregarDuracao();
+                    wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
+                    var adicionar = arrayMusic.push(wavesurfer);
+                    //carregarDuracao();
     
 
                 }
@@ -107,8 +107,19 @@ document.addEventListener('click', function (event) {
     var idClick = event.target.id;
     var idConteudo = idClick.replace(/^./, "");
 
-    alert(classClick);
-    alert(idConteudo);
+    for(var music = 1; music< arrayMusic.length ;music++){
+        if(idClick == music){
+            for(var i = 1; i < arrayMusic.length ; i++){
+                    if(arrayMusic[i].isPlaying() == true){
+                        if(i != idClick){
+                        arrayMusic[i].stop();
+                        }
+                    }       
+                }
+            arrayMusic[idClick].playPause();
+            }
+        }
+
  if (classClick == 'likeRed' && validarSessao() == true){
         removeLike(idConteudo);
         var feed = document.getElementById("p" + idConteudo);
