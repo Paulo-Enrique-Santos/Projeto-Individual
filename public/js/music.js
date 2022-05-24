@@ -30,7 +30,7 @@ document.addEventListener('click', function (event) {
 //FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
 function click(event){
     var click = event.target.id;
-    
+
     for(var music = 1; music< arrayMusic.length ;music++){
         if(click == music){
             for(var i = 1; i < arrayMusic.length ; i++){
@@ -54,85 +54,93 @@ function atualizarMusic() {
                 var feed = document.getElementById("music");
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
+                    var verMusica = document.getElementById("l" + publicacao.idMusica);
+                    var artist = document.getElementById("artista" + publicacao.idMusica);
 
-                    // criando e manipulando elementos do HTML via JavaScript
-                    var divPublicacao = document.createElement("div");
-                    divPublicacao.className = "player";
+                    if(verMusica != null){
+                    artist.innerHTML += ', ' + publicacao.artista;
+                    } else {
 
-                    var sobre = document.createElement("div");
-                    sobre.className = 'sobre';
-                    sobre.id = publicacao.idMusica;
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        divPublicacao.className = "player";
 
-                    var divFoto = document.createElement("div");
-                    divFoto.className = "foto";
-                    divFoto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
+                        var sobre = document.createElement("div");
+                        sobre.className = 'sobre';
+                        sobre.id = publicacao.idMusica;
 
-                    var divTitles = document.createElement('div');
-                    divTitles.className = 'titles';
+                        var divFoto = document.createElement("div");
+                        divFoto.className = "foto";
+                        divFoto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
 
-                    var music = document.createElement('h2');
-                    music.className = 'title-music';
-                    music.innerHTML = publicacao.musica;
+                        var divTitles = document.createElement('div');
+                        divTitles.className = 'titles';
 
-                    var artista = document.createElement('h3');
-                    artista.className = 'title-artist';
-                    artista.innerHTML = publicacao.artista;
+                        var music = document.createElement('h2');
+                        music.className = 'title-music';
+                        music.innerHTML = publicacao.musica;
 
-                    var divWaves = document.createElement('div');
-                    divWaves.className = 'waveform'
-                    divWaves.id = 'waves' + publicacao.idMusica;
+                        var artista = document.createElement('h3');
+                        artista.className = 'title-artist';
+                        artista.id = 'artista' + publicacao.idMusica;
+                        artista.innerHTML += publicacao.artista;
+
+                        var divWaves = document.createElement('div');
+                        divWaves.className = 'waveform'
+                        divWaves.id = 'waves' + publicacao.idMusica;
+                        
+                        var divFinal = document.createElement('div');
+                        divFinal.className = 'final';
+
+                        var timeMusic = document.createElement('span');
+                        timeMusic.id = 'duracao' + publicacao.idMusica;
+
+                        var like = document.createElement('div');
+                        like.className = 'like';
+                        like.id = 'l'+ publicacao.idMusica;
+
+                        var add = document.createElement('h1');
+                        add.innerHTML = '+';
+
+                        feed.appendChild(divPublicacao);
+                        divPublicacao.appendChild(sobre);
+                        divPublicacao.appendChild(divFoto);
+                        divPublicacao.appendChild(divTitles);
+                        divTitles.appendChild(music);
+                        divTitles.appendChild(artista);
+                        divPublicacao.appendChild(divWaves);
+                        divPublicacao.appendChild(divFinal);
+                        divFinal.appendChild(timeMusic);
+                        divFinal.appendChild(like);
+                        divFinal.appendChild(add);
+
+                        var wavesurfer = WaveSurfer.create({
+                            container: '#waves' + publicacao.idMusica,
+                            waveColor: '#a8a8a8',
+                            progressColor: '#01a0c8',
+                            height: 50,
+                            responsive: true,
+                            barWidth: 3,
+                            barRadius: 2,
+                            cursorWidth: 0,
+                            interact: false,
+                            pixelRatio: 1
+                        });
+                        
+                        wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
+                        var adicionar = arrayMusic.push(wavesurfer);
+                        //carregarDuracao();
+                        attLikes();
+                        carregarDuracao();
+                    }
                     
-                    var divFinal = document.createElement('div');
-                    divFinal.className = 'final';
-
-                    var timeMusic = document.createElement('span');
-                    timeMusic.id = 'duracao' + publicacao.idMusica;
-
-                    var like = document.createElement('div');
-                    like.className = 'like';
-                    like.id = 'l'+ publicacao.idMusica;
-
-                    var add = document.createElement('h1');
-                    add.innerHTML = '+';
-
-                    feed.appendChild(divPublicacao);
-                    divPublicacao.appendChild(sobre);
-                    divPublicacao.appendChild(divFoto);
-                    divPublicacao.appendChild(divTitles);
-                    divTitles.appendChild(music);
-                    divTitles.appendChild(artista);
-                    divPublicacao.appendChild(divWaves);
-                    divPublicacao.appendChild(divFinal);
-                    divFinal.appendChild(timeMusic);
-                    divFinal.appendChild(like);
-                    divFinal.appendChild(add);
-
-                    var wavesurfer = WaveSurfer.create({
-                        container: '#waves' + publicacao.idMusica,
-                        waveColor: '#a8a8a8',
-                        progressColor: '#01a0c8',
-                        height: 50,
-                        responsive: true,
-                        barWidth: 3,
-                        barRadius: 2,
-                        cursorWidth: 0,
-                        interact: false,
-                        pixelRatio: 1
-                    });
-                    
-                   wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
-                   var adicionar = arrayMusic.push(wavesurfer);
-                   //carregarDuracao();
-    
-
                 }
 
             });
-
-            setTimeout(() => {
-                carregarDuracao();
-                attLikes();
-             }, "8000")
+            // setTimeout(() => {
+            //     carregarDuracao();
+            //     attLikes();
+            //  }, "8000")
 
         } else {
             throw ('Houve um erro na API!');
@@ -164,7 +172,7 @@ function carregarDuracao(){
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
 function attLikes(){
-
+console.log(arrayMusic.length);
     for(var i = 1 ; i < arrayMusic.length ; i ++){
 
         var id = arrayMusic[i].container.id;

@@ -3,27 +3,41 @@ create database MusicFans;
 use musicfans;
 
 create table usuario (
-idUser int primary key auto_increment,
+idUsuario int primary key auto_increment,
 nome 	varchar (45),
 email	varchar (60),
 senha 	varchar (20)
 );
 
-create table musicas (
+create table artista (
+idArtista int primary key auto_increment,
+nome 	varchar(45),
+caminhoFoto	varchar(200),
+genero	varchar(45)
+);
+
+create table musica (
 idMusica int primary key auto_increment,
-artista	 varchar(45),
-musica	 varchar(45),
+nome	 varchar(45),
 caminhoFoto  varchar(200),
 caminhoAudio varchar(200) unique,
-genero 	varchar(45),
 likes	int
+);
+
+create table feat (
+idFeat int auto_increment,
+fkArtista int,
+foreign key (fkArtista) references Artista(idArtista),
+fkMusica int,
+foreign key (fkMusica) references Musica(idMusica),
+primary key (idFeat, fkArtista,fkMusica)
 );
 
 create table likes (
 fkUsuario int,
-foreign key (fkUsuario) references usuario (idUser),
+foreign key (fkUsuario) references usuario (idUsuario),
 fkMusica int,
-foreign key (fkMusica) references Musicas (idMusica),
+foreign key (fkMusica) references Musica (idMusica),
 primary key(fkUsuario,fkMusica)
 );
 
@@ -31,16 +45,58 @@ create table PlayList (
 idPlayList int primary key,
 nomePlayList varchar (45),
 fkUsuario int,
-foreign key (fkUsuario) references Usuario(idUser)
+foreign key (fkUsuario) references Usuario(idUsuario)
 );
 
 create table MusicaPlayList (
 fkMusica int,
 fkPlayList int,
-foreign key (fkMusica) references Musicas (idMusica),
+foreign key (fkMusica) references Musica (idMusica),
 foreign key (fkPlayList) references PlayList(idPlayList),
 Primary key (fkPlayList, fkMusica)
 );
+
+-- INSERINDO ARTISTAS
+insert into Artista values
+(null,'MC Poze do Rodo', 'Artistas/poze.png','Funk'),
+(null,'Luan Santana', 'Artistas/luan.png','Sertanejo'),
+(null,'Felipe Ret', 'Artistas/felipe.jpg','RAP'),
+(null,'Justin Bieber', 'Artistas/justin.png','POP');
+
+-- INSERINDO MUSICAS
+insert into Musica values
+(null, 'Me Sinto Abençoado','Musicas/me-sinto-abencoado.jpg','me-sinto-abencoado.mp3',0),
+(null, 'Red Eye','Musicas/red-eye.jpg','red-eye.mp3',0),
+(null, 'Chuva de Arroz','Musicas/chuva-de-arroz.jpg','chuva-de-arroz.mp3',0);
+
+-- VINCULANDO A MÚSICA AO ARTISTA
+insert into feat values 
+(null, 1 , 1),
+(null, 3 , 1),
+(null, 4 , 2),
+(null, 2 , 3);
+
+-- LISTAR GENEROS DIFERENTES 
+select distinct genero from Artista;
+
+-- LISTAR ARTISTAS SEPARADOS POR GÊNERO
+select distinct 
+	nome, 
+    caminhoFoto 
+from Artista
+	where genero = 'RAP';
+    
+-- LISTAR MUSICAS 
+select 
+	idMusica,
+    musica.nome as musica,
+    artista.nome as artista,
+    musica.caminhoFoto,
+    musica.caminhoAudio
+from musica join feat on idMusica = fkMusica 
+	join Artista on fkArtista = idArtista;
+
+
 
 insert Musicas values
 (null, 'Justin Bieber', 'Red Eye', 'JB.jpg','red-eye.mp3','POP',0),
@@ -83,5 +139,7 @@ select * from musicas order by likes desc limit 10;
 -- SELECT PARA TRAZER AS ULTIMAS MÚSICAS ADICIONADAS
 select * from musicas order by idMusica desc limit 10;
 
+select distinct artista, caminhoFoto, genero from musicas;
 
+select count(likes), sum(likes) from Musicas where artista = 'Luan Santana';
 

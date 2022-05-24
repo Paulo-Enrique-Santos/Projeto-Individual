@@ -13,6 +13,13 @@ function listarFavoritas() {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
+                    var verMusica = document.getElementById("l" + publicacao.idMusica);
+                    var artist = document.getElementById("artista" + publicacao.idMusica);
+
+                    if(verMusica != null){
+                    artist.innerHTML += ', ' + publicacao.artista;
+                    } else {
+
 
                     // criando e manipulando elementos do HTML via JavaScript
                     var divPublicacao = document.createElement("div");
@@ -21,7 +28,7 @@ function listarFavoritas() {
 
                     var sobre = document.createElement("div");
                     sobre.className = 'sobre';
-                    sobre.id = (i+1);
+                    sobre.id = publicacao.idMusica;
 
                     var divFoto = document.createElement("div");
                     divFoto.className = "foto";
@@ -36,6 +43,7 @@ function listarFavoritas() {
 
                     var artista = document.createElement('h3');
                     artista.className = 'title-artist';
+                    artista.id = 'artista' + publicacao.idMusica;
                     artista.innerHTML = publicacao.artista;
 
                     var divWaves = document.createElement('div');
@@ -46,7 +54,7 @@ function listarFavoritas() {
                     divFinal.className = 'final';
 
                     var timeMusic = document.createElement('span');
-                    timeMusic.id = 'duracao' + (i+1);
+                    timeMusic.id = 'duracao' + publicacao.idMusica;
 
                     var like = document.createElement('div');
                     like.className = 'likeRed';
@@ -83,12 +91,11 @@ function listarFavoritas() {
                     wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
                     var adicionar = arrayMusic.push(wavesurfer);
                     //carregarDuracao();
-    
+                }
 
                 }
 
             });
-
             setTimeout(() => {
                 carregarDuracao();
              }, "8000")
@@ -128,16 +135,6 @@ document.addEventListener('click', function (event) {
 
 });
 
-//FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
-function carregarDuracao(){
-
-    console.log(arrayMusic.length);
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
-        var duracao = document.getElementById(`duracao${i}`);
-            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
-    }    
-}
-
 //FUNCTION PARA CONVERTER SEGUNDOS EM UM HORÁRIO VISÍVEL
 function converterTempo(segundo){
     var campoMinuto = Math.floor(segundo / 60);
@@ -147,4 +144,14 @@ function converterTempo(segundo){
     }
 
     return campoMinuto + ':' + campoSegundo;
+}
+
+//FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
+function carregarDuracao(){
+    for(var i = 1 ; i < arrayMusic.length ; i ++){
+        let idClick = arrayMusic[i].container.id;
+        var idConteudo = idClick.replace('waves', "");
+        var duracao = document.getElementById(`duracao${idConteudo}`);
+            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
+    }    
 }

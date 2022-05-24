@@ -520,6 +520,9 @@ section .card li:hover{
     box-shadow: 1px 1px 11px 2px #000000;
     background-size: cover;
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .titles{
@@ -660,9 +663,16 @@ footer .contato h5{
     cursor: pointer;
 }
 
-#artist .card img{
-    height: 100%;
+#artist .card:hover{
+    background-color: var(--card-color);
+}
+
+#artist .card .foto{
+    width: 20vw;
     border-radius: var(--border-radius);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 #artist .titulos h4{
@@ -682,6 +692,7 @@ footer .contato h5{
     flex-direction: column;
     width: 90%;
     justify-content: center;
+    padding: 2%;
     align-items: center;
     text-align: center;
 }

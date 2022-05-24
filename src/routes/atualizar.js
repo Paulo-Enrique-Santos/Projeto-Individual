@@ -7,6 +7,10 @@ router.get("/listarGenero", function (req, res) {
     atualizarController.listarGenero(req, res);
 });
 
+router.get("/listarArtista", function (req, res) {
+    atualizarController.listarArtista(req, res);
+});
+
 router.post("/addLike", function (req, res) {
     atualizarController.addLike(req, res);
 });
