@@ -102,6 +102,21 @@ function listarFavoritas(req, res) {
     });
 }
 
+function attDadosArtista(req, res) {
+    var idArtista = req.params.idArtista;
+
+    atualizarModel.attDadosArtista(idArtista).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function listarFoto(req, res) {
     var idVar = req.body.idServer;
@@ -126,5 +141,6 @@ module.exports = {
     addLike,
     removeLike,
     listarFavoritas,
-    listarArtista
+    listarArtista,
+    attDadosArtista
 }

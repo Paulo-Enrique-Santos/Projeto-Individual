@@ -145,6 +145,8 @@ function AbrirLogin(local){
     }else{
         if(local == "mylikes"){
             window.location = "mylikes.html"
+        } else if(local == "playlist"){
+            window.location = "myplaylist.html"
         }
     };        
 }

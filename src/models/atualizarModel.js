@@ -15,6 +15,7 @@ function listarArtista() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
     select distinct 
+        idArtista,
         nome as artista, 
         caminhoFoto, 
         genero 
@@ -41,12 +42,35 @@ function listarMusic() {
     return database.executar(instrucao);
 }
 
+function attDadosArtista(idArtista) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    select 
+	    count(idMusica) as musics, 
+        sum(likes) as likes 
+    from musica 
+	    join feat on idMusica = feat.fkMusica 
+		    join artista on feat.fkArtista = idArtista 
+			    where idArtista = ${idArtista};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function listarFavoritas(idUser) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    select idMusica,musica.nome as musica, artista.nome as artista, musica.caminhoFoto, caminhoAudio from usuario join likes on usuario.idUsuario = likes.fkUsuario join musica on likes.fkMusica = musica.idMusica 
-	join feat on idMusica = feat.fkMusica 
-		join artista on feat.fkArtista = idArtista where idUsuario = 1;
+    select 
+        idMusica,musica.nome as musica, 
+        artista.nome as artista, 
+        musica.caminhoFoto, 
+        caminhoAudio 
+    from usuario 
+    join likes on usuario.idUsuario = likes.fkUsuario 
+        join musica on likes.fkMusica = musica.idMusica 
+	        join feat on idMusica = feat.fkMusica 
+		        join artista on feat.fkArtista = idArtista 
+                    where idUsuario = ${idUser};
         `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -103,5 +127,6 @@ module.exports = {
     addLike,
     removeLike,
     listarFavoritas,
-    listarArtista
+    listarArtista,
+    attDadosArtista
 }

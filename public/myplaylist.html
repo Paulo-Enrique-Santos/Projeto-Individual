@@ -12,7 +12,7 @@
     
     <title>MusicFans | Artistas</title>
 </head>
-<body onload="atualizarArtista(), validarSessao()">
+<body onload="validarSessao()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -123,7 +123,7 @@
                     <span>Meus&nbsp;Favoritos</span>
                     <span class="text-next">Meus&nbsp;Favoritos</span>
                 </li>
-                <li onclick="AbrirLogin('playlist')" >
+                <li onclick="AbrirLogin('playlist')">
                     <span>Minhas&nbsp;PlayLists</span>
                     <span class="text-next">Minhas&nbsp;PlayLists</span>
                 </li>
@@ -163,24 +163,23 @@
                     <H1>Ouça os Melhores Artistas!</H1>
                     <h2>Monte PlayLists Incríveis.</h2>
                 </div>
-                <div id="artist">
-                    <div id="left">
-                        <!-- <div class="card">
-                            <img src="./assets/picture/JB.jpg">
-                            <div class="titulos">
-                                <h1>Justin Bieber</h1>
-                                <h2>POP</h2>
+                <div id="playlist">
+                    <div class="card">
+                        <div class="playerPlaylist">
+                            <!-- <img src="./assets/picture/Artistas/justin.png"> -->
+                            <div class="foto">
+                                <img src="./assets/picture/Artistas/justin.png" >
                             </div>
-                            <div class="titulos">
-                                <h4><span>Justin Bieber</span> do gênero <span>POP</span>
-                                conta com <span>9 músicas</span> cadastradas, e já 
-                                acumula <span>312 likes</span> entre os nossos 
-                                usuarios.</h4>
+                            <div class="botoes">
+                                <img class="trocar" src="./assets/picture/inicio.png">
+                                <img class="play" src="./assets/picture/play.png">
+                                <img class="pause" src="./assets/picture/pause.png">
+                                <img class="trocar" src="./assets/picture/fim.png">
                             </div>
-                        </div> -->
-                    </div>
-                    <div id="right">
-                    </div>
+                        </div>
+
+
+                    </div> 
                 </div>
                 <footer>
                     <div class="direitos">
@@ -219,4 +218,3 @@
 <script src="js/funcoes.js"></script>
 <script src="js/login.js"></script>
 <script src="js/cadastrar.js"></script>
-<script src="js/artist.js"></script>
