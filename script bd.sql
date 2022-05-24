@@ -95,8 +95,19 @@ select
     musica.caminhoAudio
 from musica join feat on idMusica = fkMusica 
 	join Artista on fkArtista = idArtista;
-
-
+    
+-- LISTAR QUANTOS LIKES E MUSICAS TEM O ARTISTA
+select 
+	count(idMusica) as musics, 
+    sum(likes) as likes 
+from musica 
+	join feat on idMusica = feat.fkMusica 
+		join artista on feat.fkArtista = idArtista 
+			where idArtista = 1;
+    
+select idMusica,musica.nome as musica, artista.nome as artista, musica.caminhoFoto, caminhoAudio from usuario join likes on usuario.idUsuario = likes.fkUsuario join musica on likes.fkMusica = musica.idMusica 
+	join feat on idMusica = feat.fkMusica 
+		join artista on feat.fkArtista = idArtista where idUsuario = 1;
 
 insert Musicas values
 (null, 'Justin Bieber', 'Red Eye', 'JB.jpg','red-eye.mp3','POP',0),
