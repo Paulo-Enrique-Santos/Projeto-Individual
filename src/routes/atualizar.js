@@ -15,6 +15,10 @@ router.get("/attDadosArtista/:idArtista/", function (req, res) {
     atualizarController.attDadosArtista(req, res);
 });
 
+router.get("/atualizarPlaylist/:idUsuario/", function (req, res) {
+    atualizarController.atualizarPlaylist(req, res);
+});
+
 router.post("/addLike", function (req, res) {
     atualizarController.addLike(req, res);
 });

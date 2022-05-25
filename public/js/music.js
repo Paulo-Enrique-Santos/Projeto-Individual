@@ -172,7 +172,6 @@ function carregarDuracao(){
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
 function attLikes(){
-console.log(arrayMusic.length);
     for(var i = 1 ; i < arrayMusic.length ; i ++){
 
         var id = arrayMusic[i].container.id;

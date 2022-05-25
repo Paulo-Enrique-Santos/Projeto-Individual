@@ -1,11 +1,10 @@
-let arrayMusic = ['0'];
+let arrayMusic = [];
 
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function listarFavoritas() {
     var idUser = sessionStorage.ID_USUARIO;
     var feed = document.getElementById("music");
     feed.innerHTML = "";
-    arrayMusic = ['0'];
     fetch(`/atualizar/listarFavoritas/${idUser}`).then(function (resposta) {
         if (resposta.ok) {
 
@@ -114,18 +113,25 @@ document.addEventListener('click', function (event) {
     var idClick = event.target.id;
     var idConteudo = idClick.replace(/^./, "");
 
-    for(var music = 1; music< arrayMusic.length ;music++){
-        if(idClick == music){
-            for(var i = 1; i < arrayMusic.length ; i++){
-                    if(arrayMusic[i].isPlaying() == true){
-                        if(i != idClick){
-                        arrayMusic[i].stop();
-                        }
-                    }       
-                }
-            arrayMusic[idClick].playPause();
+    for(var b = 0; b < arrayMusic.length ; b++){
+        var idWaves = arrayMusic[b].container.id;
+        var id = idWaves.replace('waves', '');
+            if(id == idClick){
+                arrayMusic[b].playPause();      
+            }   
+    }
+    for(var music = 0; music< arrayMusic.length ;music++){
+        for(var i = 0; i < arrayMusic.length ; i++){
+            var idWave = arrayMusic[i].container.id;
+            var id = idWave.replace('waves', '');
+                if(arrayMusic[i].isPlaying() == true){
+                    
+                    if(id != idClick){
+                    arrayMusic[i].stop();
+                    }
+                }       
             }
-        }
+    }
 
  if (classClick == 'likeRed' && validarSessao() == true){
         removeLike(idConteudo);
@@ -148,7 +154,7 @@ function converterTempo(segundo){
 
 //FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
 function carregarDuracao(){
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
+    for(var i = 0 ; i < arrayMusic.length ; i ++){
         let idClick = arrayMusic[i].container.id;
         var idConteudo = idClick.replace('waves', "");
         var duracao = document.getElementById(`duracao${idConteudo}`);
