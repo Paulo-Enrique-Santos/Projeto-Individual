@@ -106,6 +106,15 @@ function addLike(idMusic,idUser) {
     return database.executar(instrucao);
 }
 
+function criarPlaylist(nome,idUser) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    insert into Playlist (nomePlaylist,fkUsuario) values
+    ('${nome}',${idUser});
+    `;
+    return database.executar(instrucao);
+}
+
 function removeLike(idMusic,idUser) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
@@ -143,5 +152,6 @@ module.exports = {
     listarFavoritas,
     listarArtista,
     attDadosArtista,
-    atualizarPlaylist
+    atualizarPlaylist,
+    criarPlaylist
 }

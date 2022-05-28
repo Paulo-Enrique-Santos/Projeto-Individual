@@ -50,6 +50,28 @@ function addLike(req, res) {
     );
 }
 
+function criarPlaylist(req, res) {
+
+    var nome = req.body.nomeServer;
+    var idUser = req.body.idUserServer;
+
+    atualizarModel.criarPlaylist(nome, idUser)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 function removeLike(req, res) {
 
     var idMusic = req.body.idMusicServer;
@@ -159,5 +181,6 @@ module.exports = {
     listarFavoritas,
     listarArtista,
     attDadosArtista,
-    atualizarPlaylist
+    atualizarPlaylist,
+    criarPlaylist
 }

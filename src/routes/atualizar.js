@@ -23,6 +23,14 @@ router.post("/addLike", function (req, res) {
     atualizarController.addLike(req, res);
 });
 
+router.post("/criarPlaylist", function (req, res) {
+    atualizarController.criarPlaylist(req, res);
+});
+
+router.post("/deletarPlaylist", function (req, res) {
+    atualizarController.deletarPlaylist(req, res);
+});
+
 router.post("/removeLike", function (req, res) {
     atualizarController.removeLike(req, res);
 });

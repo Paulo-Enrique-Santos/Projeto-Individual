@@ -18,7 +18,7 @@ function listarFavoritas() {
                     if(verMusica != null){
                     artist.innerHTML += ', ' + publicacao.artista;
                     } else {
-
+                        
 
                     // criando e manipulando elementos do HTML via JavaScript
                     var divPublicacao = document.createElement("div");
