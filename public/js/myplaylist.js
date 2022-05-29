@@ -157,7 +157,7 @@ function atualizarMusicas(idPlaylist){
                                 <h2>${publicacao.musica}</h2>
                                 <h3 id="artista${publicacao.idMusica}${idPlaylist}">${publicacao.artista}</h3>  
                             </div>
-                            <img src="./assets/picture/delete-list.png">
+                            <img src="./assets/picture/delete-list.png" onclick="deletarMusicaPlaylist(${publicacao.idMusica},${idPlaylist})">
                         </div>
 
                         `
@@ -186,6 +186,33 @@ function atualizarMusicas(idPlaylist){
 
 }
 
+//FUNÇÃO PARA DELETAR AS MUSICAS DAS PLAYLISTS
+function deletarMusicaPlaylist(idMusica,idPlaylist){
+    fetch("/atualizar/deletarMusicaPlaylist", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            idPlaylistServer: idPlaylist,
+            idMusicaServer: idMusica
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            document.location.reload(true);
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+
+}
+
+//FUNÇÃO PARA TOCAR AS MÚSICAS
 document.addEventListener('click', function (event){
     var clickBruto = event.target.id;
     var click = clickBruto.replace('sobre', '');

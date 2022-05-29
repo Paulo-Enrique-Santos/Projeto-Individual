@@ -1,5 +1,5 @@
 //ARRAY QUE SALVA AS MÚSICAS
-var arrayMusic = ['0'];
+var arrayMusic = [];
 
 var classAtual = 'like';
 
@@ -31,20 +31,26 @@ document.addEventListener('click', function (event) {
 
 //FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
 function click(event){
-    var click = event.target.id;
+    var clickBruto = event.target.id;
+    var click = clickBruto.replace('sobre', '');
 
-    for(var music = 1; music< arrayMusic.length ;music++){
-        if(click == music){
-            for(var i = 1; i < arrayMusic.length ; i++){
-                    if(arrayMusic[i].isPlaying() == true){
-                        if(i != click){
-                        arrayMusic[i].stop();
-                        }
-                    }       
+    for(var i = 0; i < arrayMusic.length ; i++){
+        var idWaveBruto = arrayMusic[i].container.id;
+        var idWave = idWaveBruto.replace('waves','');
+
+        if(click == idWave){
+            for(var b = 0; b < arrayMusic.length; b ++){
+                var idWaveBruto = arrayMusic[b].container.id;
+                var idWave = idWaveBruto.replace('waves','');        
+                if(arrayMusic[b].isPlaying() == true){
+                    if(idWave != click){
+                        arrayMusic[b].stop();
+                    }
                 }
-            arrayMusic[click].playPause();
             }
+            arrayMusic[i].playPause();
         }
+    }
 }
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function atualizarMusic() {
@@ -170,15 +176,17 @@ function converterTempo(segundo){
 //FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
 function carregarDuracao(){
 
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
-        var duracao = document.getElementById(`duracao${i}`);
+    for(var i = 0 ; i < arrayMusic.length ; i ++){
+        var idWaveBruto = arrayMusic[i].container.id;
+        var idWave = idWaveBruto.replace('waves','');
+        var duracao = document.getElementById(`duracao${idWave}`);
             duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
     }    
 }
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
 function attLikes(){
-    for(var i = 1 ; i < arrayMusic.length ; i ++){
+    for(var i = 0 ; i < arrayMusic.length ; i ++){
 
         var id = arrayMusic[i].container.id;
         var idConteudo = id.replace("waves", "");

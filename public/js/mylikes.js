@@ -57,7 +57,7 @@ function listarFavoritas() {
 
                     var like = document.createElement('div');
                     like.className = 'likeRed';
-                    like.id = 'l'+publicacao.idMusica;
+                    like.id = 'l' + publicacao.idMusica;
 
                     var add = document.createElement('h1');
                     add.innerHTML = '+';
@@ -109,33 +109,34 @@ function listarFavoritas() {
 
 //FUNÇÃO PARA CONSEGUIR REMOVER A MUSICA
 document.addEventListener('click', function (event) {
+    var clickBruto = event.target.id;
+    var click = clickBruto.replace('l','');
     var classClick = event.target.className;
-    var idClick = event.target.id;
-    var idConteudo = idClick.replace(/^./, "");
 
-    for(var b = 0; b < arrayMusic.length ; b++){
-        var idWaves = arrayMusic[b].container.id;
-        var id = idWaves.replace('waves', '');
-            if(id == idClick){
-                arrayMusic[b].playPause();      
-            }   
-    }
-    for(var music = 0; music< arrayMusic.length ;music++){
-        for(var i = 0; i < arrayMusic.length ; i++){
-            var idWave = arrayMusic[i].container.id;
-            var id = idWave.replace('waves', '');
-                if(arrayMusic[i].isPlaying() == true){
-                    
-                    if(id != idClick){
-                    arrayMusic[i].stop();
+    for(var i = 0; i < arrayMusic.length; i ++){
+        var idWaveBruto = arrayMusic[i].container.id;
+        var idWave = idWaveBruto.replace('waves', '');
+
+        if(click == idWave ){
+            for(var b = 0; b < arrayMusic.length; b ++){
+                var idWaveBruto = arrayMusic[b].container.id;
+                var idWave = idWaveBruto.replace('waves','');        
+                if(arrayMusic[b].isPlaying() == true){
+                    if(idWave != click){
+                        arrayMusic[b].stop();
                     }
-                }       
+                }
             }
+            if(clickBruto == click){
+            arrayMusic[i].playPause();
+            }
+        }
     }
 
  if (classClick == 'likeRed' && validarSessao() == true){
-        removeLike(idConteudo);
-        var feed = document.getElementById("p" + idConteudo);
+
+        removeLike(click);
+        var feed = document.getElementById("p" + click);
         feed.style.display = "none";
     }
 

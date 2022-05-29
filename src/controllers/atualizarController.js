@@ -157,6 +157,28 @@ function deletarPlaylist(req, res) {
     );
 }
 
+function deletarMusicaPlaylist(req, res) {
+
+    var idMusica = req.body.idMusicaServer
+    var idPlaylist = req.body.idPlaylistServer;
+
+    atualizarModel.deletarMusicaPlaylist(idMusica,idPlaylist)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 function removeLike(req, res) {
 
     var idMusic = req.body.idMusicServer;
@@ -271,5 +293,6 @@ module.exports = {
     deletarPlaylist,
     listarPlaylist,
     addPlaylist,
-    atualizarMusicas
+    atualizarMusicas,
+    deletarMusicaPlaylist
 }
