@@ -113,9 +113,13 @@ from Usuario
 	join playlist on idUsuario = fkUsuario 
 		where fkUsuario = 1;
 
-select * from playlist;        
-
--- INSERINDO UMA NOVA PLAYLIST
+-- BUSCAR TODAS AS PLAYLIST DE UM DETERMINADO USUARIO
+select 
+	idPlaylist,
+    nomePlaylist
+from usuario 
+	join playlist on idUsuario = fkUsuario
+		where idUsuario = 1;
 
 select idMusica,musica.nome as musica, artista.nome as artista, musica.caminhoFoto, caminhoAudio from usuario join likes on usuario.idUsuario = likes.fkUsuario join musica on likes.fkMusica = musica.idMusica 
 	join feat on idMusica = feat.fkMusica 

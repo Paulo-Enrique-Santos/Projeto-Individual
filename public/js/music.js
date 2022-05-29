@@ -1,7 +1,9 @@
 //ARRAY QUE SALVA AS MÚSICAS
 var arrayMusic = ['0'];
 
-let classAtual = 'like';
+var classAtual = 'like';
+
+var idMusica = 0;
 //EVENTO QUE CHAMA A FUNÇÃO PARA ATUALIZAR A DURAÇÃO DA MÚSICA
 //arrayMusic[arrayMusic.length].on('ready', carregarDuracao);
 
@@ -99,9 +101,10 @@ function atualizarMusic() {
                         like.className = 'like';
                         like.id = 'l'+ publicacao.idMusica;
 
-                        var add = document.createElement('h1');
-                        add.innerHTML = '+';
-
+                        // var add = document.createElement('h1');
+                        // add.innerHTML = '+';
+                        // add.onclick = addMusicPlaylist(publicacao.idMusica);
+                        
                         feed.appendChild(divPublicacao);
                         divPublicacao.appendChild(sobre);
                         divPublicacao.appendChild(divFoto);
@@ -112,8 +115,11 @@ function atualizarMusic() {
                         divPublicacao.appendChild(divFinal);
                         divFinal.appendChild(timeMusic);
                         divFinal.appendChild(like);
-                        divFinal.appendChild(add);
-
+                        // divFinal.appendChild(add);
+                        divFinal.innerHTML += `
+                        <h1 onclick="addMusicPlaylist(${publicacao.idMusica})">+</h1>
+                        `
+                        
                         var wavesurfer = WaveSurfer.create({
                             container: '#waves' + publicacao.idMusica,
                             waveColor: '#a8a8a8',
@@ -215,3 +221,93 @@ function attLikes(){
     });
 }
 }
+
+//FUNÇÃO PARA CONSEGUIR ADICIONAR UMA MUSICA A UMA PLAYLIST
+function addMusicPlaylist(idMusic){
+    idMusica = idMusic;
+
+    var card = document.querySelector(".sobreposi-playlist");
+    card.style.display = "flex";
+
+    fetch("/atualizar/listarPlaylist", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUserServer: sessionStorage.ID_USUARIO
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+            var lista = document.getElementById('playlists');
+            lista.innerHTML= ``;
+            for (let i = 0; i < resposta.length; i++) {
+                var publicacao = resposta[i];
+                lista.innerHTML += `
+                <div onclick="addPlaylist(${publicacao.idPlaylist})" class="playlist">${publicacao.nomePlaylist}</div>
+                `
+            }
+            });    
+
+        } else {
+            console.log("Houve um erro ao tentar realizar o login!");
+            
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+            return false;
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    });
+
+}
+
+function addPlaylist(idPlaylist){
+
+    fetch("/atualizar/addPlaylist", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idPlaylistServer: idPlaylist,
+            idMusicaServer: idMusica
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+            var lista = document.getElementById('playlists');
+            lista.innerHTML= ``;
+            for (let i = 0; i < resposta.length; i++) {
+                var publicacao = resposta[i];
+                lista.innerHTML += `
+                <div onclick="addPlaylist(${publicacao.idPlaylist})" class="playlist">${publicacao.nomePlaylist}</div>
+                `
+            }
+            });    
+
+        } else {
+            console.log("Houve um erro ao tentar realizar o login!");
+            
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+            return false;
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    });
+
+}
+
+var sobrePlay = document.querySelector('.sobreposi-playlist');
+
+sobrePlay.addEventListener('click' , function(){
+    sobrePlay.style.display = 'none';
+});

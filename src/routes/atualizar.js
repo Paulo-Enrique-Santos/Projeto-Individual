@@ -23,6 +23,10 @@ router.post("/addLike", function (req, res) {
     atualizarController.addLike(req, res);
 });
 
+router.post("/listarPlaylist", function (req, res) {
+    atualizarController.listarPlaylist(req, res);
+});
+
 router.post("/criarPlaylist", function (req, res) {
     atualizarController.criarPlaylist(req, res);
 });

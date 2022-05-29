@@ -5,30 +5,10 @@ function atualizarPlaylist() {
         if (resposta.ok) {
             var feed = document.getElementById("playlist");
             feed.innerHTML = "";
-            feed.innerHTML += `
-            <div class="criar-musicas">
-                <div>
-                    <h2>Criar uma Nova PlayList</h2>
-                </div>
-                <div class="criar">
-                    <input id="inputNomePlaylist" type="text" placeholder="Nome da PlayList">
-                    <button class="botao" onclick="criarPlaylist()">Criar PlayList</button>
-                </div>
-            </div>
-            `
             if (resposta.status == 204) {
                 feed.innerHTML = `
                 <h1 class="resultados">Nenhuma PlayList encontrada.</h1>
-                <div class="criar-musicas">
-                    <div>
-                        <h2>Criar uma Nova PlayList</h2>
-                    </div>
-                    <div class="criar">
-                        <input id="inputNomePlaylist" type="text" placeholder="Nome da PlayList">
-                        <button class="botao" onclick="criarPlaylist()">Criar PlayList</button>
-                    </div>
-                </div>
-                `
+                `;
                 throw "Nenhum resultado encontrado!!";
             }
 
@@ -92,6 +72,11 @@ function criarPlaylist(){
 
     var idUser = sessionStorage.ID_USUARIO;
     var nomePlaylist = inputNomePlaylist.value;
+
+    if(nomePlaylist == ""){
+        alert('Nome da PlayList não pode ser nulo!');
+        return;
+    }
 
     fetch("/atualizar/criarPlaylist", {
         method: "POST",
