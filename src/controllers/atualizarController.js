@@ -73,9 +73,9 @@ function listarPlaylist(req, res) {
 
 function atualizarMusicas(req, res) {
 
-    var idUser = req.body.idUserServer;
+    var idPlaylist = req.body.idPlaylistServer;
 
-    atualizarModel.listarPlaylist(idUser)
+    atualizarModel.atualizarMusicas(idPlaylist)
     .then(
         function (resultado) {
             res.json(resultado);

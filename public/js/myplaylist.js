@@ -38,17 +38,7 @@ function atualizarPlaylist() {
                         </div>
 
                         <div class="musics" id="musicasPlaylist${publicacao.idPlaylist}">
-                            <div class="music">
-                                <div class="foto">
 
-                                </div>
-
-                                <div class="titles-musics">
-                                    <h2>Red Eye</h2>
-                                    <h3>Justin Bieber</h3>  
-                                </div>
-                                <img src="./assets/picture/delete-list.png">
-                            </div>
                         </div>
                     </div>
 
@@ -145,7 +135,48 @@ function atualizarMusicas(idPlaylist){
     }).then(function (resposta) {
 
         if (resposta.ok) {
-            document.location.reload(true);
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+                var feed = document.getElementById(`musicasPlaylist${idPlaylist}`);
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+                    var artist = document.getElementById(`artista${publicacao.idMusica}${idPlaylist}`);
+
+                    if(artist != null){
+                    artist.innerHTML += ', ' + publicacao.artista;
+                    } else {
+                        feed.innerHTML += `
+                <div class="music" id="${publicacao.idMusica}${idPlaylist}">
+                            <div class="sobre" id="sobre${publicacao.idMusica}${idPlaylist}"></div>
+                            <div class="wave" id="waves${publicacao.idMusica}${idPlaylist}"></div>
+                            <div class="foto" id="foto${publicacao.idMusica}${idPlaylist}">
+
+                            </div>
+
+                            <div class="titles-musics">
+                                <h2>${publicacao.musica}</h2>
+                                <h3 id="artista${publicacao.idMusica}${idPlaylist}">${publicacao.artista}</h3>  
+                            </div>
+                            <img src="./assets/picture/delete-list.png">
+                        </div>
+
+                        `
+                        var foto = document.getElementById(`foto${publicacao.idMusica}${idPlaylist}`);
+
+                        foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`
+
+
+                        var wavesurfer = WaveSurfer.create({
+                            container: '#waves' + publicacao.idMusica + idPlaylist
+                        });
+                        
+                        wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
+                        var adicionar = arrayMusic.push(wavesurfer);
+                    }
+                    
+                }
+
+            });
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -154,3 +185,27 @@ function atualizarMusicas(idPlaylist){
     });
 
 }
+
+document.addEventListener('click', function (event){
+    var clickBruto = event.target.id;
+    var click = clickBruto.replace('sobre', '');
+
+    for(var i = 0; i < arrayMusic.length ; i++){
+        var idWaveBruto = arrayMusic[i].container.id;
+        var idWave = idWaveBruto.replace('waves','');
+
+        if(click == idWave){
+            for(var b = 0; b < arrayMusic.length; b ++){
+                var idWaveBruto = arrayMusic[b].container.id;
+                var idWave = idWaveBruto.replace('waves','');        
+                if(arrayMusic[b].isPlaying() == true){
+                    if(idWave != click){
+                        arrayMusic[b].stop();
+                    }
+                }
+            }
+            arrayMusic[i].playPause();
+        }
+    }
+
+});

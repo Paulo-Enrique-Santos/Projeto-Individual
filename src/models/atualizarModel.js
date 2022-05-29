@@ -119,15 +119,22 @@ function listarPlaylist(idUser) {
     return database.executar(instrucao);
 }
 
-function atualizarMusicas(idUser) {
+function atualizarMusicas(idPlaylist) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
     select 
-	    idPlaylist,
-        nomePlaylist
-    from usuario 
-        join playlist on idUsuario = fkUsuario
-            where idUsuario = ${idUser};
+        artista.nome as artista,
+        musica.nome as musica,
+        idMusica,
+        musica.caminhoFoto,
+        musica.caminhoAudio,
+        artista.idArtista
+    from Playlist
+        join musicaplaylist on idPlaylist = fkplaylist
+            join musica on musicaplaylist.fkmusica = idMusica
+                join feat on idMusica = feat.fkMusica
+                    join artista on fkArtista = idArtista
+                        where idPlaylist = ${idPlaylist};
     `;
     return database.executar(instrucao);
 }
@@ -155,6 +162,11 @@ function deletarPlaylist(idPlaylist) {
     var instrucao = `
     delete from playlist where idPlaylist = ${idPlaylist};
     `;
+
+    var instrucao2 = `
+    delete from musicaplaylist where fkPlaylist =${idPlaylist};
+    ` 
+    database.executar(instrucao2);
     return database.executar(instrucao);
 }
 

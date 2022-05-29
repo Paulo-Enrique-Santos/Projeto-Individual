@@ -891,6 +891,13 @@ footer .contato h5{
     width: 11%;
     background-color: red;
     height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#playlist .wave{
+    display: none;
 }
 
 #playlist .titles-musics {
@@ -924,4 +931,11 @@ footer .contato h5{
 
 #playlist .titles-play img{
     cursor: pointer;
+}
+
+#playlist .sobre{
+    height: 10vh;
+    width: 42vw;
+    z-index: 8;
+    position: absolute;
 }
