@@ -126,7 +126,7 @@ function deletarPlaylist(idPlaylist){
         body: JSON.stringify({
             // crie um atributo que recebe o valor recuperado aqui
             // Agora vá para o arquivo routes/usuario.js
-            idUserServer: idUser
+            idPlaylistServer: idPlaylist
         })
     }).then(function (resposta) {
 
