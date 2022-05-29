@@ -119,6 +119,28 @@ function listarPlaylist(idUser) {
     return database.executar(instrucao);
 }
 
+function atualizarMusicas(idUser) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    select 
+	    idPlaylist,
+        nomePlaylist
+    from usuario 
+        join playlist on idUsuario = fkUsuario
+            where idUsuario = ${idUser};
+    `;
+    return database.executar(instrucao);
+}
+
+function addPlaylist(idPlaylist,idMusica) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n " + idMusica + idPlaylist);
+    var instrucao = `
+    insert into MusicaPlaylist(fkMusica,fkPlaylist) values 
+    (${idMusica},${idPlaylist});
+    `;
+    return database.executar(instrucao);
+}
+
 function criarPlaylist(nome,idUser) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
@@ -176,5 +198,7 @@ module.exports = {
     atualizarPlaylist,
     criarPlaylist,
     deletarPlaylist,
-    listarPlaylist
+    listarPlaylist,
+    addPlaylist,
+    atualizarMusicas
 }

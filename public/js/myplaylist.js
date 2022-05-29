@@ -1,3 +1,5 @@
+let arrayMusic = [];
+
 //FUNÇÃO PARA PEGAR OS ARTISTAS DO BANCO DE DADOS
 function atualizarPlaylist() {
     var idUser = sessionStorage.ID_USUARIO;
@@ -16,7 +18,6 @@ function atualizarPlaylist() {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
-
                     feed.innerHTML += `
                     <div class="card">
                     <div class="playerPlaylist">
@@ -54,6 +55,8 @@ function atualizarPlaylist() {
                 </div> 
 
                 `
+
+                atualizarMusicas(publicacao.idPlaylist);
                 }
             });
             setTimeout(() => {
@@ -68,6 +71,7 @@ function atualizarPlaylist() {
     });
 }
 
+//CRIAR OS CARDS DE PLAYLIST
 function criarPlaylist(){
 
     var idUser = sessionStorage.ID_USUARIO;
@@ -101,6 +105,7 @@ function criarPlaylist(){
     });
 }
 
+//DELETAR AS PLAYLIST
 function deletarPlaylist(idPlaylist){
 
     fetch("/atualizar/deletarPlaylist", {
@@ -123,4 +128,29 @@ function deletarPlaylist(idPlaylist){
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
+}
+
+//ADICIONAR AS MÚSICAS DA PLAYLIST
+function atualizarMusicas(idPlaylist){
+    fetch("/atualizar/atualizarMusicas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            idPlaylistServer: idPlaylist
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            document.location.reload(true);
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+
 }

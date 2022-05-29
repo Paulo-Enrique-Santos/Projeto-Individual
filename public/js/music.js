@@ -274,24 +274,17 @@ function addPlaylist(idPlaylist){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            idPlaylistServer: idPlaylist,
-            idMusicaServer: idMusica
+            idPlaylistServer: Number(idPlaylist),
+            idMusicaServer: Number(idMusica)
         })
     }).then(function (resposta) {
 
         if (resposta.ok) {
-            resposta.json().then(function (resposta) {
-            var lista = document.getElementById('playlists');
-            lista.innerHTML= ``;
-            for (let i = 0; i < resposta.length; i++) {
-                var publicacao = resposta[i];
-                lista.innerHTML += `
-                <div onclick="addPlaylist(${publicacao.idPlaylist})" class="playlist">${publicacao.nomePlaylist}</div>
-                `
-            }
-            });    
-
         } else {
+            if(resposta.status == 500){
+                alert('Essa musica já está nessa PlayList!');
+            }
+            console.log(resposta);
             console.log("Houve um erro ao tentar realizar o login!");
             
             resposta.text().then(texto => {

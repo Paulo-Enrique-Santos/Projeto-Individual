@@ -71,6 +71,49 @@ function listarPlaylist(req, res) {
     );
 }
 
+function atualizarMusicas(req, res) {
+
+    var idUser = req.body.idUserServer;
+
+    atualizarModel.listarPlaylist(idUser)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function addPlaylist(req, res) {
+
+    var idPlaylist = req.body.idPlaylistServer;
+    var idMusica = req.body.idMusicaServer;
+
+    atualizarModel.addPlaylist(idPlaylist,idMusica)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 function criarPlaylist(req, res) {
 
     var nome = req.body.nomeServer;
@@ -226,5 +269,7 @@ module.exports = {
     atualizarPlaylist,
     criarPlaylist,
     deletarPlaylist,
-    listarPlaylist
+    listarPlaylist,
+    addPlaylist,
+    atualizarMusicas
 }

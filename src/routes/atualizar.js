@@ -27,6 +27,14 @@ router.post("/listarPlaylist", function (req, res) {
     atualizarController.listarPlaylist(req, res);
 });
 
+router.post("/atualizarMusicas", function (req, res) {
+    atualizarController.atualizarMusicas(req, res);
+});
+
+router.post("/addPlaylist", function (req, res) {
+    atualizarController.addPlaylist(req, res);
+});
+
 router.post("/criarPlaylist", function (req, res) {
     atualizarController.criarPlaylist(req, res);
 });
