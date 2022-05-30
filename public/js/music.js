@@ -52,6 +52,7 @@ function click(event){
         }
     }
 }
+
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function atualizarMusic() {
     fetch("/atualizar/listarMusic").then(function (resposta) {
@@ -68,7 +69,6 @@ function atualizarMusic() {
                     if(verMusica != null){
                     artist.innerHTML += ', ' + publicacao.artista;
                     } else {
-
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
                         divPublicacao.className = "player";
@@ -126,7 +126,7 @@ function atualizarMusic() {
                         <h1 onclick="addMusicPlaylist(${publicacao.idMusica})">+</h1>
                         `
                         
-                        var wavesurfer = WaveSurfer.create({
+                            wavesurfer = WaveSurfer.create({
                             container: '#waves' + publicacao.idMusica,
                             waveColor: '#a8a8a8',
                             progressColor: '#01a0c8',
@@ -136,9 +136,10 @@ function atualizarMusic() {
                             barRadius: 2,
                             cursorWidth: 0,
                             interact: false,
-                            pixelRatio: 1
+                            pixelRatio: 1,
+                            forceDecode: true,
+                            partialRender: true
                         });
-                        
                         wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
                         var adicionar = arrayMusic.push(wavesurfer);
                         //carregarDuracao();

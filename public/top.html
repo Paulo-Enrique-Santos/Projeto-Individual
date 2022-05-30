@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="./assets/picture/icon.png">
+    
+    <title>MusicFans | Artistas</title>
+</head>
+<body onload="atualizarTopMusica(), validarSessao()">
+    <div class="sobreposi">
+        <div class="opacity" onclick="Close()">
+
+        </div>
+        <div class="cadastro">
+            <span onclick="Close()">X</span>
+            <div class="container">
+                <div class="logo">
+                    <img src="./assets/picture/icon.png" alt="ICON.png">
+                    <h1>Crie sua Conta</h1>
+                </div>
+                <hr>
+                <div id="form-cadastro">
+                    <label>Nome:</label>
+                    <input id="nome_cadastro" type="text" placeholder="Como devemos te Chamar ?">
+                    <label for="">Email:</label>
+                    <input id="email_cadastro" type="text" placeholder="Qual é o seu email ?">
+                    <input id="email_cadastro_c" type="text" placeholder="Confirme seu email.">
+                    <label>Senha:</label>
+                    <input id="senha_cadastro" type="password" placeholder="Crie uma Senha.">
+                    <input id="senha_cadastro_c" type="password" placeholder="Confirme sua Senha.">
+                </div>
+                <button onclick="cadastrar()">
+                    Increva-se
+                </button>
+                <div class="wait">
+                    <div class="loading" id="loading_cadastro">
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <span>Loading...</span>
+                    </div>
+                    <div class="card_erro" id="card_erro_cadastro">
+                        <h4 id="erro_cadastro"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login">
+            <span onclick="Close()">X</span>
+            <div class="container">
+                <div class="logo">
+                    <img src="./assets/picture/icon.png" alt="ICON.png">
+                    <h1>Conecte-se</h1>
+                </div>
+                <hr>
+                <div id="form-login">
+                    <label for="">Login:</label>
+                    <input id="email_login" type="text" placeholder="Informe seu email">
+                    <label for="">Senha:</label>
+                    <input id="senha_login" type="password" placeholder="Informe sua Senha">
+                </div>
+                <button onclick="entrar()">
+                    Login
+                </button>
+                <div class="wait">
+                    <div class="loading" id="loading_login">
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <span>Loading...</span>
+                    </div>
+                    <div class="card_erro" id="card_erro_login">
+                        <h4 id="erro_login"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header-left">
+        <div class="container">
+            <div class="logo">
+                <img src="./assets/picture/icon.png" alt="ICON.png">
+                <h2>MusicFans</h2>
+            </div>
+
+            <hr>
+
+            <ul>
+                <li>
+                    <a href="./index.html"><span>Home</span>
+                    <span class="text-next">Home</span></a>
+                </li>
+                <li>
+                    <a href="./music.html"><span>Musicas</span>
+                    <span class="text-next">Musicas</span></a>
+                </li>
+                <li>
+                    <a href="./artist.html"><span>Artistas</span>
+                    <span class="text-next">Artistas</span></a>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <span>Top&nbsp;3</span>
+                    <span class="text-next">Top&nbsp;3</span>
+                </li>
+                <li>
+                    <span>Novidades</span>
+                    <span class="text-next">Novidades</span>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li onclick="AbrirLogin('mylikes')">
+                    <span>Meus&nbsp;Favoritos</span>
+                    <span class="text-next">Meus&nbsp;Favoritos</span>
+                </li>
+                <li onclick="AbrirLogin('playlist')">
+                    <span>Minhas&nbsp;PlayLists</span>
+                    <span class="text-next">Minhas&nbsp;PlayLists</span>
+                </li>
+                <li onclick="AbrirLogin('myaccount')">
+                    <span>Minha&nbsp;Conta</span>
+                    <span class="text-next">Minha&nbsp;Conta</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="body-dois">
+        <header class="header-top">
+            <div class="bar-src">
+                <input type="search" name="src" id="src" placeholder="Pesquise">
+            </div>
+            <div class="btns">
+                <button onclick="AbrirLogin()">
+                    Login
+                </button>
+                <button onclick="AbrirCadastro()">
+                    Increva-se
+                </button>
+            </div>
+            <div class="btns logado">
+                <h3>Olá, 
+                    <span id="name_user"></span>
+                </h3>
+                <a href="./myaccount.html">
+                    <img src="./assets/picture/user.png">
+                </a>
+            </div>
+        </header>
+        <section class="content">
+            <div class="container">
+                <div class="topo">
+                    <div class="top">
+                        <H1>Ouça os Melhores Artistas!</H1>
+                        <h2>Monte PlayLists Incríveis.</h2>
+                    </div>
+                </div>
+                <div id="top-dez">
+                    <h1>TOP 3 Músicas</h1>
+                    <div class="podio">
+                        <div class="top segundo">
+                            <div class="medalha">
+                                <img src="./assets/picture/segundo.png">
+                            </div>
+                            <div class="foto" id="segunda_foto_musica">
+
+                            </div>
+                            <h1 id="segunda_nome_musica"></h1>
+                            <h2 id="segunda_likes_musica"></h2>
+                        </div>
+    
+                        <div class="top primeiro">
+                            <div class="medalha">
+                                <img src="./assets/picture/primeiro.png">
+                            </div>
+                            <div class="foto" id="primeira_foto_musica">
+
+                            </div>
+                            <h1 id="primeira_nome_musica"></h1>
+                            <h2 id="primeira_likes_musica"></h2>
+                        </div>
+    
+                        <div class="top terceiro">
+                            <div class="medalha">
+                                <img src="./assets/picture/terceiro.png">
+                            </div>
+                            <div class="foto" id="terceira_foto_musica">
+
+                            </div>
+                            <h1 id="terceira_nome_musica"></h1>
+                            <h2 id="terceira_likes_musica"></h2>
+                        </div>
+                    </div>
+                    <h1>TOP 3 Artistas</h1>
+                    <div class="podio">
+                        <div class="top segundo">
+                            <div class="medalha">
+                                <img src="./assets/picture/segundo.png">
+                            </div>
+                            <div class="foto" id="segunda_foto_artista">
+
+                            </div>
+                            <h1></h1>
+                            <h2></h2>
+                        </div>
+    
+                        <div class="top primeiro">
+                            <div class="medalha">
+                                <img src="./assets/picture/primeiro.png">
+                            </div>
+                            <div class="foto" id="primeira_foto_artista">
+
+                            </div>
+                            <h1></h1>
+                            <h2></h2>
+                        </div>
+    
+                        <div class="top terceiro">
+                            <div class="medalha">
+                                <img src="./assets/picture/terceiro.png">
+                            </div>
+                            <div class="foto" id="terceira_foto_artista">
+
+                            </div>
+                            <h1></h1>
+                            <h2></h2>
+                        </div>
+                    </div>
+                    <!-- <div class="card">
+                        <div class="playerPlaylist">
+                            <img src="./assets/picture/Artistas/justin.png">
+                            <div class="foto">
+                                <img src="./assets/picture/play pause.gif" >
+                            </div>
+                            <div class="botoes">
+                                <img class="trocar" src="./assets/picture/inicio.png">
+                                <img class="play" src="./assets/picture/play.png">
+                                <img class="pause" src="./assets/picture/pause.png">
+                                <img class="trocar" src="./assets/picture/fim.png">
+                            </div>
+                        </div>
+                        <div class="select">
+                            <h2>PlayList: ABC</h2>
+
+                            <div class="musics">
+                                <div class="music">
+                                    <div class="foto">
+
+                                    </div>
+
+                                    <div class="titles-musics">
+                                        <h2>Red Eye</h2>
+                                        <h3>Justin Bieber</h3>  
+                                    </div>
+                                    <button>
+                                        X
+                                    </button>
+                                </div>
+                                <div class="music"></div>
+                                <div class="music"></div>
+                                <div class="music"></div>
+                                <div class="music"></div>
+                            </div>
+                        </div>
+                    </div>  -->
+                </div>
+                <footer>
+                    <div class="direitos">
+                        <h1>Direitos Autorais</h1>
+                        <h5>
+                            Esse projeto tem como objetivo fins 
+                            didáticos, e todos os materiais 
+                            utilizados são apenas para 
+                            demonstração do sistema em 
+                            funcionamento, e não buscando 
+                            favorecimento ou plágio nas músicas 
+                            dos artistas.
+                        </h5>
+                    </div>
+                    <div class="agradecimentos">
+                        <h1>Materiais Utilizados</h1>
+                        <h5>wavesurfer-js.org</h5>
+                        <h5>icons8.com.br</h5>
+                        <h5>API SPTech</h5>
+                        <h5>Músicas de Artistas</h5>
+                    </div>
+                    <div class="contato">
+                        <h1>Contato</h1>
+                        <h3>paulinhoenrique10@gmail.com</h3>
+                        <img src="assets/picture/linkedin.png">
+                        <h5>Feito com muito Amor por Paulo Enrique, um Aluno SPTech.</h5>
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="js/funcoes.js"></script>
+<script src="js/login.js"></script>
+<script src="js/cadastrar.js"></script>
+<script src="js/top.js"></script>

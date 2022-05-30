@@ -56,6 +56,23 @@ foreign key (fkPlayList) references PlayList(idPlayList),
 Primary key (fkPlayList, fkMusica)
 );
 
+	select 
+		artista.nome as Artista,
+		musica.nome as Musica,
+		idMusica,
+        musica.caminhoFoto,
+        musica.caminhoAudio
+	from Playlist
+		join musicaplaylist on idPlaylist = fkplaylist
+			join musica on musicaplaylist.fkmusica = idMusica
+				join feat on idMusica = feat.fkMusica
+					join artista on fkArtista = idArtista
+						where idPlaylist = 1;
+
+select * from MusicaPlaylist;
+
+delete from MusicaPlaylist where fkMusica = 1 and fkPlaylist = 7;
+
 -- INSERINDO ARTISTAS
 insert into Artista values
 (null,'MC Poze do Rodo', 'Artistas/poze.png','Funk'),
@@ -112,6 +129,24 @@ select
 from Usuario
 	join playlist on idUsuario = fkUsuario 
 		where fkUsuario = 1;
+
+    insert into MusicaPlaylist values 
+    (2,9);
+    
+-- SELECIONAR OS TOPS 3 DAS MÚSICAS
+select 
+    musica.nome as musica,
+    musica.caminhoFoto,
+    likes
+from artista
+	join feat on idArtista = feat.fkArtista
+		join musica on feat.fkmusica = idmusica
+				group by musica.nome
+					order by likes desc limit 3;
+
+select * from musica;
+
+update musica set likes = 5 where idMusica = 2;
 
 -- BUSCAR TODAS AS PLAYLIST DE UM DETERMINADO USUARIO
 select 

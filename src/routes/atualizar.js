@@ -55,6 +55,10 @@ router.get("/listarMusic", function (req, res) {
     atualizarController.listarMusic(req, res);
 });
 
+router.get("/topMusica", function (req, res) {
+    atualizarController.topMusica(req, res);
+});
+
 router.post("/listarFoto", function (req, res) {
     atualizarController.listarFoto(req, res);
 });
