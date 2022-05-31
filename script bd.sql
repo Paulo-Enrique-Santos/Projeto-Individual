@@ -144,6 +144,14 @@ from artista
 				group by musica.nome
 					order by likes desc limit 3;
 
+-- SELECIONAR OS TOPS 3 DOS ARTISTAS
+select 
+	sum(likes)
+from artista
+	join feat on idArtista = feat.fkArtista
+		join musica on feat.fkmusica = idmusica
+			order by likes desc limit 3;
+
 select * from musica;
 
 update musica set likes = 5 where idMusica = 2;

@@ -11,7 +11,7 @@
     
     <title>MusicFans | Artistas</title>
 </head>
-<body onload="atualizarTopMusica(), validarSessao()">
+<body onload="atualizarTopMusica(), atualizarTopArtista(), validarSessao()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -104,16 +104,9 @@
                     <a href="./artist.html"><span>Artistas</span>
                     <span class="text-next">Artistas</span></a>
                 </li>
-            </ul>
-            <hr>
-            <ul>
                 <li>
-                    <span>Top&nbsp;3</span>
-                    <span class="text-next">Top&nbsp;3</span>
-                </li>
-                <li>
-                    <span>Novidades</span>
-                    <span class="text-next">Novidades</span>
+                    <a href="./top.html"><span>Top&nbsp;3</span>
+                    <span class="text-next">Top&nbsp;3</span></a>
                 </li>
             </ul>
             <hr>
@@ -125,10 +118,6 @@
                 <li onclick="AbrirLogin('playlist')">
                     <span>Minhas&nbsp;PlayLists</span>
                     <span class="text-next">Minhas&nbsp;PlayLists</span>
-                </li>
-                <li onclick="AbrirLogin('myaccount')">
-                    <span>Minha&nbsp;Conta</span>
-                    <span class="text-next">Minha&nbsp;Conta</span>
                 </li>
             </ul>
         </div>
@@ -209,8 +198,8 @@
                             <div class="foto" id="segunda_foto_artista">
 
                             </div>
-                            <h1></h1>
-                            <h2></h2>
+                            <h1 id="segunda_nome_artista"></h1>
+                            <h2 id="segunda_likes_artista"></h2> 
                         </div>
     
                         <div class="top primeiro">
@@ -220,8 +209,8 @@
                             <div class="foto" id="primeira_foto_artista">
 
                             </div>
-                            <h1></h1>
-                            <h2></h2>
+                            <h1 id="primeira_nome_artista"></h1>
+                            <h2 id="primeira_likes_artista"></h2>
                         </div>
     
                         <div class="top terceiro">
@@ -231,8 +220,8 @@
                             <div class="foto" id="terceira_foto_artista">
 
                             </div>
-                            <h1></h1>
-                            <h2></h2>
+                            <h1 id="terceira_nome_artista"></h1>
+                            <h2 id="terceira_likes_artista"></h2>
                         </div>
                     </div>
                     <!-- <div class="card">

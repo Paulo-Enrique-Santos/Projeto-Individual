@@ -223,6 +223,23 @@ function topMusica() {
     return database.executar(instrucao);
 }
 
+function topArtista() {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    select 
+        sum(likes) as likes,
+        artista.nome as artista,
+        artista.caminhoFoto
+    from artista
+        join feat on idArtista = feat.fkArtista
+            join musica on feat.fkmusica = idmusica
+                group by artista.nome 
+                    order by likes desc limit 3;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listarGenero,
     listarFoto,
@@ -239,5 +256,6 @@ module.exports = {
     addPlaylist,
     atualizarMusicas,
     deletarMusicaPlaylist,
-    topMusica
+    topMusica,
+    topArtista
 }

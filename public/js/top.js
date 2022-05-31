@@ -63,30 +63,30 @@ function atualizarTopArtista() {
                     var publicacao = resposta[i];
 
                     if(i == 0){
-                        var foto = document.getElementById("primeira_foto_musica");
-                        var musica = document.getElementById("primeira_nome_musica");
-                        var likes = document.getElementById("primeira_likes_musica");
+                        var foto = document.getElementById("primeira_foto_artista");
+                        var artista = document.getElementById("primeira_nome_artista");
+                        var likes = document.getElementById("primeira_likes_artista");
 
                         foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
-                        musica.innerHTML = publicacao.musica;
+                        artista.innerHTML = publicacao.artista;
                         likes.innerHTML = `${publicacao.likes} likes`;
 
                     } else if( i == 1){
-                        var foto = document.getElementById("segunda_foto_musica");
-                        var musica = document.getElementById("segunda_nome_musica");
-                        var likes = document.getElementById("segunda_likes_musica");
+                        var foto = document.getElementById("segunda_foto_artista");
+                        var artista = document.getElementById("segunda_nome_artista");
+                        var likes = document.getElementById("segunda_likes_artista");
 
                         foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
-                        musica.innerHTML = publicacao.musica;
+                        artista.innerHTML = publicacao.artista;
                         likes.innerHTML = `${publicacao.likes} likes`;
 
                     } else {
-                        var foto = document.getElementById("terceira_foto_musica");
-                        var musica = document.getElementById("terceira_nome_musica");
-                        var likes = document.getElementById("terceira_likes_musica");
+                        var foto = document.getElementById("terceira_foto_artista");
+                        var artista = document.getElementById("terceira_nome_artista");
+                        var likes = document.getElementById("terceira_likes_artista");
 
                         foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
-                        musica.innerHTML = publicacao.musica;
+                        artista.innerHTML = publicacao.artista;
                         likes.innerHTML = `${publicacao.likes} likes`;
 
                     }

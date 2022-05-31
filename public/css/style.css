@@ -463,7 +463,6 @@ section .card li:hover{
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
     margin-bottom: 3vh;
-    height: 70vh;
     position: relative;
 }
 
@@ -676,12 +675,11 @@ footer .contato h5{
 
 /* PÁGINA DOS ARTISTAS */
 #artist{
-    padding: 10px 20px 30px 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: var(--border-radius);
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
     margin-bottom: 3vh;
-    min-height: 70vh;
     display: flex;
     justify-content: space-between;
 }
@@ -737,12 +735,11 @@ footer .contato h5{
 
 /*  PAGINA DAS PLAYLIST */
 #playlist{
-    padding: 10px 20px 30px 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: var(--border-radius);
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
     margin-bottom: 3vh;
-    min-height: 70vh;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -948,6 +945,7 @@ footer .contato h5{
     padding: 2vh;
     display: flex;
     flex-direction: column;
+    margin-bottom: 3vh;
     gap: 20px;
 }
 
