@@ -404,6 +404,15 @@ section .card li:hover{
     height: 10vh;
 }
 
+.wait h5{
+    color: var(--textos-color);
+}
+
+.wait a{
+    cursor: pointer;
+    color: var(--contraste-color);
+}
+
 .loading{
     display: none;
     flex-wrap: wrap;
@@ -419,6 +428,7 @@ section .card li:hover{
     display: none;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .loading span{
@@ -811,6 +821,7 @@ footer .contato h5{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    transition: 200ms;
 }
 
 #playlist .foto{
@@ -829,6 +840,7 @@ footer .contato h5{
     width: 80px;
     height: 80px;
     position: absolute;
+    transition: 200ms;
 }
 
 #playlist .card:hover{
@@ -838,6 +850,7 @@ footer .contato h5{
 
 #playlist .card:hover .botao-play{
     display: block;
+    transition: 200ms;
 }
 
 /* PARTE DE TOP 10 MUSICAS */
@@ -924,14 +937,25 @@ footer .contato h5{
     background-color: var(--background2-color);
     border-top: var(--textos-color) solid 1px;
     box-shadow: 1px 1px 11px 2px #000000;
-    height: 10vh;
+    height: 0;
     width: 99vw;
     position: absolute;
     z-index: 8;
     align-self: flex-end;
-    display: flex;
+    display: none;
     justify-content: space-evenly;
     align-items: center;
+    animation: .8s ativarPlayer linear forwards;
+}
+
+@keyframes ativarPlayer {
+    from{
+        height: 0vh;
+    }
+
+    to{
+        height: 10vh;
+    }
 }
 
 .player_bottom .foto{
@@ -1030,12 +1054,13 @@ footer .contato h5{
     height: 100%;
     display: none;
     gap: 1px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .equalizador div{
-    width: 9px;
+    width: 5px;
     height: 10%;
+    border-radius: 3vh;
     background-color: var(--contraste-color);
     animation: equalizer 1s normal infinite forwards;
 }
@@ -1057,6 +1082,14 @@ footer .contato h5{
 
 .equalizador div:nth-child(4){
     animation-delay: .4s;
+}   
+
+.equalizador div:nth-child(5){
+    animation-delay: .1s;
+}   
+
+.equalizador div:nth-child(6){
+    animation-delay: .3s;
 }   
 
 @keyframes equalizer {

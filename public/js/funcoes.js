@@ -6,7 +6,6 @@ function validarSessao() {
     var nome = sessionStorage.NOME_USUARIO;
 
     if (email != null && nome != null) {
-        // window.alert(`Seja bem-vindo, ${nome}!`);
         document.querySelector('.btns').style.display = 'none'
         document.querySelector('.logado').style.display = 'flex'
         name_user.innerHTML = nome;
@@ -42,6 +41,10 @@ function finalizarAguardarCadastro(texto) {
     if (texto) {
         divErrosLogin.innerHTML = texto;
     }
+
+    setTimeout(() => {
+        sumirMensagemCadastro();
+    }, 5000);
 }
 
 // CARREGAMENTO (LOADING) LOGIN
@@ -53,15 +56,15 @@ function aguardarLogin() {
 
 function finalizarAguardarLogin(texto) {
     var divAguardar = document.getElementById("loading_login");
-    //divAguardar.style.display = "none";
+    divAguardar.style.display = "none";
 
     var divErrosLogin = document.getElementById("erro_login");
-    var cardErro = document.getElementById("card_erro_login");
     if (texto) {
-        divAguardar.style.display = 'none'
-        cardErro.style.display = 'flex'
         divErrosLogin.innerHTML = texto;
     }
+    setTimeout(() => {
+        sumirMensagemLogin();
+    }, 5000);
 }
 
 //ADICIONAR O LIKE EM DETERMINADA MÚSICA
@@ -122,19 +125,6 @@ function removeLike(id){
     });
 }
 
-//ABRINDO A TELA DE CADASTRO
-function AbrirCadastro(){
-
-    if(validarSessao() == false){
-    document.querySelector('.sobreposi').style.animation = 'sobrepor 0.9s ease forwards';
-
-    document.querySelector('.sobreposi').style.display = 'flex'
-    document.querySelector('.cadastro').style.display = 'flex'
-    }else{
-        alert('Ainda não fiz essa página')
-    }
-}
-
 function AbrirLogin(local){
 
     if(validarSessao() == false){
@@ -153,14 +143,27 @@ function AbrirLogin(local){
 
 
 //FECHANDO A TELA DE CADASTRO OU DE LOGIN
-function Close(){
+function Close(podeAbrir){
     document.querySelector('.sobreposi').style.animation = 'fechar 0.9s ease forwards';
-
+    
     setTimeout(() => {
         document.querySelector('.sobreposi').style.display = 'none';
             document.querySelector('.cadastro').style.display = 'none';
-            document.querySelector('.login').style.display = 'none';    
+            document.querySelector('.login').style.display = 'none'; 
+            if(podeAbrir){
+                AbrirCadastro();
+            }
         }, 900);
+}
+
+//ABRINDO A TELA DE CADASTRO
+function AbrirCadastro(){
+    if(validarSessao() == false){
+    document.querySelector('.sobreposi').style.animation = 'sobrepor 0.9s ease forwards';
+
+    document.querySelector('.sobreposi').style.display = 'flex'
+    document.querySelector('.cadastro').style.display = 'flex'
+    }
 }
 
 //FUNÇÃO PARA SUMIR A MENSAGEM DE ERRO

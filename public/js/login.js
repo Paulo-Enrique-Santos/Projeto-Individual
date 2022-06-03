@@ -7,8 +7,8 @@ function entrar() {
 
     if (emailVar == "" || senhaVar == "") {
         card_erro_login.style.display = "flex"
-        erro_login.innerHTML = "Um ou mais campos estão em branco.";
         finalizarAguardarLogin();
+        erro_login.innerHTML = "Um ou mais campos estão em branco.";
         return false;
     }
     else {

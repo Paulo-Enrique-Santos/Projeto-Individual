@@ -44,11 +44,11 @@ function cadastrar() {
             erro_cadastro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
             setTimeout(() => {
-                erro_cadastro.style.color = 'red'
                 Close();
             }, "1000")
-
+            
             setTimeout(() => {
+                erro_cadastro.style.color = 'red'
                 AbrirLogin();
             }, "2000")
             

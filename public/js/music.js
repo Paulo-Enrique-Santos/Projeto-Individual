@@ -1,15 +1,12 @@
 //ARRAY QUE SALVA AS MÚSICAS
 var arrayMusic = [];
 
-var classAtual = 'like';
-
 var idMusica = 0;
-//EVENTO QUE CHAMA A FUNÇÃO PARA ATUALIZAR A DURAÇÃO DA MÚSICA
-//arrayMusic[arrayMusic.length].on('ready', carregarDuracao);
 
 //EVENTO QUE CHAMA FUNÇÃO CLICK (QUE FAZ AS MUSICAS TOCAREM)
 document.addEventListener('click', click);
 
+//EVENTO QUE CHAMA A FUNÇÃO PARA DAR OU TIRAR LIKE DE UMA MÚSICA
 document.addEventListener('click', function (event) {
     var classClick = event.target.className;
     var idClick = event.target.id;
@@ -26,14 +23,13 @@ document.addEventListener('click', function (event) {
         document.querySelector(`#${idClick}`).classList.remove("likeRed");
         removeLike(idConteudo);
     }
-
 });
 
-//VALIDANDO SE A MÚSICA ESTÁ TOCANDO 
+//VALIDANDO SE A MÚSICA ESTÁ TOCANDO E FAZ ALGUMAS COISAS NAS FUNÇÕES
 setInterval(() => {
-    for(var i = 0; i < arrayMusic.length ; i++){
+    for (var i = 0; i < arrayMusic.length; i++) {
         var idBruto = arrayMusic[i].container.id;
-        var idMusica = idBruto.replace('waves','');
+        var idMusica = idBruto.replace('waves', '');
         var tamanhoTotal = document.getElementById(`duracao${idMusica}`)
         var tempo = document.getElementById(`audio${idMusica}`);
         var progressTag = document.querySelector('progress');
@@ -41,28 +37,36 @@ setInterval(() => {
         var musica = document.getElementById(`musica${idMusica}`);
         var tocando = document.getElementById(`nmrMusica${idMusica}`);
         var equalizador = document.getElementById(`equalizador${idMusica}`);
+        var player = document.querySelector(`.player_bottom`);
 
-        if(arrayMusic[i].isPlaying()){
+        if(arrayMusic[i].getDuration() == arrayMusic[i].getCurrentTime() && 
+           arrayMusic[i].getCurrentTime() != 0){
+            arrayMusic[i].stop();
+            if(arrayMusic[i+1] == undefined){
+                arrayMusic[0].play();
+            } else {
+                arrayMusic[i+1].play();
+            }
+        }
+        
+        if(tamanhoTotal.innerHTML == "NaN:NaN"){
+            carregarDuracao();
+        }
+        
+        if (arrayMusic[i].isPlaying()) {
             progressTag.max = Math.floor(tempo.duration);
             progressTag.value = Math.floor(arrayMusic[i].getCurrentTime());
-
             musica.style.color = "var(--contraste-color)";
-
-
             duracao_atual.innerHTML = converterTempo(arrayMusic[i].getCurrentTime());
             duracao_final.innerHTML = tamanhoTotal.innerHTML;
-
             tocando.style.display = "none";
-
             equalizador.style.display = "flex";
-
             musica_bottom.innerHTML = musica.innerHTML;
             artista_bottom.innerHTML = artista.innerHTML;
+            player.style.display = 'flex';
         } else {
             tocando.style.display = "flex";
-
             equalizador.style.display = "none";
-
             musica.style.color = "var(--textos2-color)";
         }
     }
@@ -87,7 +91,8 @@ function click(event) {
                     }
                 }
             }
-            arrayMusic[i].playPause();
+            arrayMusic[i].stop();
+            arrayMusic[i].play();
         }
     }
 }
@@ -99,109 +104,112 @@ function atualizarMusic() {
 
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                var feed = document.getElementById("music");
+                var divPai = document.getElementById("music");
                 var audio = document.getElementById('audio');
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
-                    var verMusica = document.getElementById("l" + publicacao.idMusica);
-                    var artist = document.getElementById("artista" + publicacao.idMusica);
+                    var resp = resposta[i];
+                    var verMusica = document.getElementById("l" + resp.idMusica);
+                    var artist = document.getElementById("artista" + resp.idMusica);
 
                     if (verMusica != null) {
-                        artist.innerHTML += ', ' + publicacao.artista;
+                        artist.innerHTML += ', ' + resp.artista;
                     } else {
-                        console.log(audio)
-                        audio.innerHTML += `
-                        <audio id="audio${publicacao.idMusica}" src="./assets/audio/${publicacao.caminhoAudio}"></audio>
-                        `
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        divPublicacao.className = `player`;
+
+                        var audioAtual = document.createElement('audio');
+                        audioAtual.id = `audio${resp.idMusica}`;
+                        audioAtual.src = `./assets/audio/${resp.caminhoAudio}`;
+                        audio.appendChild(audioAtual);
+
+                        var divPlayer = document.createElement("div");
+                        divPlayer.className = `player`;
+                        divPai.appendChild(divPlayer);
 
                         var sobre = document.createElement("div");
                         sobre.className = 'sobre';
-                        sobre.id = publicacao.idMusica;
+                        sobre.id = resp.idMusica;
+                        divPlayer.appendChild(sobre);
 
                         var nmrMusica = document.createElement("div");
                         nmrMusica.className = `nmrMusica`
-                        // nmrMusica.innerHTML = `${arrayMusic.length + 1}`;
-                        
-                        var span =document.createElement("span");
-                        span.id = `nmrMusica${publicacao.idMusica}`;
+                        divPlayer.appendChild(nmrMusica);
+
+                        var span = document.createElement("span");
+                        span.id = `nmrMusica${resp.idMusica}`;
                         span.innerHTML = `${arrayMusic.length + 1}`;
                         nmrMusica.appendChild(span);
 
                         var equalizador = document.createElement('div');
                         equalizador.className = "equalizador";
                         nmrMusica.appendChild(equalizador);
-                        equalizador.id = `equalizador${publicacao.idMusica}`
+                        equalizador.id = `equalizador${resp.idMusica}`
 
                         var filhoUm = document.createElement('div');
                         equalizador.appendChild(filhoUm);
-                        
+
                         var filhoDois = document.createElement('div');
                         equalizador.appendChild(filhoDois);
-            
+
                         var filhoTres = document.createElement('div');
                         equalizador.appendChild(filhoTres);
-            
+
                         var filhoQuatro = document.createElement('div');
-                        equalizador.appendChild(filhoQuatro);           
+                        equalizador.appendChild(filhoQuatro);
+
+                        var filhoCinco = document.createElement('div');
+                        equalizador.appendChild(filhoCinco);
+
+                        var filhoSeis = document.createElement('div');
+                        equalizador.appendChild(filhoSeis);
 
                         var divFoto = document.createElement("div");
                         divFoto.className = "foto";
-                        divFoto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`;
+                        divFoto.style.backgroundImage = `url("/assets/picture/${resp.caminhoFoto}")`;
+                        divPlayer.appendChild(divFoto);
 
                         var divTitles = document.createElement('div');
                         divTitles.className = 'titles';
+                        divPlayer.appendChild(divTitles);
 
                         var music = document.createElement('h2');
                         music.className = 'title-music';
-                        music.id = 'musica' + publicacao.idMusica
-                        music.innerHTML = publicacao.musica;
+                        music.id = 'musica' + resp.idMusica
+                        music.innerHTML = resp.musica;
+                        divTitles.appendChild(music);
 
                         var artista = document.createElement('h3');
                         artista.className = 'title-artist';
-                        artista.id = 'artista' + publicacao.idMusica;
-                        artista.innerHTML += publicacao.artista;
+                        artista.id = 'artista' + resp.idMusica;
+                        artista.innerHTML += resp.artista;
+                        divTitles.appendChild(artista);
 
                         var divWaves = document.createElement('div');
                         divWaves.className = 'waveform'
-                        divWaves.id = 'waves' + publicacao.idMusica;
+                        divWaves.id = 'waves' + resp.idMusica;
+                        divPlayer.appendChild(divWaves);
 
                         var divFinal = document.createElement('div');
                         divFinal.className = 'final';
                         divFinal.id = `div_final_${i}`
+                        divPlayer.appendChild(divFinal);
 
                         var timeMusic = document.createElement('span');
-                        timeMusic.id = 'duracao' + publicacao.idMusica;
+                        timeMusic.id = 'duracao' + resp.idMusica;
+                        divFinal.appendChild(timeMusic);
 
                         var like = document.createElement('div');
                         like.className = 'like';
-                        like.id = 'l' + publicacao.idMusica;
-
-                        // var add = document.createElement('h1');
-                        // add.innerHTML = '+';
-                        // add.onclick = addMusicPlaylist(publicacao.idMusica);
-
-                        feed.appendChild(divPublicacao);
-                        divPublicacao.appendChild(sobre);
-                        divPublicacao.appendChild(nmrMusica);
-                        divPublicacao.appendChild(divFoto);
-                        divPublicacao.appendChild(divTitles);
-                        divTitles.appendChild(music);
-                        divTitles.appendChild(artista);
-                        divPublicacao.appendChild(divWaves);
-                        divPublicacao.appendChild(divFinal);
-                        divFinal.appendChild(timeMusic);
+                        like.id = 'l' + resp.idMusica;
                         divFinal.appendChild(like);
 
-                        // divFinal.appendChild(add);
-                        divFinal.innerHTML += `
-                        <h1 onclick="addMusicPlaylist(${publicacao.idMusica})">+</h1>
-                        `
+                        var addPlaylist = document.createElement('h1');
+                        addPlaylist.innerHTML = '+';
+                        divFinal.appendChild(addPlaylist);
+                        addPlaylist.addEventListener('click', function () {
+                            addMusicPlaylist(resp.idMusica);
+                        });
 
                         var wavesurfer = WaveSurfer.create({
-                            container: '#waves' + publicacao.idMusica,
+                            container: '#waves' + resp.idMusica,
                             waveColor: '#a8a8a8',
                             progressColor: '#01a0c8',
                             height: 50,
@@ -216,24 +224,15 @@ function atualizarMusic() {
                             hideScrollbar: true
                         });
 
-                        // document.getElementById(`${publicacao.idMusica}`).addEventListener('click', function() {
-                        //     mostrarWaverBottom(arrayMusic[arrayMusic.length - 1].container)
-                        // })
-                        wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
+                        wavesurfer.load(`./assets/audio/${resp.caminhoAudio}`);
                         arrayMusic.push(wavesurfer);
-                        //carregarDuracao();
                         attLikes();
                         carregarDuracao();
                     }
-
+                    
                 }
 
             });
-            // setTimeout(() => {
-            //     carregarDuracao();
-            //     attLikes();
-            //  }, "8000")
-
         } else {
             throw ('Houve um erro na API!');
         }
@@ -249,31 +248,26 @@ function converterTempo(segundo) {
     if (campoSegundo < 10) {
         campoSegundo = '0' + campoSegundo;
     }
-
     return campoMinuto + ':' + campoSegundo;
 }
 
 //FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
 function carregarDuracao() {
-
     for (var i = 0; i < arrayMusic.length; i++) {
         var idWaveBruto = arrayMusic[i].container.id;
         var idWave = idWaveBruto.replace('waves', '');
         var duracao = document.getElementById(`duracao${idWave}`);
         var tempo = document.getElementById(`audio${idWave}`);
-        tempo.onloadeddata = function() {
-            duracao.innerHTML = converterTempo(tempo.duration);
-        };        
+
+        duracao.innerHTML = converterTempo(tempo.duration);
     }
 }
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
 function attLikes() {
     for (var i = 0; i < arrayMusic.length; i++) {
-
         var id = arrayMusic[i].container.id;
         var idConteudo = id.replace("waves", "");
-
         fetch("/validacoes/attLikes", {
             method: "POST",
             headers: {
@@ -284,20 +278,13 @@ function attLikes() {
                 idUserServer: sessionStorage.ID_USUARIO
             })
         }).then(function (resposta) {
-
             if (resposta.ok) {
-
                 resposta.json().then(function (resposta) {
-
                     if (resposta.length == 1) {
-                        console.log(`#l${resposta[0].fkMusica}`);
                         document.querySelector(`#l${resposta[0].fkMusica}`).classList.add("likeRed");
                         document.querySelector(`#l${resposta[0].fkMusica}`).classList.remove("like");
-
                     }
                 });
-
-
             } else {
                 console.log("Houve um erro ao tentar realizar o login!");
 
@@ -313,13 +300,12 @@ function attLikes() {
     }
 }
 
-//FUNÇÃO PARA CONSEGUIR ADICIONAR UMA MUSICA A UMA PLAYLIST
+//FUNÇÃO PARA LISTAR AS PLAYLISTS DO USUARIO
 function addMusicPlaylist(idMusic) {
-    if(validarSessao() == false){
+    if (validarSessao() == false) {
         AbrirLogin();
-        return
+        return;
     }
-
     idMusica = idMusic;
 
     var card = document.querySelector(".sobreposi-playlist");
@@ -340,10 +326,15 @@ function addMusicPlaylist(idMusic) {
                 var lista = document.getElementById('playlists');
                 lista.innerHTML = ``;
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
-                    lista.innerHTML += `
-                <div onclick="addPlaylist(${publicacao.idPlaylist})" class="playlist">${publicacao.nomePlaylist}</div>
-                `
+                    var resp = resposta[i];
+
+                    var divAddPlaylist = document.createElement('div');
+                    divAddPlaylist.className = 'playlist';
+                    divAddPlaylist.innerHTML = resp.nomePlaylist;
+                    lista.appendChild(divAddPlaylist);
+                    divAddPlaylist.addEventListener('click', function() {
+                        addPlaylist(resp.idPlaylist);
+                    });
                 }
             });
 
@@ -362,6 +353,7 @@ function addMusicPlaylist(idMusic) {
 
 }
 
+//FUNÇÃO PARA ADICIONAR A MUSICA A UMA DETERMINADA PLAYLIST
 function addPlaylist(idPlaylist) {
 
     fetch("/atualizar/addPlaylist", {
@@ -395,15 +387,9 @@ function addPlaylist(idPlaylist) {
 
 }
 
+//FUNÇÃO PARA SOBREPOR A LISTA DAS PLAYLISTS
 var sobrePlay = document.querySelector('.sobreposi-playlist');
 
 sobrePlay.addEventListener('click', function () {
     sobrePlay.style.display = 'none';
 });
-
-// function mostrarWaverBottom(idWave){
-//     alert(idWave)
-//     var id = document.getElementById(idWave);
-//     var waveBottom = document.getElementById(`waveBottom`);
-//     waveBottom.appendChild(idWave);
-// }
