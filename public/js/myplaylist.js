@@ -19,40 +19,18 @@ function atualizarPlaylist() {
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
                     feed.innerHTML += `
-                    <div class="card">
-                    <div class="playerPlaylist">
+                    <div class="card" onclick="verMusicasPlaylist(${publicacao.idPlaylist})">
                         <div class="foto">
-                            <img src="./assets/picture/play pause.gif" >
+                            <img src="./assets/picture/playlist.png">
+                            <div class="botao-play">
+                                <img src="./assets/picture/play80.png">
+                            </div>
                         </div>
-                        <div class="botoes">
-                            <img class="trocar" src="./assets/picture/inicio.png">
-                            <img class="play" src="./assets/picture/play.png">
-                            <img class="pause" src="./assets/picture/pause.png">
-                            <img class="trocar" src="./assets/picture/fim.png">
-                        </div>
-                    </div>
-                    <div class="select">
-                        <div class="titles-play">
-                            <h2 class="title-play">${publicacao.nomePlaylist}</h2>
-                            <img onclick="deletarPlaylist(${publicacao.idPlaylist})" src="./assets/picture/delete.png" >
-                        </div>
-
-                        <div class="musics" id="musicasPlaylist${publicacao.idPlaylist}">
-
-                        </div>
-                    </div>
-
-                </div> 
-
+                        <h2>${publicacao.nomePlaylist}</h2>
+                    </div> 
                 `
-
-                atualizarMusicas(publicacao.idPlaylist);
                 }
             });
-            setTimeout(() => {
-               // carregarDuracao();
-             }, "8000")
-
         } else {
             throw ('Houve um erro na API!');
         }

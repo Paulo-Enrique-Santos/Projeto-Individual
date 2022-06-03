@@ -13,6 +13,7 @@
     --background-color: #2c2c2c;
     --card-color: #0c0c0c;
     --textos-color: #a8a8a8;
+    --textos2-color: #e6e6e6;
     --border-width: 0.3vh;
     --border-radius: 2vh;
 }
@@ -189,7 +190,8 @@ header a{
 }
 
 .body-dois header .logado img{
-    width: 40px;
+    width: 30px;
+    margin-left: 10px;
     cursor: pointer;
 }
 
@@ -466,6 +468,10 @@ section .card li:hover{
     position: relative;
 }
 
+#music .audio{
+    display: none;
+}
+
 .top{
     height: 25vh;
     width: 100%;
@@ -499,7 +505,7 @@ section .card li:hover{
     box-shadow: 1px 1px 11px 2px #000000;
     color: var(--textos-color);
     height: 10vh;
-    border-radius: 5vh;
+    border-radius: 2vh;
     margin-top: 1.5%;
     width: 100%;
     padding: 1%;
@@ -514,8 +520,9 @@ section .card li:hover{
 }
 
 .player .foto{
-    border-radius: 5vh;
+    border-radius: 2vh;
     height: 50px;
+    margin-left: 20px;
     width: 50px;
     box-shadow: 1px 1px 11px 2px #000000;
     background-size: cover;
@@ -523,6 +530,10 @@ section .card li:hover{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+.cor-titulos{
+    color: var(--contraste-color);
 }
 
 .titles{
@@ -547,23 +558,27 @@ section .card li:hover{
 
 .titles h2{
     font-size: 1em;
-    color: #e6e6e6;
+}
+
+.titles .title-music{
+    color: var(--textos2-color);
 }
 
 .final h1{
-    color: #e6e6e6;
+    color: var(--textos2-color);
 }
 
 .titles h3{
     font-size: 0.8em;
 }
 
-.player .like{
+.like{
     width: 30px;
     height: 30px;
     background-image: url("/assets/picture/heart.png");
     background-position: center;
     background-size: cover;
+    cursor: pointer;
 }
 
 .player .likeRed{
@@ -742,7 +757,9 @@ footer .contato h5{
     margin-bottom: 3vh;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .criar .botao{
@@ -787,154 +804,40 @@ footer .contato h5{
 }
 
 #playlist .card{
-    width: 100%;
-    height: 50vh;
+    width: 20%;
+    height: 40vh;
     padding: 1.5vh;
-    display: flex;
-}
-
-#playlist .playerPlaylist{
-    width: 35%;
-    height: 100%;
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
-    box-shadow: 1px 1px 11px 2px #000000;
-    padding: 1.5vh;
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
 }
 
 #playlist .foto{
     width: 100%;
-    height: 80%;
-    border-radius: var(--border-radius);
-}
-
-#playlist .foto img{
-    height: 100%;
-    width: 100%;
-    border-radius: var(--border-radius);
-}
-
-#playlist .botoes{
-    width: 40%;
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#playlist .botoes img{
-    cursor: pointer;
-}
-
-#playlist .trocar{
-    width: 30px;
-}
-
-#playlist .pause{
-    width: 55px;
-    display: none;
-}
-
-#playlist .select{
-    width: 65%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5vh 1vh 0 2.5vh;
-}
-
-#playlist .select h2{
-    color: var(--contraste-color);
-}
-
-#playlist .select .title-play{
-    font-size: 2.5rem;
-}
-
-#playlist .musics{
-    margin-top: 10px;
     background-color: var(--background-color);
-    width: 100%;
-    height: 100%;
+    height: 70%;
     border-radius: var(--border-radius);
-    box-shadow: 1px 1px 11px 2px #000000;
-    padding: 1.5vh 1.5vh 0vh 1.5vh;
-    overflow-y: scroll;
-}
-
-#playlist .musics::-webkit-scrollbar{
-    display: none;
-}
-
-#playlist .music{
-    background-color: var(--background2-color);
-    width: 100%;
-    height: 10vh;
-    margin-bottom: 1.5vh;
-    border-radius: var(--border-radius);
-    box-shadow: 1px 1px 11px 2px #000000;
-    padding: 1vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+    justify-content: center;
 }
 
-#playlist .musics .foto {
-    width: 11%;
-    background-color: red;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#playlist .wave{
+#playlist .card .botao-play{
+    background-color: var(--background-color);
     display: none;
-}
-
-#playlist .titles-musics {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#playlist .musics img{
-    height: 35px;
-    width: 35px;
-}
-
-#playlist .musics button:hover{
-    transform: none;
-    box-shadow: none;
-}
-
-#playlist .resultados{
-    color: var(--contraste-color);
-    margin-top: 10px;
-}
-
-#playlist .titles-play{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-#playlist .titles-play img{
-    cursor: pointer;
-}
-
-#playlist .sobre{
-    height: 10vh;
-    width: 42vw;
-    z-index: 8;
+    width: 80px;
+    height: 80px;
     position: absolute;
+}
+
+#playlist .card:hover{
+    background-color: var(--background3-color);
+    cursor: pointer;
+}
+
+#playlist .card:hover .botao-play{
+    display: block;
 }
 
 /* PARTE DE TOP 10 MUSICAS */
@@ -1014,4 +917,162 @@ footer .contato h5{
 #top-dez h1{
     font-size: 40px;
     color: var(--contraste-color);
+}
+
+/* CLASS BOTTOM PLAYER */
+.player_bottom{
+    background-color: var(--background2-color);
+    border-top: var(--textos-color) solid 1px;
+    box-shadow: 1px 1px 11px 2px #000000;
+    height: 10vh;
+    width: 99vw;
+    position: absolute;
+    z-index: 8;
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.player_bottom .foto{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 60px;
+    width: 60px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.player_bottom .botoes{
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player_bottom .botoes .maior{
+    height: 40px;
+}
+
+.player_bottom .menor{
+    height: 30px;
+}
+
+.player_bottom h2{
+    color: var(--contraste-color);
+}
+
+.player_bottom h3{
+    color: var(--hoverbutton-color);
+}
+
+.player_bottom .fotos{
+    display: flex;
+    align-items: center;
+}
+
+.player_bottom .progress{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    gap: 5px;
+    color: var(--textos-color);
+}
+
+.player_bottom progress{
+    width: 600px;
+    height: 10px;
+    -webkit-appearance: none;
+}
+
+.player_bottom progress::-webkit-progress-value{
+    background-color: var(--contraste-color);
+    border-radius: 20px;
+    transition: 3000ms;
+}
+
+.player_bottom progress::-webkit-progress-bar{
+    background: var(--card-color);
+    border-radius: 20px;
+}
+
+.player_bottom .likes-playlist{
+    color: var(--textos-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.player_bottom .controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1vh;
+}
+
+.nmrMusica{
+    width: 40px;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* EQUALIZADOR */
+.equalizador{
+    width: 40px;
+    height: 100%;
+    display: none;
+    gap: 1px;
+    align-items: flex-end;
+}
+
+.equalizador div{
+    width: 9px;
+    height: 10%;
+    background-color: var(--contraste-color);
+    animation: equalizer 1s normal infinite forwards;
+}
+
+.equalizador div:nth-child(1){
+    animation-delay: .1s;
+}   
+
+
+.equalizador div:nth-child(2){
+    animation-delay: .3s;
+}   
+
+
+.equalizador div:nth-child(3){
+    animation-delay: .2s;
+}   
+
+
+.equalizador div:nth-child(4){
+    animation-delay: .4s;
+}   
+
+@keyframes equalizer {
+    0%{
+        height: 10%;
+    }
+    25%{
+        height: 100%;
+    }
+    50%{
+        height: 30%;
+    }
+    75%{
+        height: 70%;
+    }
+    100%{
+        height: 10%;
+    }
 }

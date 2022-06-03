@@ -15,13 +15,13 @@ document.addEventListener('click', function (event) {
     var idClick = event.target.id;
     var idConteudo = idClick.replace(/^./, "");
 
-    if(classClick == 'like' && validarSessao() == true){
+    if (classClick == 'like' && validarSessao() == true) {
         document.querySelector(`#${idClick}`).classList.add("likeRed");
         document.querySelector(`#${idClick}`).classList.remove("like");
         addLike(idConteudo);
-        } else if (classClick == 'like' && validarSessao() == false){
+    } else if (classClick == 'like' && validarSessao() == false) {
         AbrirLogin();
-    } else if (classClick == 'likeRed' && validarSessao() == true){
+    } else if (classClick == 'likeRed' && validarSessao() == true) {
         document.querySelector(`#${idClick}`).classList.add("like");
         document.querySelector(`#${idClick}`).classList.remove("likeRed");
         removeLike(idConteudo);
@@ -29,21 +29,60 @@ document.addEventListener('click', function (event) {
 
 });
 
+//VALIDANDO SE A MÚSICA ESTÁ TOCANDO 
+setInterval(() => {
+    for(var i = 0; i < arrayMusic.length ; i++){
+        var idBruto = arrayMusic[i].container.id;
+        var idMusica = idBruto.replace('waves','');
+        var tamanhoTotal = document.getElementById(`duracao${idMusica}`)
+        var tempo = document.getElementById(`audio${idMusica}`);
+        var progressTag = document.querySelector('progress');
+        var artista = document.getElementById(`artista${idMusica}`);
+        var musica = document.getElementById(`musica${idMusica}`);
+        var tocando = document.getElementById(`nmrMusica${idMusica}`);
+        var equalizador = document.getElementById(`equalizador${idMusica}`);
+
+        if(arrayMusic[i].isPlaying()){
+            progressTag.max = Math.floor(tempo.duration);
+            progressTag.value = Math.floor(arrayMusic[i].getCurrentTime());
+
+            musica.style.color = "var(--contraste-color)";
+
+
+            duracao_atual.innerHTML = converterTempo(arrayMusic[i].getCurrentTime());
+            duracao_final.innerHTML = tamanhoTotal.innerHTML;
+
+            tocando.style.display = "none";
+
+            equalizador.style.display = "flex";
+
+            musica_bottom.innerHTML = musica.innerHTML;
+            artista_bottom.innerHTML = artista.innerHTML;
+        } else {
+            tocando.style.display = "flex";
+
+            equalizador.style.display = "none";
+
+            musica.style.color = "var(--textos2-color)";
+        }
+    }
+}, 1000);
+
 //FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
-function click(event){
+function click(event) {
     var clickBruto = event.target.id;
     var click = clickBruto.replace('sobre', '');
 
-    for(var i = 0; i < arrayMusic.length ; i++){
+    for (var i = 0; i < arrayMusic.length; i++) {
         var idWaveBruto = arrayMusic[i].container.id;
-        var idWave = idWaveBruto.replace('waves','');
+        var idWave = idWaveBruto.replace('waves', '');
 
-        if(click == idWave){
-            for(var b = 0; b < arrayMusic.length; b ++){
+        if (click == idWave) {
+            for (var b = 0; b < arrayMusic.length; b++) {
                 var idWaveBruto = arrayMusic[b].container.id;
-                var idWave = idWaveBruto.replace('waves','');        
-                if(arrayMusic[b].isPlaying() == true){
-                    if(idWave != click){
+                var idWave = idWaveBruto.replace('waves', '');
+                if (arrayMusic[b].isPlaying() == true) {
+                    if (idWave != click) {
                         arrayMusic[b].stop();
                     }
                 }
@@ -61,21 +100,52 @@ function atualizarMusic() {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var feed = document.getElementById("music");
+                var audio = document.getElementById('audio');
                 for (let i = 0; i < resposta.length; i++) {
                     var publicacao = resposta[i];
                     var verMusica = document.getElementById("l" + publicacao.idMusica);
                     var artist = document.getElementById("artista" + publicacao.idMusica);
 
-                    if(verMusica != null){
-                    artist.innerHTML += ', ' + publicacao.artista;
+                    if (verMusica != null) {
+                        artist.innerHTML += ', ' + publicacao.artista;
                     } else {
+                        console.log(audio)
+                        audio.innerHTML += `
+                        <audio id="audio${publicacao.idMusica}" src="./assets/audio/${publicacao.caminhoAudio}"></audio>
+                        `
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
-                        divPublicacao.className = "player";
+                        divPublicacao.className = `player`;
 
                         var sobre = document.createElement("div");
                         sobre.className = 'sobre';
                         sobre.id = publicacao.idMusica;
+
+                        var nmrMusica = document.createElement("div");
+                        nmrMusica.className = `nmrMusica`
+                        // nmrMusica.innerHTML = `${arrayMusic.length + 1}`;
+                        
+                        var span =document.createElement("span");
+                        span.id = `nmrMusica${publicacao.idMusica}`;
+                        span.innerHTML = `${arrayMusic.length + 1}`;
+                        nmrMusica.appendChild(span);
+
+                        var equalizador = document.createElement('div');
+                        equalizador.className = "equalizador";
+                        nmrMusica.appendChild(equalizador);
+                        equalizador.id = `equalizador${publicacao.idMusica}`
+
+                        var filhoUm = document.createElement('div');
+                        equalizador.appendChild(filhoUm);
+                        
+                        var filhoDois = document.createElement('div');
+                        equalizador.appendChild(filhoDois);
+            
+                        var filhoTres = document.createElement('div');
+                        equalizador.appendChild(filhoTres);
+            
+                        var filhoQuatro = document.createElement('div');
+                        equalizador.appendChild(filhoQuatro);           
 
                         var divFoto = document.createElement("div");
                         divFoto.className = "foto";
@@ -86,6 +156,7 @@ function atualizarMusic() {
 
                         var music = document.createElement('h2');
                         music.className = 'title-music';
+                        music.id = 'musica' + publicacao.idMusica
                         music.innerHTML = publicacao.musica;
 
                         var artista = document.createElement('h3');
@@ -96,23 +167,25 @@ function atualizarMusic() {
                         var divWaves = document.createElement('div');
                         divWaves.className = 'waveform'
                         divWaves.id = 'waves' + publicacao.idMusica;
-                        
+
                         var divFinal = document.createElement('div');
                         divFinal.className = 'final';
+                        divFinal.id = `div_final_${i}`
 
                         var timeMusic = document.createElement('span');
                         timeMusic.id = 'duracao' + publicacao.idMusica;
 
                         var like = document.createElement('div');
                         like.className = 'like';
-                        like.id = 'l'+ publicacao.idMusica;
+                        like.id = 'l' + publicacao.idMusica;
 
                         // var add = document.createElement('h1');
                         // add.innerHTML = '+';
                         // add.onclick = addMusicPlaylist(publicacao.idMusica);
-                        
+
                         feed.appendChild(divPublicacao);
                         divPublicacao.appendChild(sobre);
+                        divPublicacao.appendChild(nmrMusica);
                         divPublicacao.appendChild(divFoto);
                         divPublicacao.appendChild(divTitles);
                         divTitles.appendChild(music);
@@ -121,12 +194,13 @@ function atualizarMusic() {
                         divPublicacao.appendChild(divFinal);
                         divFinal.appendChild(timeMusic);
                         divFinal.appendChild(like);
+
                         // divFinal.appendChild(add);
                         divFinal.innerHTML += `
                         <h1 onclick="addMusicPlaylist(${publicacao.idMusica})">+</h1>
                         `
-                        
-                            wavesurfer = WaveSurfer.create({
+
+                        var wavesurfer = WaveSurfer.create({
                             container: '#waves' + publicacao.idMusica,
                             waveColor: '#a8a8a8',
                             progressColor: '#01a0c8',
@@ -138,15 +212,20 @@ function atualizarMusic() {
                             interact: false,
                             pixelRatio: 1,
                             forceDecode: true,
-                            partialRender: true
+                            partialRender: true,
+                            hideScrollbar: true
                         });
+
+                        // document.getElementById(`${publicacao.idMusica}`).addEventListener('click', function() {
+                        //     mostrarWaverBottom(arrayMusic[arrayMusic.length - 1].container)
+                        // })
                         wavesurfer.load(`./assets/audio/${publicacao.caminhoAudio}`);
-                        var adicionar = arrayMusic.push(wavesurfer);
+                        arrayMusic.push(wavesurfer);
                         //carregarDuracao();
                         attLikes();
                         carregarDuracao();
                     }
-                    
+
                 }
 
             });
@@ -164,10 +243,10 @@ function atualizarMusic() {
 }
 
 //FUNCTION PARA CONVERTER SEGUNDOS EM UM HORÁRIO VISÍVEL
-function converterTempo(segundo){
+function converterTempo(segundo) {
     var campoMinuto = Math.floor(segundo / 60);
     var campoSegundo = Math.floor(segundo % 60);
-    if(campoSegundo < 10){
+    if (campoSegundo < 10) {
         campoSegundo = '0' + campoSegundo;
     }
 
@@ -175,64 +254,72 @@ function converterTempo(segundo){
 }
 
 //FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
-function carregarDuracao(){
+function carregarDuracao() {
 
-    for(var i = 0 ; i < arrayMusic.length ; i ++){
+    for (var i = 0; i < arrayMusic.length; i++) {
         var idWaveBruto = arrayMusic[i].container.id;
-        var idWave = idWaveBruto.replace('waves','');
+        var idWave = idWaveBruto.replace('waves', '');
         var duracao = document.getElementById(`duracao${idWave}`);
-            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
-    }    
+        var tempo = document.getElementById(`audio${idWave}`);
+        tempo.onloadeddata = function() {
+            duracao.innerHTML = converterTempo(tempo.duration);
+        };        
+    }
 }
 
 //FUNÇÃO PARA ATUALIZAR OS LIKES DAS MÚSICAS
-function attLikes(){
-    for(var i = 0 ; i < arrayMusic.length ; i ++){
+function attLikes() {
+    for (var i = 0; i < arrayMusic.length; i++) {
 
         var id = arrayMusic[i].container.id;
         var idConteudo = id.replace("waves", "");
 
-    fetch("/validacoes/attLikes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            idMusicServer: idConteudo,
-            idUserServer: sessionStorage.ID_USUARIO
-        })
-    }).then(function (resposta) {
+        fetch("/validacoes/attLikes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idMusicServer: idConteudo,
+                idUserServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resposta) {
 
-        if (resposta.ok) {
+            if (resposta.ok) {
 
-            resposta.json().then(function (resposta) {
+                resposta.json().then(function (resposta) {
 
-                if(resposta.length == 1){
-                    console.log(`#l${resposta[0].fkMusica}`);
-                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.add("likeRed");
-                    document.querySelector(`#l${resposta[0].fkMusica}`).classList.remove("like");
+                    if (resposta.length == 1) {
+                        console.log(`#l${resposta[0].fkMusica}`);
+                        document.querySelector(`#l${resposta[0].fkMusica}`).classList.add("likeRed");
+                        document.querySelector(`#l${resposta[0].fkMusica}`).classList.remove("like");
 
-                }
-            });    
+                    }
+                });
 
 
-        } else {
-            console.log("Houve um erro ao tentar realizar o login!");
-            
-            resposta.text().then(texto => {
-                console.error(texto);
-            });
-            return false;
-        }
+            } else {
+                console.log("Houve um erro ao tentar realizar o login!");
 
-    }).catch(function (erro) {
-        console.log(erro);
-    });
-}
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+                return false;
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        });
+    }
 }
 
 //FUNÇÃO PARA CONSEGUIR ADICIONAR UMA MUSICA A UMA PLAYLIST
-function addMusicPlaylist(idMusic){
+function addMusicPlaylist(idMusic) {
+    if(validarSessao() == false){
+        AbrirLogin();
+        return
+    }
+
     idMusica = idMusic;
 
     var card = document.querySelector(".sobreposi-playlist");
@@ -250,19 +337,19 @@ function addMusicPlaylist(idMusic){
 
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
-            var lista = document.getElementById('playlists');
-            lista.innerHTML= ``;
-            for (let i = 0; i < resposta.length; i++) {
-                var publicacao = resposta[i];
-                lista.innerHTML += `
+                var lista = document.getElementById('playlists');
+                lista.innerHTML = ``;
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+                    lista.innerHTML += `
                 <div onclick="addPlaylist(${publicacao.idPlaylist})" class="playlist">${publicacao.nomePlaylist}</div>
                 `
-            }
-            });    
+                }
+            });
 
         } else {
             console.log("Houve um erro ao tentar realizar o login!");
-            
+
             resposta.text().then(texto => {
                 console.error(texto);
             });
@@ -275,7 +362,7 @@ function addMusicPlaylist(idMusic){
 
 }
 
-function addPlaylist(idPlaylist){
+function addPlaylist(idPlaylist) {
 
     fetch("/atualizar/addPlaylist", {
         method: "POST",
@@ -290,12 +377,12 @@ function addPlaylist(idPlaylist){
 
         if (resposta.ok) {
         } else {
-            if(resposta.status == 500){
+            if (resposta.status == 500) {
                 alert('Essa musica já está nessa PlayList!');
             }
             console.log(resposta);
             console.log("Houve um erro ao tentar realizar o login!");
-            
+
             resposta.text().then(texto => {
                 console.error(texto);
             });
@@ -310,6 +397,13 @@ function addPlaylist(idPlaylist){
 
 var sobrePlay = document.querySelector('.sobreposi-playlist');
 
-sobrePlay.addEventListener('click' , function(){
+sobrePlay.addEventListener('click', function () {
     sobrePlay.style.display = 'none';
 });
+
+// function mostrarWaverBottom(idWave){
+//     alert(idWave)
+//     var id = document.getElementById(idWave);
+//     var waveBottom = document.getElementById(`waveBottom`);
+//     waveBottom.appendChild(idWave);
+// }
