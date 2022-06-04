@@ -10,7 +10,6 @@ document.addEventListener('click', click);
 function likes (idMusica){
     var classClick = document.getElementById(`l${idMusica}`).classList;
 
-    alert(idMusica);
     if (classClick == 'like' && validarSessao() == true) {
         document.getElementById(`l${idMusica}`).classList.add("likeRed");
         document.getElementById(`l${idMusica}`).classList.remove("like");
@@ -38,6 +37,8 @@ setInterval(() => {
         var equalizador = document.getElementById(`equalizador${idMusica}`);
         var player = document.querySelector(`.player_bottom`);
         var like = document.getElementById(`l${idMusica}`);
+        var fotoMusica = document.getElementById(`foto${idMusica}`);
+        var fotoBottom = document.getElementById(`foto_bottom`);
 
         if(arrayMusic[i].getDuration() == arrayMusic[i].getCurrentTime() && 
            arrayMusic[i].getCurrentTime() != 0){
@@ -64,6 +65,7 @@ setInterval(() => {
             musica_bottom.innerHTML = musica.innerHTML;
             artista_bottom.innerHTML = artista.innerHTML;
             player.style.display = 'flex';
+            fotoBottom.style.backgroundImage = fotoMusica.style.backgroundImage;            
 
             var divFinal = document.getElementById(`divFinal_bottom`);
             divFinal.innerHTML = `
@@ -183,6 +185,7 @@ function atualizarMusic() {
                         divFoto.className = "foto";
                         divFoto.style.backgroundImage = `url("/assets/picture/${resp.caminhoFoto}")`;
                         divPlayer.appendChild(divFoto);
+                        divFoto.id = `foto${resp.idMusica}`
 
                         var divTitles = document.createElement('div');
                         divTitles.className = 'titles';
@@ -334,7 +337,6 @@ function attLikes() {
 
 //FUNÇÃO PARA LISTAR AS PLAYLISTS DO USUARIO
 function addMusicPlaylist(idMusic) {
-    alert(idMusic);
     if (validarSessao() == false) {
         AbrirLogin();
         return;
