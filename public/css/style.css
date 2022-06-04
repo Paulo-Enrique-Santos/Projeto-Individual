@@ -1127,3 +1127,44 @@ footer .contato h5{
         height: 10%;
     }
 }
+
+/* PÁGINA QUE VAI SELECIONAR AS PLAYLISTS */
+.topo .foto{
+    width: 25%;
+    height: 35vh;
+    z-index: 8;
+    margin-bottom: 3vh;
+    margin-right: 1vw;
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 11px 6px #202020;
+    background-color: var(--background5-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topo .title{
+    height: 35vh;
+    width: 75%;
+    margin-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5vh;
+}
+
+.topo .title h1{
+    font-size: 3rem; 
+    color: var(--contraste-color);
+}
+
+.topo .title h2{
+    font-size: 2rem;
+    color: var(--hoverbutton-color);
+}
+
+.topo .title .deletar_playlist{
+    align-self: flex-end;
+    position: absolute;
+    cursor: pointer;
+}
