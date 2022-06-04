@@ -73,6 +73,13 @@ setInterval(() => {
             </div>
             <h1 onclick="addMusicPlaylist(${idMusica})">+</h1>
             `;
+            var botoes = document.getElementById(`controls_bottom`);
+            botoes.innerHTML = `
+            <img src="./assets/picture/inicio.png" class="menor" onclick="controls('back',${idMusica})">
+            <img src="./assets/picture/play.png" class="maior" id="play_bottom" onclick="controls('play',${idMusica})">
+            <img src="./assets/picture/pause.png" class="maior" id="pause_bottom" onclick="controls('pause',${idMusica})">
+            <img src="./assets/picture/fim.png" class="menor" onclick="controls('next',${idMusica})">
+            `;
 
             var classDoLike = like.classList;
             var likeBottom = document.getElementById(`like_bottom`);    
@@ -85,12 +92,53 @@ setInterval(() => {
                 likeBottom.classList.remove(`like`);
             }
         } else {
+            if(arrayMusic[i].getCurrentTime()!= 0){
+                musica.style.color = 'var(--contraste-color)';
+            }else{
+                musica.style.color = "var(--textos2-color)";
+            }
             tocando.style.display = "flex";
             equalizador.style.display = "none";
-            musica.style.color = "var(--textos2-color)";
         }
     }
 }, 1000);
+
+//FUNÇÃO PARA CONTROLAR AS MUSICAS NO PLAYER DO BOTTOM
+function controls(funcao, idMusica){
+    var play = document.getElementById(`play_bottom`);
+    var pause = document.getElementById(`pause_bottom`);
+
+    for(let i = 0; i < arrayMusic.length ; i++){
+        var idBruto = arrayMusic[i].container.id;
+        var idWave = idBruto.replace('waves', '');
+
+        if(idWave == idMusica){
+            if(funcao == 'play' ){
+                arrayMusic[i].playPause();
+                play.style.display = 'none';
+                pause.style.display = 'block';
+            }else if(funcao == 'pause'){
+                arrayMusic[i].playPause();
+                play.style.display = 'block';
+                pause.style.display = 'none';
+            }else if(funcao == 'next'){
+                arrayMusic[i].stop();
+                if(arrayMusic[i+1] == undefined){
+                    arrayMusic[0].play();
+                }else{
+                    arrayMusic[i+1].play();
+                }
+            }else{
+                arrayMusic[i].stop();
+                if(arrayMusic[i-1] == undefined){
+                    arrayMusic[0].play();
+                }else{
+                    arrayMusic[i-1].play();
+                }
+            }
+        }
+    }
+}
 
 //FUNCTION CLICK QUE FAZ AS MUSICAS TOCAREM
 function click(event) {

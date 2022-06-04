@@ -978,10 +978,12 @@ footer .contato h5{
 
 .player_bottom .botoes .maior{
     height: 40px;
+    cursor: pointer;
 }
 
 .player_bottom .menor{
     height: 30px;
+    cursor: pointer;
 }
 
 .player_bottom h2{
@@ -1043,7 +1045,7 @@ footer .contato h5{
 }
 
 .nmrMusica{
-    width: 40px;
+    width: 50px;
     height: 70%;
     display: flex;
     justify-content: center;
@@ -1054,6 +1056,14 @@ footer .contato h5{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.player_bottom h1{
+    cursor: pointer;
+}
+
+#play_bottom{
+    display: none;
 }
 
 /* EQUALIZADOR */
