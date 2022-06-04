@@ -1,36 +1,35 @@
 //ARRAY QUE SALVA AS MÚSICAS
 var arrayMusic = [];
 
-var idMusica = 0;
+var idMusicas = 0;
 
 //EVENTO QUE CHAMA FUNÇÃO CLICK (QUE FAZ AS MUSICAS TOCAREM)
 document.addEventListener('click', click);
 
-//EVENTO QUE CHAMA A FUNÇÃO PARA DAR OU TIRAR LIKE DE UMA MÚSICA
-document.addEventListener('click', function (event) {
-    var classClick = event.target.className;
-    var idClick = event.target.id;
-    var idConteudo = idClick.replace(/^./, "");
+//FUNCTION QUE DA LIKE NAS MÚSICAS
+function likes (idMusica){
+    var classClick = document.getElementById(`l${idMusica}`).classList;
 
+    alert(idMusica);
     if (classClick == 'like' && validarSessao() == true) {
-        document.querySelector(`#${idClick}`).classList.add("likeRed");
-        document.querySelector(`#${idClick}`).classList.remove("like");
-        addLike(idConteudo);
+        document.getElementById(`l${idMusica}`).classList.add("likeRed");
+        document.getElementById(`l${idMusica}`).classList.remove("like");
+        addLike(idMusica);
     } else if (classClick == 'like' && validarSessao() == false) {
         AbrirLogin();
     } else if (classClick == 'likeRed' && validarSessao() == true) {
-        document.querySelector(`#${idClick}`).classList.add("like");
-        document.querySelector(`#${idClick}`).classList.remove("likeRed");
-        removeLike(idConteudo);
+        document.getElementById(`l${idMusica}`).classList.add("like");
+        document.getElementById(`l${idMusica}`).classList.remove("likeRed");
+        removeLike(idMusica);
     }
-});
+}
 
 //VALIDANDO SE A MÚSICA ESTÁ TOCANDO E FAZ ALGUMAS COISAS NAS FUNÇÕES
 setInterval(() => {
     for (var i = 0; i < arrayMusic.length; i++) {
         var idBruto = arrayMusic[i].container.id;
         var idMusica = idBruto.replace('waves', '');
-        var tamanhoTotal = document.getElementById(`duracao${idMusica}`)
+        var tamanhoTotal = document.getElementById(`duracao${idMusica}`);
         var tempo = document.getElementById(`audio${idMusica}`);
         var progressTag = document.querySelector('progress');
         var artista = document.getElementById(`artista${idMusica}`);
@@ -38,6 +37,7 @@ setInterval(() => {
         var tocando = document.getElementById(`nmrMusica${idMusica}`);
         var equalizador = document.getElementById(`equalizador${idMusica}`);
         var player = document.querySelector(`.player_bottom`);
+        var like = document.getElementById(`l${idMusica}`);
 
         if(arrayMusic[i].getDuration() == arrayMusic[i].getCurrentTime() && 
            arrayMusic[i].getCurrentTime() != 0){
@@ -64,6 +64,24 @@ setInterval(() => {
             musica_bottom.innerHTML = musica.innerHTML;
             artista_bottom.innerHTML = artista.innerHTML;
             player.style.display = 'flex';
+
+            var divFinal = document.getElementById(`divFinal_bottom`);
+            divFinal.innerHTML = `
+            <div id="like_bottom" class="like" onclick="likes(${idMusica})">
+            </div>
+            <h1 onclick="addMusicPlaylist(${idMusica})">+</h1>
+            `;
+
+            var classDoLike = like.classList;
+            var likeBottom = document.getElementById(`like_bottom`);    
+
+            if(classDoLike == 'like'){
+                likeBottom.classList.add(`like`);
+                likeBottom.classList.remove(`likeRed`);
+            }else{
+                likeBottom.classList.add(`likeRed`);
+                likeBottom.classList.remove(`like`);
+            }
         } else {
             tocando.style.display = "flex";
             equalizador.style.display = "none";
@@ -196,17 +214,31 @@ function atualizarMusic() {
                         timeMusic.id = 'duracao' + resp.idMusica;
                         divFinal.appendChild(timeMusic);
 
-                        var like = document.createElement('div');
-                        like.className = 'like';
-                        like.id = 'l' + resp.idMusica;
-                        divFinal.appendChild(like);
+                        divFinal.innerHTML += `
+                        <div class="like" id="l${resp.idMusica}" onclick="likes(${resp.idMusica})">
+                        </div>
+                        <h1 onclick="addMusicPlaylist(${resp.idMusica})">
+                        +
+                        </h1>
+                        `
 
-                        var addPlaylist = document.createElement('h1');
-                        addPlaylist.innerHTML = '+';
-                        divFinal.appendChild(addPlaylist);
-                        addPlaylist.addEventListener('click', function () {
-                            addMusicPlaylist(resp.idMusica);
-                        });
+                        // var like = document.createElement('div');
+                        // like.className = 'like';
+                        // like.id = 'l' + resp.idMusica;
+                        // divFinal.appendChild(like);
+                        // like.addEventListener('click', function(){
+                        //     likes(resp.idMusica);
+                        // });
+
+                        // var addPlaylist = document.createElement('h1');
+                        // addPlaylist.innerHTML = '+';
+                        // divFinal.appendChild(addPlaylist);
+                        // addPlaylist.onclick = function (){
+                        //     addMusicPlaylist(resp.idMusica);
+                        // };
+                        // addPlaylist.addEventListener('click', ()=>{
+                        //     addMusicPlaylist(resp.idMusica);
+                        // });
 
                         var wavesurfer = WaveSurfer.create({
                             container: '#waves' + resp.idMusica,
@@ -302,11 +334,12 @@ function attLikes() {
 
 //FUNÇÃO PARA LISTAR AS PLAYLISTS DO USUARIO
 function addMusicPlaylist(idMusic) {
+    alert(idMusic);
     if (validarSessao() == false) {
         AbrirLogin();
         return;
     }
-    idMusica = idMusic;
+    idMusicas = idMusic;
 
     var card = document.querySelector(".sobreposi-playlist");
     card.style.display = "flex";

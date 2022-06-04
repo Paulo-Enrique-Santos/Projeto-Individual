@@ -591,12 +591,13 @@ section .card li:hover{
     cursor: pointer;
 }
 
-.player .likeRed{
+.likeRed{
     width: 30px;
     height: 30px;
     background-image: url("/assets/picture/heart-red.png");
     background-position: center;
     background-size: cover;
+    cursor: pointer;
 }
 
 
