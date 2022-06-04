@@ -446,7 +446,7 @@ function addPlaylist(idPlaylist) {
         },
         body: JSON.stringify({
             idPlaylistServer: Number(idPlaylist),
-            idMusicaServer: Number(idMusica)
+            idMusicaServer: Number(idMusicas)
         })
     }).then(function (resposta) {
 
