@@ -470,15 +470,18 @@ section .card li:hover{
 
 /* DIV DAS MÚSICAS */
 #music{
-    padding: 10px 20px 30px 20px;
+    padding: 20px;
     border-radius: var(--border-radius);
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;
     margin-bottom: 3vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
 }
 
-#music .audio{
+.audios{
     display: none;
 }
 
@@ -516,7 +519,6 @@ section .card li:hover{
     color: var(--textos-color);
     height: 10vh;
     border-radius: 2vh;
-    margin-top: 1.5%;
     width: 100%;
     padding: 1%;
     display: flex;
@@ -773,6 +775,10 @@ footer .contato h5{
     gap: 20px;
 }
 
+.resultados{
+    color: var(--contraste-color);
+}
+
 .criar .botao{
     background-color: var(--contraste-color);
     height: 5vh;
@@ -825,7 +831,7 @@ footer .contato h5{
     transition: 200ms;
 }
 
-#playlist .foto{
+#playlist .card .foto{
     width: 100%;
     background-color: var(--background-color);
     height: 70%;

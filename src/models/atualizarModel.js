@@ -128,7 +128,8 @@ function atualizarMusicas(idPlaylist) {
         idMusica,
         musica.caminhoFoto,
         musica.caminhoAudio,
-        artista.idArtista
+        artista.idArtista,
+        PlayList.nomePlaylist
     from Playlist
         join musicaplaylist on idPlaylist = fkplaylist
             join musica on musicaplaylist.fkmusica = idMusica
