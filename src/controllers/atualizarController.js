@@ -96,7 +96,7 @@ function atualizarMusicasArtista(req, res) {
 
     var idPlaylist = req.body.idPlaylistServer;
 
-    atualizarModel.atualizarMusicas(idPlaylist)
+    atualizarModel.atualizarMusicasArtista(idPlaylist)
     .then(
         function (resultado) {
             res.json(resultado);
@@ -347,5 +347,6 @@ module.exports = {
     atualizarMusicas,
     deletarMusicaPlaylist,
     topMusica,
-    topArtista
+    topArtista,
+    atualizarMusicasArtista
 }
