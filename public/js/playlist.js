@@ -28,6 +28,7 @@ function deletarPlaylist(){
 
 //ADICIONAR AS MÚSICAS DA PLAYLIST
 function atualizarMusicas(){
+    var qtdMusica = 0;
     fetch("/atualizar/atualizarMusicas", {
         method: "POST",
         headers: {
@@ -52,8 +53,6 @@ function atualizarMusicas(){
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var divPai = document.getElementById("playlist");
                 var audio = document.getElementById('audio');
-                var qtdMusicas = document.getElementById(`qtdMusicas_playlist`);
-                qtdMusicas.innerHTML = `${resposta.length} Musicas`;
 
                 for (let i = 0; i < resposta.length; i++) {
                     var resp = resposta[i];
@@ -63,6 +62,10 @@ function atualizarMusicas(){
                     if (verMusica != null) {
                         artist.innerHTML += ', ' + resp.artista;
                     } else {
+                        qtdMusica++;
+
+                        var qtdMusicas = document.getElementById(`qtdMusicas_playlist`);
+                        qtdMusicas.innerHTML = `${qtdMusica} Musicas`;        
 
                         var audioAtual = document.createElement('audio');
                         audioAtual.id = `audio${resp.idMusica}`;
@@ -149,9 +152,7 @@ function atualizarMusicas(){
                         divFinal.innerHTML += `
                         <div class="like" id="l${resp.idMusica}" onclick="likes(${resp.idMusica})">
                         </div>
-                        <h1 onclick="addMusicPlaylist(${resp.idMusica})">
-                        +
-                        </h1>
+                        <img src="./assets/picture/delete.png" onclick="deletarMusicaPlaylist(${resp.idMusica})">
                         `
 
                         // var like = document.createElement('div');
@@ -207,7 +208,7 @@ function atualizarMusicas(){
 }
 
 //FUNÇÃO PARA DELETAR AS MUSICAS DAS PLAYLISTS
-function deletarMusicaPlaylist(idMusica,idPlaylist){
+function deletarMusicaPlaylist(idMusica){
     fetch("/atualizar/deletarMusicaPlaylist", {
         method: "POST",
         headers: {
@@ -216,7 +217,7 @@ function deletarMusicaPlaylist(idMusica,idPlaylist){
         body: JSON.stringify({
             // crie um atributo que recebe o valor recuperado aqui
             // Agora vá para o arquivo routes/usuario.js
-            idPlaylistServer: idPlaylist,
+            idPlaylistServer: sessionStorage.ID_PLAYLIST,
             idMusicaServer: idMusica
         })
     }).then(function (resposta) {

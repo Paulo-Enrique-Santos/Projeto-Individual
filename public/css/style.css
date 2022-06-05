@@ -818,6 +818,7 @@ footer .contato h5{
 .topo{
     display: flex;
     align-items: center;
+    margin-top: 2vh;
 }
 
 #playlist .card{
@@ -1149,6 +1150,15 @@ footer .contato h5{
     align-items: center;
 }
 
+.topo .title .voltar{
+    height: 100%;
+}
+
+.topo .title img{
+    width: 30px;
+    cursor: pointer;
+}
+
 .topo .title{
     height: 35vh;
     width: 75%;
@@ -1173,4 +1183,9 @@ footer .contato h5{
     align-self: flex-end;
     position: absolute;
     cursor: pointer;
+    width: 2vw;
+}
+
+.topo .title .deletar_playlist img{
+    width: 100%;
 }

@@ -430,12 +430,14 @@ function converterTempo(segundo){
 
 //FUNCTION PARA ATUALIZAR A DURAÇÃO DA MUSICA
 function carregarDuracao(){
-    for(var i = 0 ; i < arrayMusic.length ; i ++){
-        let idClick = arrayMusic[i].container.id;
-        var idConteudo = idClick.replace('waves', "");
-        var duracao = document.getElementById(`duracao${idConteudo}`);
-            duracao.innerHTML = converterTempo(arrayMusic[i].getDuration());
-    }    
+    for (var i = 0; i < arrayMusic.length; i++) {
+        var idWaveBruto = arrayMusic[i].container.id;
+        var idWave = idWaveBruto.replace('waves', '');
+        var duracao = document.getElementById(`duracao${idWave}`);
+        var tempo = document.getElementById(`audio${idWave}`);
+
+        duracao.innerHTML = converterTempo(tempo.duration);
+    }
 }
 
 //FUNÇÃO PARA ADICIONAR A MUSICA A UMA DETERMINADA PLAYLIST
