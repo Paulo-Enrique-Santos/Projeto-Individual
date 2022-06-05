@@ -1,0 +1,78 @@
+/* PARTE DE TOP 10 MUSICAS */
+#top-dez{
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 11px 2px #000000;
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3vh;
+    gap: 20px;
+}
+
+#top-dez .podio{
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    height: 50vh;
+    display: flex;
+    padding: 2vh;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+}
+
+#top-dez .podio .top{
+    background-color: var(--background5-color); 
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 11px 2px #000000;
+    padding-top: 5px;
+    align-items: center;
+}
+
+#top-dez .primeiro{
+    height: 100%;
+}
+
+#top-dez .segundo{
+    height: 90%;
+}
+
+#top-dez .terceiro{
+    height: 80%;
+}
+
+#top-dez .medalha{
+    display: flex;
+    width: 100%;
+    height: 7vh;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+#top-dez .top h1{
+    font-size: 24px;
+    margin-bottom: 2%;
+}
+
+#top-dez .top h2{
+    font-size: 20px;
+}
+
+#top-dez .foto{
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 11px 2px #000000;
+    margin-bottom: 4%;
+}
+
+#top-dez h1{
+    font-size: 40px;
+    color: var(--contraste-color);
+}
