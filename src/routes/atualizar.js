@@ -31,6 +31,10 @@ router.post("/atualizarMusicas", function (req, res) {
     atualizarController.atualizarMusicas(req, res);
 });
 
+router.post("/atualizarMusicasArtista", function (req, res) {
+    atualizarController.atualizarMusicasArtista(req, res);
+});
+
 router.post("/deletarMusicaPlaylist", function (req, res) {
     atualizarController.deletarMusicaPlaylist(req, res);
 });

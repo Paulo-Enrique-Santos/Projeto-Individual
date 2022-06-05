@@ -61,7 +61,8 @@ header {
 
 .container{
     width: 80%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container::-webkit-scrollbar{
@@ -1188,4 +1189,11 @@ footer .contato h5{
 
 .topo .title .deletar_playlist img{
     width: 100%;
+}
+
+/* PAGINA DE MUSICAS POR ARTISTAS */
+#foto_Artista{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
