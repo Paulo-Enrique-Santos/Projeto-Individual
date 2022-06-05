@@ -75,18 +75,17 @@ function atualizarArtista() {
 
                     // onde.appendChild(divPublicacao);
                     attDadosArtista(resp.idArtista);
-
                 }
-
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao tentar atualizar Artista!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
     });
 }
 
+//FUNÇÃO PARA ENVIAR OS DADOS DO ARTISTA PARA OUTRA PÁGINA
 function musicaArtista(idArtista, nome, genero, foto){
     sessionStorage.ID_ARTISTA = idArtista;
     sessionStorage.NOME_ARTISTA = nome;
@@ -104,18 +103,18 @@ function attDadosArtista(idArtista) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+                    var resp = resposta[i];
                     let musics = document.getElementById(`musics${idArtista}`);
                     let likes = document.getElementById(`likes${idArtista}`);
 
-                    musics.innerHTML = `${publicacao.musics} músicas`
-                    likes.innerHTML = `${publicacao.likes} likes`
+                    musics.innerHTML = `${resp.musics} músicas`
+                    likes.innerHTML = `${resp.likes} likes`
 
                 }
 
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao tentar coletar os dados do artista!');
         }
     }).catch(function (resposta) {
         console.error(resposta);

@@ -1,7 +1,5 @@
-// sessão
+// VALIDAR SE ESTÁ LOGADO OU NÃO
 function validarSessao() {
-    // aguardar();
-
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
@@ -10,7 +8,6 @@ function validarSessao() {
         document.querySelector('.logado').style.display = 'flex'
         name_user.innerHTML = nome;
         return true;
-        // finalizarAguardar();
     } else {
         document.querySelector('.btns').style.display = 'flex'
         document.querySelector('.logado').style.display = 'none'
@@ -19,10 +16,9 @@ function validarSessao() {
     }
 }
 
+// SAIR DA CONTA DO USUARIO
 function limparSessao() {
-    // aguardar();
     sessionStorage.clear();
-    // finalizarAguardar();
     window.location = "index.html";
 }
 
@@ -33,6 +29,7 @@ function aguardarCadastro() {
     card_erro_cadastro.style.display = "none"
 }
 
+// ENCERRAMENTO DO (LOADING) E CARD DE ERROS
 function finalizarAguardarCadastro(texto) {
     var divAguardar = document.getElementById("loading_cadastro");
     divAguardar.style.display = "none";
@@ -54,6 +51,7 @@ function aguardarLogin() {
     card_erro_login.style.display = "none"
 }
 
+// ENCERRAMENTO DO (LOADING) E CARD DE ERROS
 function finalizarAguardarLogin(texto) {
     var divAguardar = document.getElementById("loading_login");
     divAguardar.style.display = "none";
@@ -69,19 +67,15 @@ function finalizarAguardarLogin(texto) {
 
 //ADICIONAR O LIKE EM DETERMINADA MÚSICA
 function addLike(id){
-
     var idMusic = id;
     var idUser = sessionStorage.ID_USUARIO;
 
-    // Enviando o valor da nova input
     fetch("/atualizar/addLike", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
             idMusicServer: idMusic,
             idUserServer: idUser
         })
@@ -89,12 +83,11 @@ function addLike(id){
 
         if (resposta.ok) {
         } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
+            throw ("Houve um erro ao tentar dar like na musica!");
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
-
 }
 
 //REMOVER LIKE DE UMA DETERMINADA MÚSICA
@@ -102,15 +95,12 @@ function removeLike(id){
     var idMusic = id;
     var idUser = sessionStorage.ID_USUARIO;
 
-    // Enviando o valor da nova input
     fetch("/atualizar/removeLike", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
             idMusicServer: idMusic,
             idUserServer: idUser
         })
@@ -118,15 +108,15 @@ function removeLike(id){
 
         if (resposta.ok) {
         } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
+            throw ("Houve um erro ao tentar remover like!");
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
 }
 
+//FUNÇÃO QUE FAZ ABRIR O LOGIN
 function AbrirLogin(local){
-
     if(validarSessao() == false){
     document.querySelector('.sobreposi').style.animation = 'sobrepor 0.9s ease forwards';
 
@@ -140,7 +130,6 @@ function AbrirLogin(local){
         }
     };        
 }
-
 
 //FECHANDO A TELA DE CADASTRO OU DE LOGIN
 function Close(podeAbrir){
@@ -156,7 +145,7 @@ function Close(podeAbrir){
         }, 900);
 }
 
-//ABRINDO A TELA DE CADASTRO
+//FUNÇÃO QUE FAZ ABRIR A TELA DE CADASTRO
 function AbrirCadastro(){
     if(validarSessao() == false){
     document.querySelector('.sobreposi').style.animation = 'sobrepor 0.9s ease forwards';
@@ -166,12 +155,12 @@ function AbrirCadastro(){
     }
 }
 
-//FUNÇÃO PARA SUMIR A MENSAGEM DE ERRO
+//FUNÇÃO PARA SUMIR A MENSAGEM DE ERRO CADASTRO
 function sumirMensagemCadastro() {
     card_erro_cadastro.style.display = "none"
 }
 
-//FUNÇÃO PARA SUMIR A MENSAGEM DE ERRO
+//FUNÇÃO PARA SUMIR A MENSAGEM DE ERRO LOGIN
 function sumirMensagemLogin() {
     card_erro_login.style.display = "none"
 }

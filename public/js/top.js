@@ -45,7 +45,7 @@ function atualizarTopMusica() {
             //  }, "8000")
 
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao tentar atualizar o top!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
@@ -99,7 +99,7 @@ function atualizarTopArtista() {
             //  }, "8000")
 
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao tentar atualizar o top!');
         }
     }).catch(function (resposta) {
         console.error(resposta);

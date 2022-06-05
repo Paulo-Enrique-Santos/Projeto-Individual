@@ -63,11 +63,3 @@ function entrar() {
 
     return false;
 }
-
-//FUNÇÃO PARA SAIR DA CONTA
-function sair() {
-    aguardar();
-    sessionStorage.clear();
-    finalizarAguardar();
-    window.location = "login.html";
-}

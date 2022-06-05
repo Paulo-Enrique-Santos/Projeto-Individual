@@ -1,5 +1,4 @@
-//FUNCTIONS ##############################################################################################################
-//FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
+//FUNÇÃO PARA PEGAR TODOS OS GENEROS
 function atualizarGenero() {
     fetch("/atualizar/listarGenero").then(function (resposta) {
         if (resposta.ok) {
@@ -8,32 +7,32 @@ function atualizarGenero() {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var feed = document.getElementById("index");
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+                    var resp = resposta[i];
 
                     // criando e manipulando elementos do HTML via JavaScript
-                    var divPublicacao = document.createElement("div");
-                    divPublicacao.className = "card";
+                    var divresp = document.createElement("div");
+                    divresp.className = "card";
                     var h3Title = document.createElement("h3");
                     var ulFotos = document.createElement("ul");
-                    ulFotos.id = publicacao.genero;
-                    atualizarFoto(publicacao.genero);
+                    ulFotos.id = resp.genero;
+                    atualizarFoto(resp.genero);
 
-                    h3Title.innerHTML = publicacao.genero;
-                    divPublicacao.appendChild(h3Title);
-                    divPublicacao.appendChild(ulFotos);
-                    feed.appendChild(divPublicacao);
+                    h3Title.innerHTML = resp.genero;
+                    divresp.appendChild(h3Title);
+                    divresp.appendChild(ulFotos);
+                    feed.appendChild(divresp);
                 }
 
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao tentar coletar os generos do banco de dados!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
     });
 }
 
-//FUNÇÃO PARA PE
+//FUNÇÃO PARA PEGAR AS FOTOS DOS ARTISTAS 
 function atualizarFoto(id) {
     var idVar = id
 
@@ -44,8 +43,6 @@ function atualizarFoto(id) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
             idServer: idVar
         })
     }).then(function (resposta) {
@@ -55,12 +52,11 @@ function atualizarFoto(id) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var feed = document.getElementById(idVar);
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+                    var resp = resposta[i];
 
-                    // criando e manipulando elementos do HTML via JavaScript
                     var fotoArtista = document.createElement("li");
-                    fotoArtista.id = publicacao.idMusica;
-                    fotoArtista.style.backgroundImage = `url('./assets/picture/${publicacao.caminhoFoto}')`
+                    fotoArtista.id = resp.idMusica;
+                    fotoArtista.style.backgroundImage = `url('./assets/picture/${resp.caminhoFoto}')`
 
                     var divSobre = document.createElement("div");
                     divSobre.className = "sobre-index";
@@ -74,7 +70,7 @@ function atualizarFoto(id) {
 
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao atualizar as fotos dos artistas!');
         }
     }).catch(function (resposta) {
         console.error(resposta);

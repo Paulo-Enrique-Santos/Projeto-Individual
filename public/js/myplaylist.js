@@ -17,22 +17,22 @@ function atualizarPlaylist() {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+                    var resp = resposta[i];
                     feed.innerHTML += `
-                    <div class="card" onclick="verMusicasPlaylist(${publicacao.idPlaylist}, '${publicacao.nomePlaylist}')">
+                    <div class="card" onclick="verMusicasPlaylist(${resp.idPlaylist}, '${resp.nomePlaylist}')">
                         <div class="foto">
                             <img src="./assets/picture/playlist.png">
                             <div class="botao-play">
                                 <img src="./assets/picture/play80.png">
                             </div>
                         </div>
-                        <h2>${publicacao.nomePlaylist}</h2>
+                        <h2>${resp.nomePlaylist}</h2>
                     </div> 
                 `
                 }
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro ao atualizar as playlist!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
@@ -66,7 +66,7 @@ function criarPlaylist(){
         if (resposta.ok) {
             document.location.reload(true);
         } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
+            throw ("Houve um erro ao tentar criar os cards das playlist!");
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
