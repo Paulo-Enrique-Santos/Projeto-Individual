@@ -146,11 +146,14 @@ from artista
 
 -- SELECIONAR OS TOPS 3 DOS ARTISTAS
 select 
-	sum(likes)
+	sum(likes) as likes,
+    artista.nome,
+    artista.caminhoFoto
 from artista
 	join feat on idArtista = feat.fkArtista
 		join musica on feat.fkmusica = idmusica
-			order by likes desc limit 3;
+			group by artista.nome 
+				order by likes desc limit 3;
 
 select * from musica;
 

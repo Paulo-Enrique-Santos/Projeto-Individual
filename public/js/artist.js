@@ -9,47 +9,67 @@ function atualizarArtista() {
                 var right = document.getElementById("right");
                 var onde = right;
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+                    var resp = resposta[i];
 
                     if(onde == right){
                         onde = left;
                     } else {
                         onde = right;
                     }
-                    // criando e manipulando elementos do HTML via JavaScript
-                    var divPublicacao = document.createElement("div");
-                    divPublicacao.className = "card";
-                    var foto = document.createElement('div');
-                    foto.className = 'foto'
-                    foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`
-                    var divTitle = document.createElement('div');
-                    divTitle.className = 'titulos';
-                    divPublicacao.appendChild(foto);
-                    divPublicacao.appendChild(divTitle);
 
-                    var artist = document.createElement('h1');
-                    artist.innerHTML = `${publicacao.artista}`;
+                    onde.innerHTML += `
+                    <div class="card" onclick="musicaArtista(${resp.idArtista},'${resp.artista}','${resp.genero}','${resp.caminhoFoto}')">
+                        <div class="foto" id="foto-${resp.idArtista}">
+                        </div>
+                        <div class="titulos">
+                            <h1>${resp.artista}</h1>
+                            <h2>${resp.genero}</h2>
+                        </div>
+                        <div class="titulos">
+                            <h4><span>${resp.artista}</span> do gênero <span>${resp.genero}</span>
+                            conta com <span id="musics${resp.idArtista}">9 músicas</span> cadastradas, e já 
+                            acumula <span id="likes${resp.idArtista}">312 likes</span> entre os nossos 
+                            usuarios.</h4>
+                        </div>
+                    </div> 
+                    `
+                    var foto = document.getElementById(`foto-${resp.idArtista}`);
+                    foto.style.backgroundImage = `url("/assets/picture/${resp.caminhoFoto}")`;
+
+                    // criando e manipulando elementos do HTML via JavaScript
+                    // var divPublicacao = document.createElement("div");
+                    // divPublicacao.className = "card";
+                    // var foto = document.createElement('div');
+                    // foto.className = 'foto'
+                    // foto.style.backgroundImage = `url("/assets/picture/${publicacao.caminhoFoto}")`
+                    // var divTitle = document.createElement('div');
+                    // divTitle.className = 'titulos';
+                    // divPublicacao.appendChild(foto);
+                    // divPublicacao.appendChild(divTitle);
+
+                    // var artist = document.createElement('h1');
+                    // artist.innerHTML = `${publicacao.artista}`;
                     
 
-                    var genero = document.createElement('h2');
-                    genero.innerHTML = `${publicacao.genero}`;
+                    // var genero = document.createElement('h2');
+                    // genero.innerHTML = `${publicacao.genero}`;
 
-                    divTitle.appendChild(artist);
-                    divTitle.appendChild(genero);
+                    // divTitle.appendChild(artist);
+                    // divTitle.appendChild(genero);
 
-                    var divDesc = document.createElement('div');
-                    divDesc.className = 'titulos'
-                    divDesc.innerHTML = `
-                    <h4><span>${publicacao.artista}</span> do gênero <span>${publicacao.genero}</span>
-                    conta com <span id="musics${publicacao.idArtista}">9 músicas</span> cadastradas, e já 
-                    acumula <span id="likes${publicacao.idArtista}">312 likes</span> entre os nossos 
-                    usuarios.</h4>
-                    `
+                    // var divDesc = document.createElement('div');
+                    // divDesc.className = 'titulos'
+                    // divDesc.innerHTML = `
+                    // <h4><span>${publicacao.artista}</span> do gênero <span>${publicacao.genero}</span>
+                    // conta com <span id="musics${publicacao.idArtista}">9 músicas</span> cadastradas, e já 
+                    // acumula <span id="likes${publicacao.idArtista}">312 likes</span> entre os nossos 
+                    // usuarios.</h4>
+                    // `
 
-                    divPublicacao.appendChild(divDesc);
+                    // divPublicacao.appendChild(divDesc);
 
-                    onde.appendChild(divPublicacao);
-                    attDadosArtista(publicacao.idArtista);
+                    // onde.appendChild(divPublicacao);
+                    attDadosArtista(resp.idArtista);
 
                 }
 
@@ -60,6 +80,15 @@ function atualizarArtista() {
     }).catch(function (resposta) {
         console.error(resposta);
     });
+}
+
+function musicaArtista(idArtista, nome, genero, foto){
+    sessionStorage.ID_ARTISTA = idArtista;
+    sessionStorage.NOME_ARTISTA = nome;
+    sessionStorage.GENERO_ARTISTA = genero;
+    sessionStorage.FOTO_ARTISTA = foto;
+
+    window.location.href = "music-artist.html";
 }
 
 //FUNÇÃO PARA PEGAR OS DADOS ARTISTAS DO BANCO DE DADOS
