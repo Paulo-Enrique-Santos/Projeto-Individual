@@ -1,12 +1,17 @@
 //FUNÇÃO PARA PEGAR OS ARTISTAS DO BANCO DE DADOS
 function atualizarArtista() {
+    var left = document.getElementById("left");
+    var right = document.getElementById("right");
+
+    left.className = "colunas";
+    right.className = "colunas"
+
     fetch("/atualizar/listarArtista").then(function (resposta) {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                var left = document.getElementById("left");
-                var right = document.getElementById("right");
+
                 var onde = right;
                 for (let i = 0; i < resposta.length; i++) {
                     var resp = resposta[i];

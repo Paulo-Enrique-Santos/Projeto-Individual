@@ -62,6 +62,13 @@ function atualizarFoto(id) {
                     fotoArtista.id = publicacao.idMusica;
                     fotoArtista.style.backgroundImage = `url('./assets/picture/${publicacao.caminhoFoto}')`
 
+                    var divSobre = document.createElement("div");
+                    divSobre.className = "sobre-index";
+                    fotoArtista.appendChild(divSobre);
+
+                    var nomeArtista = document.createElement("h3");
+                    divSobre.appendChild(nomeArtista);
+
                     feed.appendChild(fotoArtista);
                 }
 
