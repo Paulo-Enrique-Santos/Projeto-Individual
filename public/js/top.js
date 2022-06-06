@@ -1,5 +1,6 @@
 //FUNÇÃO PARA PEGAR AS MUSICAS DO BANCO DE DADOS
 function atualizarTopMusica() {
+    var qtdMusica = 0;
     fetch("/atualizar/topMusica").then(function (resposta) {
         if (resposta.ok) {
 
@@ -13,8 +14,15 @@ function atualizarTopMusica() {
                 var contador = 1;
                 for (let i = 0; i < resposta.length; i++) {
                     var resp = resposta[i];
-                    
-                    cardTop.innerHTML += `
+
+                    var artist = document.getElementById("artista" + resp.musica);
+
+                    if (artist != null) {
+                        artist.innerHTML += ', ' + resp.artista;
+                    } else {
+                        qtdMusica++;
+                        if(qtdMusica <= 10){
+                        cardTop.innerHTML += `
                     <div class="posicaoTop">
                         <h1>
                             ${contador}º
@@ -23,23 +31,21 @@ function atualizarTopMusica() {
                         </div>
                         <div>
                             <h2>${resp.musica}</h2>
-                            <h3>${resp.artista}</h3>
+                            <h3 id="artista${resp.musica}">${resp.artista}</h3>
                             <h5>${resp.likes} LIKES</h5>
                         </div>
                     </div>
                     `;
 
-                    var fotoArtista = document.getElementById(`fotoMusica${contador}`);
-                    fotoArtista.style.backgroundImage = `url("/assets/picture/${resp.caminhoFoto}")`;
+                        var fotoArtista = document.getElementById(`fotoMusica${contador}`);
+                        fotoArtista.style.backgroundImage = `url("/assets/picture/${resp.caminhoFoto}")`;
 
-                    contador++;
+                        contador++;
+                        }
+                    }
                 }
 
             });
-            // setTimeout(() => {
-            //     carregarDuracao();
-            //     attLikes();
-            //  }, "8000")
 
         } else {
             throw ('Houve um erro ao tentar atualizar o top!');

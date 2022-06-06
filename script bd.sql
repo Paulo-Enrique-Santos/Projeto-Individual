@@ -66,9 +66,9 @@ insert into Artista values
 
 -- INSERINDO MUSICAS
 insert into Musica values
-(null, 'Me Sinto Abençoado','Musicas/me-sinto-abencoado.jpg','me-sinto-abencoado.mp3',0),
-(null, 'Red Eye','Musicas/red-eye.jpg','red-eye.mp3',0),
-(null, 'Chuva de Arroz','Musicas/chuva-de-arroz.jpg','chuva-de-arroz.mp3',0);
+(null, 'Me Sinto Abençoado','Musicas/me-sinto-abencoado.jpg','me-sinto-abencoado.mp3','RAP',0),
+(null, 'Red Eye','Musicas/red-eye.jpg','red-eye.mp3','POP',0),
+(null, 'Chuva de Arroz','Musicas/chuva-de-arroz.jpg','chuva-de-arroz.mp3','Sertanejo',0);
 
 -- VINCULANDO A MÚSICA AO ARTISTA
 insert into feat values 
@@ -77,15 +77,13 @@ insert into feat values
 (null, 4 , 2),
 (null, 2 , 3);
 
-insert Musicas values
-(null, 'Justin Bieber', 'Red Eye', 'JB.jpg','red-eye.mp3','POP',0),
-(null, 'Luan Santana', 'Chuva de Arroz', 'LUAN.jpg','chuva-de-arroz.mp3','Sertanejo',0),
-(null, 'Vanessa da Mata', 'Ai Ai Ai (Felguk & Cat Dealers Remix)', 'VANESSA.jpg','ai-ai-ai.mp3','Eletrônica',0),
-(null, 'MC Poze do Rodo ft. Filipe Ret','Me Sinto Abençoado (prod. Ajaxx)','POZE.jpg','me-sinto-abencoado.mp3','Funk',0),
-(null, 'Charlie Brown Jr.','Como Tudo Deve Ser','CBJR.jpg','como-tudo-deve-ser.mp3','Rock',0);
+    select 
+        artista.nome as artista,
+        musica.nome as musica,
+        musica.caminhoFoto,
+        likes
+    from artista
+        join feat on idArtista = feat.fkArtista
+            join musica on feat.fkmusica = idmusica
+                        order by likes desc;
 
-insert into Musicas values
-(null, 'Zé Neto e Cristiano', 'Ferida Curada', 'ZNC.jpg','ferida-curada.mp3','Sertanejo',0);
-
-insert into Musicas values
-(null, 'Anitta', 'Girl From Rio', 'ANITTA.jpg','girl-from-rio.mp3','POP',0);

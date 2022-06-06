@@ -269,8 +269,7 @@ function topMusica() {
     from artista
         join feat on idArtista = feat.fkArtista
             join musica on feat.fkmusica = idmusica
-                    group by musica.nome
-                        order by likes desc limit 10;
+                        order by likes desc;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
