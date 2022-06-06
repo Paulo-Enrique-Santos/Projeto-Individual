@@ -169,6 +169,7 @@ function sumirMensagemLogin() {
     card_erro_login.style.display = "none"
 }
 
+//FUNÇÃO PARA PESQUISAR AS MUSICAS NO BANCO DE DADOS
 function pesquisarMusica(){
 
     fetch("/atualizar/pesquisarMusica").then(function (resposta) {
@@ -189,6 +190,7 @@ function pesquisarMusica(){
     });
 }
 
+//FUNÇÃO PARA PESQUISAR OS ARTISTAS NO BANCO DE DADOS
 function pesquisarArtista(){
 
     fetch("/atualizar/pesquisarArtista").then(function (resposta) {
@@ -208,6 +210,7 @@ function pesquisarArtista(){
     });
 }
 
+//FUNÇÃO PARA PESQUISAR OS GENEROS NO BANCO DE DADOS
 function pesquisarGenero(){
 
     fetch("/atualizar/pesquisarGenero").then(function (resposta) {
@@ -226,6 +229,7 @@ function pesquisarGenero(){
     });
 }
 
+//FUNÇÃO PARA PESQUISAR NO ARRAY
 function pesquisar(){
     var digitou = (document.getElementById(`src`).value).toUpperCase();
     var divResultado = document.getElementById(`divResultado`);
@@ -233,12 +237,6 @@ function pesquisar(){
     var contadorMusicas = 0;
     var contadorArtistas = 0;
     var contadorGeneros = 0;
-
-    divPesquisa.style.animation = "barra-src-down .5s linear forwards";
-
-    setTimeout(() => {
-        divResultado.style.display = "flex"
-    }, 450);
 
     divResultado.innerHTML = "";
 
@@ -278,7 +276,7 @@ function pesquisar(){
     for(var i = 0; i< arrayPesquisaArtista.length; i++){
         if((arrayPesquisaArtista[i].nome).toUpperCase().indexOf(digitou , 0) >= 0 && digitou != ""){
             divResultado.innerHTML += `
-            <div class="resultados-src">
+            <div class="resultados-src" onclick="musicaArtista(${arrayPesquisaArtista[i].idArtista}, '${arrayPesquisaArtista[i].nome}', '${arrayPesquisaArtista[i].genero}', '${arrayPesquisaArtista[i].caminhoFoto}')">
                 <div class="foto-resultado" id="fotoArtista${arrayPesquisaArtista[i].idArtista}"></div>
                 <div class="texto-resultado">
                     <h3>${arrayPesquisaArtista[i].nome}&nbsp;</h3>-
@@ -305,7 +303,7 @@ function pesquisar(){
     for(var i = 0; i< arrayPesquisaGenero.length; i++){
         if((arrayPesquisaGenero[i].genero).toUpperCase().indexOf(digitou , 0) >= 0 && digitou != ""){
             divResultado.innerHTML += `
-            <div class="resultados-src">
+            <div class="resultados-src" onclick="musicaGenero('${arrayPesquisaGenero[i].genero}')">
                 <div class="foto-resultado" id="fotoGenero${arrayPesquisaGenero[i].genero}"></div>
                 <div class="texto-resultado">
                     <h3>${arrayPesquisaGenero[i].genero}&nbsp;</h3>-
@@ -328,4 +326,21 @@ function pesquisar(){
         <h3 style="align-self: center;">Nenhum Resultado Encontrado!</h3>
         `;
     }
+}
+
+//FUNÇÃO PARA ENVIAR OS DADOS DO ARTISTA PARA OUTRA PÁGINA
+function musicaArtista(idArtista, nome, genero, foto){
+    sessionStorage.ID_ARTISTA = idArtista;
+    sessionStorage.NOME_ARTISTA = nome;
+    sessionStorage.GENERO_ARTISTA = genero;
+    sessionStorage.FOTO_ARTISTA = foto;
+
+    window.location.href = "music-artist.html";
+}
+
+//FUNÇÃO PARA ENVIAR OS DADOS DO GENERO PARA OUTRA PÁGINA
+function musicaGenero(nome){
+    sessionStorage.NOME_GENERO = nome;
+
+    window.location.href = "music-genero.html";
 }

@@ -85,16 +85,6 @@ function atualizarArtista() {
     });
 }
 
-//FUNÇÃO PARA ENVIAR OS DADOS DO ARTISTA PARA OUTRA PÁGINA
-function musicaArtista(idArtista, nome, genero, foto){
-    sessionStorage.ID_ARTISTA = idArtista;
-    sessionStorage.NOME_ARTISTA = nome;
-    sessionStorage.GENERO_ARTISTA = genero;
-    sessionStorage.FOTO_ARTISTA = foto;
-
-    window.location.href = "music-artist.html";
-}
-
 //FUNÇÃO PARA PEGAR OS DADOS ARTISTAS DO BANCO DE DADOS
 function attDadosArtista(idArtista) {
     fetch(`/atualizar/attDadosArtista/${idArtista}`).then(function (resposta) {

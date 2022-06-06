@@ -157,6 +157,24 @@ function atualizarMusicasArtista(idPlaylist) {
     return database.executar(instrucao);
 }
 
+function atualizarMusicasGenero(idPlaylist) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    select 
+        artista.nome as artista,
+        musica.nome as musica,
+        idMusica,
+        musica.caminhoFoto,
+        musica.caminhoAudio
+    from musica
+    join feat on idMusica = fkMusica
+        join artista on fkArtista = idArtista
+            where musica.genero = '${idPlaylist}';   
+    `;
+    return database.executar(instrucao);
+}
+
+
 function addPlaylist(idPlaylist,idMusica) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n " + idMusica + idPlaylist);
     var instrucao = `
@@ -287,7 +305,7 @@ function pesquisarGenero() {
     var instrucao = `
     select 
         distinct(genero)
-    from artista;
+    from musica;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -314,5 +332,6 @@ module.exports = {
     atualizarMusicasArtista,
     pesquisarMusica,
     pesquisarArtista,
-    pesquisarGenero
+    pesquisarGenero,
+    atualizarMusicasGenero
 }
