@@ -321,7 +321,7 @@ function atualizarPlaylist(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as playlists: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -337,7 +337,7 @@ function listarFoto(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as fotos: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -352,7 +352,7 @@ function topMusica(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar o top 10: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -367,7 +367,7 @@ function topArtista(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar o top 10: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -382,7 +382,7 @@ function pesquisarMusica(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as musicas: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -397,7 +397,7 @@ function pesquisarArtista(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar os artistas: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -412,7 +412,7 @@ function pesquisarGenero(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar os generos: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }

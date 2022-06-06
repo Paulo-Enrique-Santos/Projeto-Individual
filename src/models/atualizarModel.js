@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function listarGenero() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarGenero()");
     var instrucao = `
     select distinct 
         genero 
@@ -12,7 +12,7 @@ function listarGenero() {
 }
 
 function listarArtista() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarArtista()");
     var instrucao = `
     select distinct 
         idArtista,
@@ -26,7 +26,7 @@ function listarArtista() {
 }
 
 function listarMusic() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarMusic()");
     var instrucao = `
     select 
         idMusica,
@@ -43,7 +43,7 @@ function listarMusic() {
 }
 
 function attDadosArtista(idArtista) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function attDadosArtista()");
     var instrucao = `
     select 
 	    count(idMusica) as musics, 
@@ -58,7 +58,7 @@ function attDadosArtista(idArtista) {
 }
 
 function atualizarPlaylist(idUsuario) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarPlaylist()");
     var instrucao = `
     select 
 	    playlist.idPlaylist,
@@ -72,7 +72,7 @@ function atualizarPlaylist(idUsuario) {
 }
 
 function listarFavoritas(idUser) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarFavoritas()");
     var instrucao = `
     select 
         idMusica,musica.nome as musica, 
@@ -92,7 +92,7 @@ function listarFavoritas(idUser) {
 
 
 function addLike(idMusic,idUser) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function addLike()");
     var instrucao = `
     insert into likes values (${idUser}, ${idMusic});
     `;
@@ -107,7 +107,7 @@ function addLike(idMusic,idUser) {
 }
 
 function listarPlaylist(idUser) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPlaylist()");
     var instrucao = `
     select 
 	    idPlaylist,
@@ -120,7 +120,7 @@ function listarPlaylist(idUser) {
 }
 
 function atualizarMusicas(idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMusicas()");
     var instrucao = `
     select 
         artista.nome as artista,
@@ -140,8 +140,8 @@ function atualizarMusicas(idPlaylist) {
     return database.executar(instrucao);
 }
 
-function atualizarMusicasArtista(idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+function atualizarMusicasArtista(idArtista) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMusicasArtista()");
     var instrucao = `
     select 
         artista.nome as artista,
@@ -152,13 +152,13 @@ function atualizarMusicasArtista(idPlaylist) {
     from musica
     join feat on idMusica = fkMusica
         join artista on fkArtista = idArtista
-            where fkArtista = ${idPlaylist};   
+            where fkArtista = ${idArtista};   
     `;
     return database.executar(instrucao);
 }
 
-function atualizarMusicasGenero(idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+function atualizarMusicasGenero(nomeGenero) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMusicasGenero()");
     var instrucao = `
     select 
         artista.nome as artista,
@@ -169,13 +169,13 @@ function atualizarMusicasGenero(idPlaylist) {
     from musica
     join feat on idMusica = fkMusica
         join artista on fkArtista = idArtista
-            where musica.genero = '${idPlaylist}';   
+            where musica.genero = '${nomeGenero}';   
     `;
     return database.executar(instrucao);
 }
 
-function atualizarMusicasMusica(idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+function atualizarMusicasMusica(idMusica) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMusicasMusica()");
     var instrucao = `
     select 
         artista.nome as artista,
@@ -186,13 +186,13 @@ function atualizarMusicasMusica(idPlaylist) {
     from musica
     join feat on idMusica = fkMusica
         join artista on fkArtista = idArtista
-            where musica.idMusica = ${idPlaylist};   
+            where musica.idMusica = ${idMusica};   
     `;
     return database.executar(instrucao);
 }
 
 function addPlaylist(idPlaylist,idMusica) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n " + idMusica + idPlaylist);
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function addPlaylist()");
     var instrucao = `
     insert into MusicaPlaylist(fkMusica,fkPlaylist) values 
     (${idMusica},${idPlaylist});
@@ -201,7 +201,7 @@ function addPlaylist(idPlaylist,idMusica) {
 }
 
 function criarPlaylist(nome,idUser) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function criarPlaylist()");
     var instrucao = `
     insert into Playlist (nomePlaylist,fkUsuario) values
     ('${nome}',${idUser});
@@ -210,7 +210,7 @@ function criarPlaylist(nome,idUser) {
 }
 
 function deletarPlaylist(idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletarPlaylist()");
     var instrucao = `
     delete from playlist where idPlaylist = ${idPlaylist};
     `;
@@ -223,7 +223,7 @@ function deletarPlaylist(idPlaylist) {
 }
 
 function deletarMusicaPlaylist(idMusica,idPlaylist) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletarMusicaPlaylist()");
     var instrucao = `
     delete from MusicaPlaylist where fkMusica = ${idMusica} and fkPlaylist = ${idPlaylist};
     `;
@@ -231,7 +231,7 @@ function deletarMusicaPlaylist(idMusica,idPlaylist) {
 }
 
 function removeLike(idMusic,idUser) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function removeLike()");
     var instrucao = `
     DELETE FROM likes WHERE fkUsuario = ${idUser} AND fkMusica = ${idMusic};
     `;
@@ -245,21 +245,21 @@ function removeLike(idMusic,idUser) {
     return database.executar(instrucao);
 }
 
-function listarFoto(id) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+function listarFoto(nomeGenero) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarFoto()");
     var instrucao = `
     select distinct 
 	nome, 
     caminhoFoto 
 from Artista
-	where genero = '${id}';
+	where genero = '${nomeGenero}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function topMusica() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function topMusica()");
     var instrucao = `
     select 
         artista.nome as artista,
@@ -277,7 +277,7 @@ function topMusica() {
 }
 
 function topArtista() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function topArtista()");
     var instrucao = `
     select 
         sum(likes) as likes,
@@ -295,7 +295,7 @@ function topArtista() {
 }
 
 function pesquisarMusica() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarMusica()");
     var instrucao = `
     select 
         * 
@@ -306,7 +306,7 @@ function pesquisarMusica() {
 }
 
 function pesquisarArtista() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarArtista()");
     var instrucao = `
     select 
         * 
@@ -317,7 +317,7 @@ function pesquisarArtista() {
 }
 
 function pesquisarGenero() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarGenero()");
     var instrucao = `
     select 
         distinct(genero)

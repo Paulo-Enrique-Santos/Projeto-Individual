@@ -4,7 +4,6 @@ function atualizarGenero() {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var feed = document.getElementById("index");
                 for (let i = 0; i < resposta.length; i++) {
                     var resp = resposta[i];
@@ -36,7 +35,6 @@ function atualizarGenero() {
 function atualizarFoto(id) {
     var idVar = id
 
-    console.log(idVar, 'TESTE')
     fetch("/atualizar/listarFoto", {
         method: "POST",
         headers: {
@@ -49,7 +47,6 @@ function atualizarFoto(id) {
         if (resposta.ok) {
 
             resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
                 var feed = document.getElementById(idVar);
                 for (let i = 0; i < resposta.length; i++) {
                     var resp = resposta[i];

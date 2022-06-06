@@ -109,26 +109,8 @@ function atualizarMusic() {
                         <h1 onclick="addMusicPlaylist(${resp.idMusica})">
                         +
                         </h1>
-                        `
-
-                        // var like = document.createElement('div');
-                        // like.className = 'like';
-                        // like.id = 'l' + resp.idMusica;
-                        // divFinal.appendChild(like);
-                        // like.addEventListener('click', function(){
-                        //     likes(resp.idMusica);
-                        // });
-
-                        // var addPlaylist = document.createElement('h1');
-                        // addPlaylist.innerHTML = '+';
-                        // divFinal.appendChild(addPlaylist);
-                        // addPlaylist.onclick = function (){
-                        //     addMusicPlaylist(resp.idMusica);
-                        // };
-                        // addPlaylist.addEventListener('click', ()=>{
-                        //     addMusicPlaylist(resp.idMusica);
-                        // });
-
+                        `;
+                        
                         var wavesurfer = WaveSurfer.create({
                             container: '#waves' + resp.idMusica,
                             waveColor: '#a8a8a8',

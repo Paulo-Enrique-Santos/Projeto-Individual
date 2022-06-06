@@ -12,7 +12,7 @@
     <title>MusicFans | Favoritas</title>
 </head>
 
-<body onload="listarFavoritas(), validarSessao()">
+<body onload="listarFavoritas(), validarSessao(), pesquisarMusica()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -155,7 +155,9 @@
     <div class="body-dois">
         <header>
             <div class="bar-src">
-                <input type="search" name="src" id="src" placeholder="Pesquise">
+                <input type="text" name="src" id="src" placeholder="Pesquise" onkeyup="pesquisar()">
+                <div class="divResultado" id="divResultado">
+                </div>
             </div>
             <div class="btns">
                 <button onclick="AbrirLogin()">
