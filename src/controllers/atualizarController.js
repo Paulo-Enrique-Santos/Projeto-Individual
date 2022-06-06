@@ -134,6 +134,26 @@ function atualizarMusicasGenero(req, res) {
     );
 }
 
+function atualizarMusicasMusica(req, res) {
+
+    var idPlaylist = req.body.idPlaylistServer;
+
+    atualizarModel.atualizarMusicasMusica(idPlaylist)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao dar Like Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
 
 function addPlaylist(req, res) {
 
@@ -419,5 +439,6 @@ module.exports = {
     pesquisarMusica,
     pesquisarArtista,
     pesquisarGenero,
-    atualizarMusicasGenero
+    atualizarMusicasGenero,
+    atualizarMusicasMusica
 }

@@ -108,7 +108,7 @@ header {
     background-color: var(--background-color);
     color: var(--textos-color);
     height: 100vh;
-    width: 20vw;
+    min-width: 15vw;
     border-right: var(--border-width) solid var(--background5-color);
     z-index: 2;
 }
@@ -1025,4 +1025,10 @@ footer .contato h5{
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("/assets/picture/genero.png");
+}
+
+#foto_Musica{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

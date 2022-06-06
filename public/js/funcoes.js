@@ -249,7 +249,7 @@ function pesquisar(){
     for(var i = 0; i< arrayPesquisaMusica.length; i++){
         if((arrayPesquisaMusica[i].nome).toUpperCase().indexOf(digitou , 0) >= 0 && digitou != ""){
             divResultado.innerHTML += `
-            <div class="resultados-src">
+            <div class="resultados-src" onclick="musicaMusicas(${arrayPesquisaMusica[i].idMusica})">
                 <div class="foto-resultado" id="fotoMusica${arrayPesquisaMusica[i].idMusica}"></div>
                 <div class="texto-resultado">
                     <h3>${arrayPesquisaMusica[i].nome}&nbsp;</h3>-
@@ -343,4 +343,11 @@ function musicaGenero(nome){
     sessionStorage.NOME_GENERO = nome;
 
     window.location.href = "music-genero.html";
+}
+
+//FUNÇÃO PARA ENVIAR OS DADOS DO GENERO PARA OUTRA PÁGINA
+function musicaMusicas(idMusica){
+    sessionStorage.MUSICA_IDMUSICA = idMusica;
+
+    window.location.href = "music-music.html";
 }
