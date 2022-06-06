@@ -94,7 +94,7 @@ input{
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--background-color);
     height: 60%;
-    width: 70%;
+    width: 100%;
     padding-left: 3%;
     background-color: var(--background2-color);
     color: var(--textos-color);
@@ -170,11 +170,52 @@ header a{
 }
 
 .body-dois header .bar-src{
-    padding-left: 2%;
-    width: 60%;
-    height: 100%;
+    margin-left: 1%;
+    margin-top: 1vh;
+    padding: 1vh 2% 0 2%;
+    width: 50%;
+    height: 30vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5vh;
+    box-shadow: 1px 1px 11px 2px #000000;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+}
+
+.divResultado{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+    overflow-y: scroll;
+    padding-right: 0.5vh;
+}
+
+.divResultado::-webkit-scrollbar{
+    width: 1vw;
+    background-color: var(--background5-color);
+    border-radius: var(--border-radius);
+}
+
+.divResultado::-webkit-scrollbar-thumb{
+    background-color: var(--contraste-color);
+    border-radius: var(--border-radius);
+}
+
+.body-dois header .bar-src hr{
+    margin: 1vh;
+}
+
+.resultados-src{
+    background-color: green;
+    border-radius: var(--border-radius);
+    width: 100%;
+    min-height: 6vh;
+
+}
+
+.body-dois header .bar-src input{
+    min-height: 6vh;
 }
 
 .body-dois header .btns{
@@ -215,7 +256,7 @@ header a{
 /* FOOTER DO SITE */
 footer {
     width: 100%;
-    height: 200px;
+    height: 20vh;
     display: flex;
     align-items: center;
     color: var(--textos-color);
@@ -494,6 +535,7 @@ footer .contato h5{
 
 .content{
     position: relative;
+    max-height: 90vh;
 }
 
 .content .container {
@@ -651,7 +693,6 @@ footer .contato h5{
     z-index: 8;
     align-self: flex-end;
     display: none;
-    justify-content: space-evenly;
     align-items: center;
     animation: .8s ativarPlayer linear forwards;
 }
@@ -706,7 +747,8 @@ footer .contato h5{
     display: flex;
     align-items: center;
     height: 100%;
-    width: 15%;
+    width: 35%;
+    padding: 0 2vw 0 2vw;
 }
 
 .player_bottom .progress{
@@ -738,8 +780,9 @@ footer .contato h5{
     color: var(--textos-color);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 5%;
+    justify-content: center;
+    gap: 2vw;
+    width: 15%;
     height: 100%;
 }
 
