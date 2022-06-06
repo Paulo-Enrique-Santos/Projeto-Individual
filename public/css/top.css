@@ -18,7 +18,67 @@
     padding: 2vh;
     justify-content: center;
     align-items: flex-end;
-    gap: 40px;
+    box-shadow: 1px 1px 11px 6px #000000;
+}
+
+#top-dez .podio .foto{
+    width: 40%;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+#top-dez .podio .card{
+    width: 60%;
+    background-color: var(--card-color);
+    height: 100%;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    overflow: scroll;
+    padding: 1vh;
+}
+
+#top-dez .podio .card::-webkit-scrollbar{
+    display: none;
+}
+
+
+.podio .card .posicaoTop{
+    background-color: var(--background4-color);
+    min-height: 10vh;
+    width: 100%;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    padding: 1vh 1vh 1vh 2vh;
+    gap: 1vw;
+}
+
+.podio .posicaoTop h1{
+    color: var(--hoverbutton-color);
+}
+
+.podio .posicaoTop h2{
+    color: var(--textos2-color);
+}
+
+.podio .posicaoTop h3{
+    color: var(--textos-color);
+}
+
+.podio .posicaoTop h5{
+    color: var(--contraste-color);
+}
+
+.podio .card .fotoArtista{
+    width: 9vh;
+    height: 9vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: var(--border-radius);
 }
 
 #top-dez .podio .top{
@@ -53,26 +113,6 @@
     margin-bottom: 2%;
 }
 
-#top-dez .top h1{
-    font-size: 24px;
-    margin-bottom: 2%;
-}
-
-#top-dez .top h2{
-    font-size: 20px;
-}
-
-#top-dez .foto{
-    background-position: center;
-    background-size: cover;
-    width: 100px;
-    height: 100px;
-    border-radius: var(--border-radius);
-    box-shadow: 1px 1px 11px 2px #000000;
-    margin-bottom: 4%;
-}
-
-#top-dez h1{
-    font-size: 40px;
+#top-dez .topTitles{
     color: var(--contraste-color);
 }
