@@ -75,4 +75,16 @@ router.get("/listarFavoritas/:idUser/", function (req, res) {
     atualizarController.listarFavoritas(req, res);
 });
 
+router.get("/pesquisarMusica", function (req, res) {
+    atualizarController.pesquisarMusica(req, res);
+});
+
+router.get("/pesquisarArtista", function (req, res) {
+    atualizarController.pesquisarArtista(req, res);
+});
+
+router.get("/pesquisarGenero", function (req, res) {
+    atualizarController.pesquisarGenero(req, res);
+});
+
 module.exports = router;

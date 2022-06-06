@@ -13,7 +13,7 @@
     <title>MusicFans | Musicas</title>
 </head>
 
-<body onload="atualizarMusic(), validarSessao()">
+<body onload="atualizarMusic(), validarSessao(), pesquisarMusica()">
     <div class="sobreposi">
         <div class="opacity" onclick="Close()">
 
@@ -159,10 +159,15 @@
     <div class="body-dois">
         <header>
             <div class="bar-src">
-                <input type="text" name="src" id="src" placeholder="Pesquise">
-                <hr>
-                <div class="divResultado">
-                    <div class="resultados-src"></div>
+                <input type="text" name="src" id="src" placeholder="Pesquise" onkeyup="pesquisar()">
+                <div class="divResultado" id="divResultado">
+                    <div class="resultados-src">
+                        <div class="foto-resultado"></div>
+                        <div class="texto-resultado">
+                            <h3>Justin Bieber&nbsp;</h3>-
+                            <h5>&nbsp;Artista</h5>
+                        </div>
+                    </div>
                     <div class="resultados-src"></div>
                     <div class="resultados-src"></div>
                     <div class="resultados-src"></div>
