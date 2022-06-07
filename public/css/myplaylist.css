@@ -1,6 +1,18 @@
 /*  PAGINA DAS PLAYLIST */
 #playlist{
-    padding: 10px 37px 10px 37px;
+    padding: 10px 20px 10px 20px;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+    box-shadow: 1px 1px 11px 2px #000000;
+    margin-bottom: 3vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+#playlist-Local{
+    padding: 10px 20px 10px 20px;
     border-radius: var(--border-radius);
     background-color: var(--card-color);
     box-shadow: 1px 1px 11px 2px #000000;

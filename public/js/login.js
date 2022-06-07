@@ -2,7 +2,7 @@
 function entrar() {
     aguardarLogin();
 
-    var emailVar = email_login.value;
+    var emailVar = (email_login.value).toLowerCase();
     var senhaVar = senha_login.value;
 
     if (emailVar == "" || senhaVar == "") {

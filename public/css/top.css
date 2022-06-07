@@ -59,6 +59,7 @@
 
 .podio .posicaoTop h1{
     color: var(--hoverbutton-color);
+    width: 3vw;
 }
 
 .podio .posicaoTop h2{
