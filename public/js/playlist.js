@@ -51,7 +51,7 @@ function atualizarMusicas(){
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                var divPai = document.getElementById("#playlist-Local");
+                var divPai = document.getElementById("playlist");
                 var audio = document.getElementById('audio');
 
                 for (let i = 0; i < resposta.length; i++) {

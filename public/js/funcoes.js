@@ -5,17 +5,26 @@ var arrayPesquisaGenero = [];
 // VALIDAR SE ESTÁ LOGADO OU NÃO
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+    var nomeComposto = sessionStorage.NOME_USUARIO;
+    
+    if (email != null && nomeComposto != null) {
+        var nome = '';
 
-    if (email != null && nome != null) {
-        document.querySelector('.btns').style.display = 'none'
-        document.querySelector('.logado').style.display = 'flex'
-        name_user.innerHTML = nome;
+    
+        if(nomeComposto.indexOf(' ') >= 0){
+            for(var i = 0; i < nomeComposto.indexOf(' '); i++){
+                nome += nomeComposto[i]; 
+            }
+        }else{
+            nome = nomeComposto;
+        }
+        document.querySelector('.btns').style.display = 'none';
+        document.querySelector('.logado').style.display = 'flex';
+        name_user.innerHTML = nome[0].toUpperCase() + nome.substring(1);
         return true;
     } else {
-        document.querySelector('.btns').style.display = 'flex'
-        document.querySelector('.logado').style.display = 'none'
-        name_user.innerHTML = nome;
+        document.querySelector('.btns').style.display = 'flex';
+        document.querySelector('.logado').style.display = 'none';
         return false;   
     }
 }

@@ -83,6 +83,7 @@ function likes(idMusica) {
 
 //VALIDANDO SE A MÚSICA ESTÁ TOCANDO E FAZ ALGUMAS COISAS NAS FUNÇÕES
 setInterval(() => {
+        var hrefAtual = window.location.href;
     for (var i = 0; i < arrayMusic.length; i++) {
         var idBruto = arrayMusic[i].container.id;
         var idMusica = idBruto.replace('waves', '');
@@ -125,12 +126,21 @@ setInterval(() => {
             player.style.display = 'flex';
             fotoBottom.style.backgroundImage = fotoMusica.style.backgroundImage;
 
-            var divFinal = document.getElementById(`divFinal_bottom`);
-            divFinal.innerHTML = `
-            <div id="like_bottom" class="like" onclick="likes(${idMusica})">
-            </div>
-            <h1 onclick="addMusicPlaylist(${idMusica})">+</h1>
-            `;
+            if( hrefAtual != 'http://localhost:3333/playlist.html'){
+                var divFinal = document.getElementById(`divFinal_bottom`);
+                divFinal.innerHTML = `
+                <div id="like_bottom" class="like" onclick="likes(${idMusica})">
+                </div>
+                <h1 onclick="addMusicPlaylist(${idMusica})">+</h1>
+                `;
+            }else{
+                var divFinal = document.getElementById(`divFinal_bottom`);
+                divFinal.innerHTML = `
+                <div id="like_bottom" class="like" onclick="likes(${idMusica})">
+                </div>
+                <img src="./assets/picture/delete.png" onclick="deletarMusicaPlaylist(${idMusica})">
+                `;
+            }
             var botoes = document.getElementById(`controls_bottom`);
             botoes.innerHTML = `
             <img src="./assets/picture/inicio.png" class="menor" onclick="controls('back',${idMusica})">
