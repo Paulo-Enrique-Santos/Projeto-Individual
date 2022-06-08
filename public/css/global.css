@@ -504,6 +504,7 @@ footer .contato h5{
 }
 
 .wait {
+    margin-top: 1vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
